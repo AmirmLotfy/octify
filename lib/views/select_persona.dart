@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/design/app_image.dart';
 import 'package:octify/core/design/app_input.dart';
+import 'package:octify/core/logic/helper_methods.dart';
+import 'package:octify/views/tell_about_persona.dart';
 
 import '../core/design/second_app_bar.dart';
 
@@ -64,6 +66,7 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
               ),
             ),
             SizedBox(height: 24.h),
+            // todo: hide button until the user write in the input
             const AppInput(
               label: "Other Persona",
               hint: "Enter other persona",
@@ -90,28 +93,33 @@ class _Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.r),
-      decoration: BoxDecoration(
-        color: model.color,
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Column(
-        children: [
-          Text(
-            model.text,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
+    return GestureDetector(
+      onTap: () {
+        navigateTo(TellAboutPersonaView(personaName: model.text,));
+      },
+      child: Container(
+        padding: EdgeInsets.all(16.r),
+        decoration: BoxDecoration(
+          color: model.color,
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+        child: Column(
+          children: [
+            Text(
+              model.text,
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          SizedBox(height: 16.h),
-          AppImage(
-            model.image,
-            height: 48.h,
-            width: 48.h,
-          )
-        ],
+            SizedBox(height: 16.h),
+            AppImage(
+              model.image,
+              height: 48.h,
+              width: 48.h,
+            )
+          ],
+        ),
       ),
     );
   }

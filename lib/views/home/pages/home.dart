@@ -4,6 +4,8 @@ import 'package:octify/core/design/app_image.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/views/results.dart';
 
+import '../../all_history.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -13,28 +15,28 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final list = [
-    _Model(
+    HistoryModel(
         icon: "parent_fill.svg",
         title: "Parent",
         body:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         bgShape: "bgShape",
         color: const Color(0xff7FD2F2)),
-    _Model(
+    HistoryModel(
         icon: "child_fill.svg",
         title: "Child",
         body:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         bgShape: "bgShape",
         color: const Color(0xffA6B2EE)),
-    _Model(
+    HistoryModel(
         icon: "my_self_fill.svg",
         title: "Myself",
         body:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
         bgShape: "bgShape",
         color: const Color(0xffEBCAE7)),
-    _Model(
+    HistoryModel(
         icon: "my_pet_fill.svg",
         title: "My Pet",
         body:
@@ -53,6 +55,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Row(
                 children: [
+                  // todo show user image if founded else show the first char of his name
                   Container(
                     height: 48.h,
                     width: 48.h,
@@ -112,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 TextButton(
                     onPressed: () {
-                      navigateTo(ResultsView());
+                      navigateTo(AllHistoryView());
                     },
                     child: const Text("View All"))
               ],
@@ -121,7 +124,7 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: ListView.separated(
                 // padding: EdgeInsets.all(24.r),
-                itemBuilder: (context, index) => _Item(model: list[index]),
+                itemBuilder: (context, index) => ItemHistory(model: list[index]),
                 separatorBuilder: (context, index) => SizedBox(height: 16.5.h),
                 itemCount: list.length,
               ),
@@ -133,11 +136,11 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class _Model {
+class HistoryModel {
   final String icon, title, body, bgShape;
   final Color color;
 
-  _Model(
+  HistoryModel(
       {required this.icon,
       required this.title,
       required this.body,
@@ -145,47 +148,52 @@ class _Model {
       required this.color});
 }
 
-class _Item extends StatelessWidget {
-  final _Model model;
+class ItemHistory extends StatelessWidget {
+  final HistoryModel model;
 
-  const _Item({required this.model});
+  const ItemHistory({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16.r),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
-        color: model.color,
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              AppImage(
-                model.icon,
-                height: 48.h,
-                width: 48.h,
-              ),
-              SizedBox(width: 16.w),
-              Text(
-                model.title,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
+    return GestureDetector(
+      onTap: () {
+        navigateTo(ResultsView(title: model.title,));
+      },
+      child: Container(
+        padding: EdgeInsets.all(16.r),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.r),
+          color: model.color,
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                AppImage(
+                  model.icon,
+                  height: 48.h,
+                  width: 48.h,
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16.h),
-          Text(
-            model.body,
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w400,
+                SizedBox(width: 16.w),
+                Text(
+                  model.title,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            SizedBox(height: 16.h),
+            Text(
+              model.body,
+              style: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

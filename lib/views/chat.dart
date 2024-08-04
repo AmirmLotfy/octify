@@ -29,6 +29,7 @@ class _ChatViewState extends State<ChatView> {
   final sendMessageBloc = KiwiContainer().resolve<SendMessageBloc>();
   var inputDirection = TextDirection.ltr;
 
+  // todo: need network error or server error
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +37,7 @@ class _ChatViewState extends State<ChatView> {
         leading: const AppBack(),
         title: Row(
           children: [
+            // todo: change this for app logo
             AppImage(
               "chatbot.svg",
               height: 32.h,

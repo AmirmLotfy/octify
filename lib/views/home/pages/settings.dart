@@ -47,6 +47,7 @@ class SettingsPage extends StatelessWidget {
                 onPress: () {
                   navigateTo(const HelpView());
                 }),
+            // todo: wait for rate us item to made in UI
             _Item(
                 text: "Logout",
                 image: "logout.svg",

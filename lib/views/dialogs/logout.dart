@@ -30,7 +30,7 @@ class LogoutDialog extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: OutlinedButton(
+              child: FilledButton(
                 onPressed: () {
                   navigateTo(const LoginView());
                 },
@@ -39,7 +39,7 @@ class LogoutDialog extends StatelessWidget {
             ),
             SizedBox(width: 16.w),
             Expanded(
-              child: FilledButton(
+              child: OutlinedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },

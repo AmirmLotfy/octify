@@ -125,7 +125,7 @@ class _VerificationViewState extends State<VerificationView> {
                 ),
                 // const Spacer(),
                 CircularCountDownTimer(
-                  duration: 90,
+                  duration: 60,
                   controller: countDownController,
                   width: 50.w,
                   height: 50.h,

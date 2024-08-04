@@ -10,7 +10,8 @@ import 'package:octify/views/home/view.dart';
 import '../core/design/second_app_bar.dart';
 
 class ResultsView extends StatefulWidget {
-  const ResultsView({super.key});
+  final String title;
+  const ResultsView({super.key, required this.title});
 
   @override
   State<ResultsView> createState() => _ResultsViewState();
@@ -62,7 +63,7 @@ class _ResultsViewState extends State<ResultsView> {
                 children: [
                   const TextSpan(text: "Suggested Solutions"),
                   TextSpan(
-                      text: " for\n[Persona]",
+                      text: " to deal with \n ${widget.title}",
                       style: TextStyle(color: Theme.of(context).primaryColor)),
                 ],
               ),

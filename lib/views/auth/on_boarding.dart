@@ -131,8 +131,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             navigateTo(const LoginOrRegisterView());
           } else {
             pageController.nextPage(
-              duration: const Duration(milliseconds: 1200),
-              curve: Curves.bounceInOut,
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.fastLinearToSlowEaseIn,
             );
           }
         },

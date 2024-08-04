@@ -44,6 +44,7 @@ class HelpView extends StatelessWidget {
                     color: const Color(0xff8C8C8C)),
               ),
               SizedBox(height: 8.h),
+              // todo: make email clickable
               Row(
                 children: [
                   Text(
@@ -64,6 +65,7 @@ class HelpView extends StatelessWidget {
                   )),
                 ],
               ),
+              // todo: make phone clickable
               Row(
                 children: [
                   Text(

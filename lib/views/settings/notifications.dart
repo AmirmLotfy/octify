@@ -17,15 +17,15 @@ class NotificationsView extends StatelessWidget {
           children: [
             _Item(text: "All chat notification", onChange: (value) {}),
             _Item(text: "All tagged message", onChange: (value) {}),
-            _Item(text: "New update notification", onChange: (value) {}),
+            _Item(text: "New update notification", onChange: (value) {},withDivider: false,),
           ],
         ),
       ),
-      bottomNavigationBar: AppButton(
-        text: "Save Changes",
-        type: ButtonType.bottomNav,
-        onPress: () {},
-      ),
+      // bottomNavigationBar: AppButton(
+      //   text: "Save Changes",
+      //   type: ButtonType.bottomNav,
+      //   onPress: () {},
+      // ),
     );
   }
 }
@@ -33,12 +33,13 @@ class NotificationsView extends StatelessWidget {
 class _Item extends StatefulWidget {
   final String text;
   final bool initValue;
+  final bool withDivider;
   final void Function(bool value)? onChange;
 
   const _Item({
     required this.text,
     required this.onChange,
-    this.initValue = false,
+    this.initValue = false,  this.withDivider=true,
   });
 
   @override
@@ -87,6 +88,7 @@ class _ItemState extends State<_Item> {
                 )
               ],
             ),
+            if(widget.withDivider)
             const Divider(),
           ],
         ),

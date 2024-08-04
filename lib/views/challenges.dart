@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/design/app_button.dart';
 import 'package:octify/core/design/app_input.dart';
+import 'package:octify/core/logic/helper_methods.dart';
+import 'package:octify/views/results.dart';
 
 import '../core/design/second_app_bar.dart';
 import '../core/theme.dart';
 
 class ChallengesView extends StatefulWidget {
-  const ChallengesView({super.key});
+  final String personaName;
+  const ChallengesView({super.key, required this.personaName});
 
   @override
   State<ChallengesView> createState() => _ChallengesViewState();
@@ -25,7 +28,7 @@ class _ChallengesViewState extends State<ChallengesView> {
   ];
 
   int? selectedIndex;
-
+  //todo: make it multi select and can also write challenge
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +49,7 @@ class _ChallengesViewState extends State<ChallengesView> {
                 children: [
                   const TextSpan(text: "1. What challenges are you\n"),
                   TextSpan(
-                      text: "facing with [Persona]?",
+                      text: "facing with ${widget.personaName}?",
                       style: TextStyle(color: Theme.of(context).primaryColor)),
                 ],
               ),
@@ -108,7 +111,9 @@ class _ChallengesViewState extends State<ChallengesView> {
       bottomNavigationBar: AppButton(
         text: "Analyze",
         type: ButtonType.bottomNav,
-        onPress: () {},
+        onPress: () {
+          navigateTo(ResultsView(title: widget.personaName));
+        },
       ),
     );
   }

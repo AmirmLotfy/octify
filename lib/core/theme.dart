@@ -25,6 +25,7 @@ class AppTheme {
         ),
         appBarTheme: AppBarTheme(
           // centerTitle: true,
+          surfaceTintColor: Colors.transparent,
           titleTextStyle: TextStyle(
             fontSize: 18.sp,
             fontWeight: FontWeight.w600,

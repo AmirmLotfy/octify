@@ -95,16 +95,16 @@ class _ProfileViewState extends State<ProfileView> {
                 hint: "Enter Phone Number",
                 keyboardType: TextInputType.phone,
               ),
-              const AppExpansionTile(
-                title: "Select Languages",
-                label: "Languages",
-                list: [
-                  "English (UK)",
-                  "Norsk",
-                  "Francais",
-                ],
-                icon: 'select_languages.svg',
-              ),
+              // const AppExpansionTile(
+              //   title: "Select Languages",
+              //   label: "Languages",
+              //   list: [
+              //     "English (UK)",
+              //     "Norsk",
+              //     "Francais",
+              //   ],
+              //   icon: 'select_languages.svg',
+              // ),
               AppButton(
                 onPress: () {},
                 text: "Save Changes",

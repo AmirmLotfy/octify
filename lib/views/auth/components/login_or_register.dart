@@ -63,8 +63,7 @@ class LoginOrRegister extends StatelessWidget {
                 isLogin
                     ? "Don’t have an account ?"
                     : "Already have an account?",
-                style:
-                    TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
               ),
               TextButton(
                 onPressed: () {

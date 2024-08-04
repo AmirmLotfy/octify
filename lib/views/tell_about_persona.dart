@@ -4,9 +4,13 @@ import 'package:octify/core/design/app_button.dart';
 import 'package:octify/core/design/app_expansion_tile.dart';
 import 'package:octify/core/design/app_input.dart';
 import 'package:octify/core/design/second_app_bar.dart';
+import 'package:octify/core/logic/helper_methods.dart';
+import 'package:octify/views/challenges.dart';
 
 class TellAboutPersonaView extends StatefulWidget {
-  const TellAboutPersonaView({super.key});
+  final String personaName;
+
+  const TellAboutPersonaView({super.key, required this.personaName});
 
   @override
   State<TellAboutPersonaView> createState() => _TellAboutPersonaViewState();
@@ -67,17 +71,17 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
               ],
               icon: 'gender.svg',
             ),
-            const AppExpansionTile(
-              title: "Select Blood Type",
-              label: "Blood Group",
-              list: [
-                "A",
-                "B",
-                "AB",
-                "O",
-              ],
-              icon: 'blood_type.svg',
-            ),
+            // const AppExpansionTile(
+            //   title: "Select Blood Type",
+            //   label: "Blood Group",
+            //   list: [
+            //     "A",
+            //     "B",
+            //     "AB",
+            //     "O",
+            //   ],
+            //   icon: 'blood_type.svg',
+            // ),
             SizedBox(height: 16.h),
             Text(
               "Allergies",
@@ -86,7 +90,7 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 16.h),
             Wrap(
               alignment: WrapAlignment.start,
               crossAxisAlignment: WrapCrossAlignment.start,
@@ -142,7 +146,9 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
             SizedBox(height: 24.h),
             AppButton(
               text: "Next",
-              onPress: () {},
+              onPress: () {
+                navigateTo(ChallengesView(personaName: widget.personaName,));
+              },
             )
           ],
         ),

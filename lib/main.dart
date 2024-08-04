@@ -5,6 +5,7 @@ import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/core/theme.dart';
 import 'package:octify/views/auth/login.dart';
 import 'package:octify/views/auth/on_boarding.dart';
+import 'package:octify/views/home/view.dart';
 
 import 'features/service_locator.dart';
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
               data: MediaQuery.of(context)
                   .copyWith(textScaler: TextScaler.linear(1.sp)),
               child: child!),
-          home: const LoginView(),
+          home: const OnBoardingView(),
         );
       },
     );

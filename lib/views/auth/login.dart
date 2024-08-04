@@ -35,19 +35,19 @@ class _LoginViewState extends State<LoginView> {
                 SizedBox(height: 24.h),
                 AppImage(
                   "",
-                  height: 64.h,
-                  width: 67.w,
+                  height: 120.h,
+                  width: 120.h,
                 ),
-                SizedBox(height: 16.h),
-                Center(
-                  child: Text(
-                    "Octify",
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
+                // SizedBox(height: 16.h),
+                // Center(
+                //   child: Text(
+                //     "Octify",
+                //     style: TextStyle(
+                //       fontSize: 20.sp,
+                //       fontWeight: FontWeight.w700,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: 30.h),
                 Center(
                   child: Text(
@@ -78,6 +78,7 @@ class _LoginViewState extends State<LoginView> {
                   validator: (value) => InputValidator.emailValidator(value!),
                   keyboardType: TextInputType.emailAddress,
                 ),
+                //todo: make strong password validate and at least 8 digits
                 AppInput(
                   label: "Password",
                   inputType: InputType.password,
@@ -131,7 +132,7 @@ class _LoginViewState extends State<LoginView> {
                       navigateTo(const HomeView(), keepHistory: false);
                     }
                   },
-                  child: const Text("Continue"),
+                  child: const Text("Sign In"),
                 ),
                 const LoginOrRegister()
               ],
