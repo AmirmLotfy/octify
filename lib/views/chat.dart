@@ -118,6 +118,9 @@ class _ChatViewState extends State<ChatView> {
                   child: TextFormField(
                     controller: messageController,
                     textDirection: inputDirection,
+                    style: TextStyle(
+                      fontSize: 14.sp
+                    ),
                     onChanged: (value) {
                       setState(() {});
                       /*

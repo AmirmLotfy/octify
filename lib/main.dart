@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/core/theme.dart';
+import 'package:octify/views/auth/login.dart';
 import 'package:octify/views/auth/on_boarding.dart';
 
 import 'features/service_locator.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
               data: MediaQuery.of(context)
                   .copyWith(textScaler: TextScaler.linear(1.sp)),
               child: child!),
-          home: const OnBoardingView(),
+          home: const LoginView(),
         );
       },
     );

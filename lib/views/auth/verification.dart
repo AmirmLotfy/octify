@@ -19,7 +19,7 @@ class VerificationView extends StatefulWidget {
 
 class _VerificationViewState extends State<VerificationView> {
   final countDownController = CountDownController();
-  final codeController = TextEditingController(text: "1111");
+  final codeController = TextEditingController();
   bool completed = false, isTimeFinished = false;
 
   @override
@@ -62,7 +62,7 @@ class _VerificationViewState extends State<VerificationView> {
               ),
               cursorHeight: 24.h,
               textStyle: TextStyle(
-                  fontSize: 40.sp,
+                  fontSize:  16.sp,
                   fontWeight: FontWeight.w700,
                   color: Colors.white),
               cursorColor: Theme.of(context).primaryColor.withOpacity(.5),
@@ -125,7 +125,7 @@ class _VerificationViewState extends State<VerificationView> {
                 ),
                 // const Spacer(),
                 CircularCountDownTimer(
-                  duration: 5,
+                  duration: 90,
                   controller: countDownController,
                   width: 50.w,
                   height: 50.h,

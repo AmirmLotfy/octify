@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/design/app_image.dart';
+import 'package:octify/core/logic/helper_methods.dart';
+import 'package:octify/views/results.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -108,7 +110,11 @@ class _HomePageState extends State<HomePage> {
                   style:
                       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
                 ),
-                TextButton(onPressed: () {}, child: const Text("View All"))
+                TextButton(
+                    onPressed: () {
+                      navigateTo(ResultsView());
+                    },
+                    child: const Text("View All"))
               ],
             ),
             SizedBox(height: 16.h),

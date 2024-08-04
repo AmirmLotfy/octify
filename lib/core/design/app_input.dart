@@ -47,6 +47,7 @@ class AppInput extends StatefulWidget {
 
 class _AppInputState extends State<AppInput> {
   bool isPasswordShown = false;
+  bool isError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +72,21 @@ class _AppInputState extends State<AppInput> {
             maxLines: widget.maxLines,
             obscuringCharacter: "*",
             obscureText:
-                ((widget.inputType == InputType.password) && !isPasswordShown) ,
+                ((widget.inputType == InputType.password) && !isPasswordShown),
             textInputAction: widget.textInputAction,
             keyboardType: widget.keyboardType,
-            validator: widget.validator,
+            validator: (value) {
+              if (widget.validator != null &&
+                  widget.validator!(value) != null &&
+                  widget.validator!(value)!.isNotEmpty) {
+                isError = true;
+              } else {
+                isError = false;
+              }
+
+              setState(() {});
+              return widget.validator != null ? widget.validator!(value) : null;
+            },
             inputFormatters: [
               if ([InputType.money].contains(widget.inputType))
                 FilteringTextInputFormatter.allow(RegExp("^(?!0)[0-9\\s]*")),
@@ -84,8 +96,9 @@ class _AppInputState extends State<AppInput> {
             decoration: InputDecoration(
               hintText: widget.hint,
               alignLabelWithHint: true,
-              // filled: true,
-              // fillColor: Colors.white,
+              fillColor: isError
+                  ? Theme.of(context).primaryColor.withOpacity(.1)
+                  : null,
               isDense: widget.isDense,
               prefixIcon:
                   widget.prefix != null || widget.inputType == InputType.phone
@@ -136,15 +149,15 @@ class _AppInputState extends State<AppInput> {
                         if (widget.onTogglePassword != null) {
                           widget.onTogglePassword!(isPasswordShown);
                         }
-                        setState(() {
-
-                        });
+                        setState(() {});
                       },
                       icon: Icon(
                         isPasswordShown
                             ? Icons.visibility_outlined
                             : Icons.visibility_off_outlined,
-                        color: Color(isPasswordShown?Theme.of(context).primaryColor.value:0xff8C8C8C),
+                        color: Color(isPasswordShown
+                            ? Theme.of(context).primaryColor.value
+                            : 0xff8C8C8C),
                       ),
                     )
                   : widget.suffix ?? const SizedBox(),
