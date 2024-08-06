@@ -14,35 +14,60 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // todo: need the rest of bg shapes
   final list = [
     HistoryModel(
-        icon: "parent_fill.svg",
-        title: "Parent",
-        body:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        bgShape: "bgShape",
-        color: const Color(0xff7FD2F2)),
+      icon: "child_fill.svg",
+      title: "My Child",
+      body:
+          "Track your child's developmental milestones, challenges, and achievements. View past advice and insights tailored to their growth.",
+      bgShape: "shape1.svg",
+      color: const Color(0xffA6B2EE),
+    ),
     HistoryModel(
-        icon: "child_fill.svg",
-        title: "Child",
+      icon: "partner_filled.svg",
+      title: "My Partner",
+      body:
+          "Review your relationship history, past advice, and personalized insights. Monitor key moments and challenges faced together.",
+      bgShape: "shape2.svg",
+      color: const Color(0xff8FD1CD),
+    ),
+    HistoryModel(
+      icon: "parent_fill.svg",
+      title: "My Parent",
+      body:
+          "Keep a record of your parent's health updates, caregiving tips, and relationship advice. Access previous guidance tailored to their needs.",
+      bgShape: "shape3.svg",
+      color: const Color(0xff7FD2F2),
+    ),
+    HistoryModel(
+        icon: "friend_filled.svg",
+        title: "My Friend",
         body:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        bgShape: "bgShape",
-        color: const Color(0xffA6B2EE)),
+            "Maintain a history of your friend's important events, interests, and challenges. Revisit past advice to strengthen your friendship.",
+        bgShape: "shape4.svg",
+        color: const Color(0xffFEDEA5)),
     HistoryModel(
         icon: "my_self_fill.svg",
         title: "Myself",
         body:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        bgShape: "bgShape",
+            "View your personal growth journey, self-care plans, and past advice. Reflect on your progress and revisit previous recommendations.",
+        bgShape: "shape1.svg",
         color: const Color(0xffEBCAE7)),
     HistoryModel(
         icon: "my_pet_fill.svg",
         title: "My Pet",
         body:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        bgShape: "bgShape",
+            "Record your pet’s health updates, care tips, and special moments. Access past advice to ensure your pet’s well-being.",
+        bgShape: "shape2.svg",
         color: const Color(0xffC2D6FE)),
+    HistoryModel(
+        icon: "colleague_filled.svg",
+        title: "My Colleague",
+        body:
+            "Monitor key interactions, professional challenges, and milestones with your colleague. Access past advice to improve workplace relationships and collaboration.",
+        bgShape: "shape3.svg",
+        color: const Color(0xff96D9B0)),
   ];
 
   @override
@@ -115,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 TextButton(
                     onPressed: () {
-                      navigateTo(AllHistoryView());
+                      navigateTo(AllHistoryView(list: list));
                     },
                     child: const Text("View All"))
               ],
@@ -124,7 +149,8 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: ListView.separated(
                 // padding: EdgeInsets.all(24.r),
-                itemBuilder: (context, index) => ItemHistory(model: list[index]),
+                itemBuilder: (context, index) =>
+                    ItemHistory(model: list[index]),
                 separatorBuilder: (context, index) => SizedBox(height: 16.5.h),
                 itemCount: list.length,
               ),
@@ -147,7 +173,6 @@ class HistoryModel {
       required this.bgShape,
       required this.color});
 }
-
 class ItemHistory extends StatelessWidget {
   final HistoryModel model;
 
@@ -157,42 +182,60 @@ class ItemHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        navigateTo(ResultsView(title: model.title,));
+        navigateTo(ResultsView(
+          title: model.title,
+        ));
       },
-      child: Container(
-        padding: EdgeInsets.all(16.r),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.r),
-          color: model.color,
-        ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                AppImage(
-                  model.icon,
-                  height: 48.h,
-                  width: 48.h,
-                ),
-                SizedBox(width: 16.w),
-                Text(
-                  model.title,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16.h),
-            Text(
-              model.body,
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w400,
+      child: IntrinsicHeight(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.r),
+            color: model.color,
+          ),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              AppImage(
+                model.bgShape,
+                height: 132.h,
+                fit: BoxFit.cover,
+                width: double.infinity,
               ),
-            ),
-          ],
+              Padding(
+                padding: EdgeInsets.all(16.r),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        AppImage(
+                          model.icon,
+                          height: 48.h,
+                          width: 48.h,
+                        ),
+                        SizedBox(width: 16.w),
+                        Text(
+                          model.title,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16.h),
+                    Text(
+                      model.body,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -6,6 +6,8 @@ import 'package:octify/core/theme.dart';
 import 'package:octify/views/auth/login.dart';
 import 'package:octify/views/auth/on_boarding.dart';
 import 'package:octify/views/home/view.dart';
+import 'package:octify/views/settings/help.dart';
+import 'package:octify/views/settings/privacy.dart';
 
 import 'features/service_locator.dart';
 
@@ -34,9 +36,12 @@ class MyApp extends StatelessWidget {
               data: MediaQuery.of(context)
                   .copyWith(textScaler: TextScaler.linear(1.sp)),
               child: child!),
-          home: const OnBoardingView(),
+          home: const HomeView(),
         );
       },
     );
   }
 }
+// Firebase
+//  Register ( first name - last name - email address - phone number - password )
+//  Login ( email address - password )

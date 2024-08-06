@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:octify/core/design/app_button.dart';
 import 'package:octify/core/design/app_image.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/views/auth/login.dart';
 
-class LogoutDialog extends StatelessWidget {
+class LogoutDialog extends StatefulWidget {
   const LogoutDialog({super.key});
+
+  @override
+  State<LogoutDialog> createState() => _LogoutDialogState();
+}
+
+class _LogoutDialogState extends State<LogoutDialog> {
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +38,19 @@ class LogoutDialog extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: FilledButton(
-                onPressed: () {
+              child: AppButton(
+                isLoading: isLoading,
+                onPress: () async {
+                  isLoading = true;
+                  setState(() {});
+
+                  await Future.delayed(const Duration(seconds: 2));
+                  isLoading = false;
+                  setState(() {});
+
                   navigateTo(const LoginView());
                 },
-                child: const Text("Logout"),
+                text: "Logout",
               ),
             ),
             SizedBox(width: 16.w),

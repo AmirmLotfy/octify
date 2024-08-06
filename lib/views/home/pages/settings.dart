@@ -8,7 +8,6 @@ import 'package:octify/views/settings/notifications.dart';
 import 'package:octify/views/settings/privacy.dart';
 import 'package:octify/views/settings/profile.dart';
 
-
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -51,6 +50,7 @@ class SettingsPage extends StatelessWidget {
             _Item(
                 text: "Logout",
                 image: "logout.svg",
+                withDivider: false,
                 onPress: () {
                   showDialog(
                     context: context,
@@ -66,12 +66,14 @@ class SettingsPage extends StatelessWidget {
 
 class _Item extends StatelessWidget {
   final String image, text;
+  final bool withDivider;
   final VoidCallback onPress;
 
   const _Item({
     required this.image,
     required this.text,
     required this.onPress,
+    this.withDivider = true,
   });
 
   @override
@@ -108,7 +110,7 @@ class _Item extends StatelessWidget {
               ],
             ),
             SizedBox(height: 12.w),
-            const Divider(),
+            if (withDivider) const Divider(),
           ],
         ),
       ),

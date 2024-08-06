@@ -50,7 +50,7 @@ class _PrivacyViewState extends State<PrivacyView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SecondAppBar(text: "Data Privacy and Usage"),
+      appBar: const SecondAppBar(text: "Data Privacy and Usage Policy"),
       body: ListView.separated(
         padding: EdgeInsets.all(24.r),
         itemBuilder: (context, index) => _Item(

@@ -20,17 +20,17 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     _Model(
         title: "Welcome to Octify",
         desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+            "Discover personalized solutions for understanding and connecting with your loved ones.",
         image: "on_boarding1.svg"),
     _Model(
-        title: "Lorem Ipsum",
+        title: "Tailored Insights",
         desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+            "Get customized advice based on life stages, current situations, and personal challenges.",
         image: "on_boarding2.svg"),
     _Model(
-        title: "Lorem Ipsum",
+        title: "Grow Together",
         desc:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+            "Enhance your relationships with actionable plans and expert guidance.",
         image: "on_boarding3.svg"),
   ];
 

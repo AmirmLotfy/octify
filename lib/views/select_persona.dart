@@ -5,6 +5,7 @@ import 'package:octify/core/design/app_input.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/views/tell_about_persona.dart';
 
+import '../core/design/app_button.dart';
 import '../core/design/second_app_bar.dart';
 
 class SelectPersonaView extends StatefulWidget {
@@ -71,7 +72,10 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
               label: "Other Persona",
               hint: "Enter other persona",
             ),
-            FilledButton(onPressed: () {}, child: const Text("Next"))
+            AppButton(
+              onPress: () {},
+              text: "Next",
+            )
           ],
         ),
       ),
@@ -95,7 +99,9 @@ class _Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        navigateTo(TellAboutPersonaView(personaName: model.text,));
+        navigateTo(TellAboutPersonaView(
+          personaName: model.text,
+        ));
       },
       child: Container(
         padding: EdgeInsets.all(16.r),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:octify/core/design/app_button.dart';
 import 'package:octify/core/design/app_image.dart';
 import 'package:octify/core/design/app_input.dart';
 import 'package:octify/core/logic/helper_methods.dart';
@@ -21,6 +22,8 @@ class _LoginViewState extends State<LoginView> {
   bool isRememberMe = false;
   final formKey = GlobalKey<FormState>();
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +37,7 @@ class _LoginViewState extends State<LoginView> {
               children: [
                 SizedBox(height: 24.h),
                 AppImage(
-                  "",
+                  "logo.png",
                   height: 120.h,
                   width: 120.h,
                 ),
@@ -78,14 +81,14 @@ class _LoginViewState extends State<LoginView> {
                   validator: (value) => InputValidator.emailValidator(value!),
                   keyboardType: TextInputType.emailAddress,
                 ),
-                //todo: make strong password validate and at least 8 digits
                 AppInput(
                   label: "Password",
                   inputType: InputType.password,
                   prefix: "password.svg",
                   hint: "Enter Password",
-                  validator: (value) =>
-                      InputValidator.passwordLoginValidator(value!,),
+                  validator: (value) => InputValidator.passwordLoginValidator(
+                    value!,
+                  ),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -126,13 +129,21 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ),
                 SizedBox(height: 24.h),
-                FilledButton(
-                  onPressed: () {
+                AppButton(
+                  isLoading: isLoading,
+                  onPress: () async {
                     if (formKey.currentState!.validate()) {
+                      isLoading = true;
+                      setState(() {});
+
+                      await Future.delayed(const Duration(seconds: 2));
+                      isLoading = false;
+                      setState(() {});
+
                       navigateTo(const HomeView(), keepHistory: false);
                     }
                   },
-                  child: const Text("Sign In"),
+                  text: "Sign In",
                 ),
                 const LoginOrRegister()
               ],

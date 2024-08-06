@@ -9,6 +9,7 @@ class InputValidator {
   static final _arabicTextReg = RegExp(r"[\u0600-\u06ff]+");
   static final _cardNumbersReg = RegExp(r"\d.{4}");
   static final _saudiNumberReg = RegExp(r"((\+|00)?966|0)?5\d{8}$");
+  static final _strongPasswordReg = RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
 
   static String? validatePhone(String? value) {
     if (value!.isEmpty) {
@@ -57,10 +58,10 @@ class InputValidator {
     if (value.isEmpty) {
       return "Password Required";
     }
-    if (value.length >= 6) {
+    if (value.length >= 8) {
       return null;
     } else {
-      return "At least 6 digits";
+      return "At least 8 digits";
     }
   }
   static String? passwordValidator(String value, TextEditingController confirmPassword, {lengthRequired = false}) {
@@ -68,10 +69,10 @@ class InputValidator {
       return "Password Required";
     }
     else if (lengthRequired) {
-      if (value.length >= 6) {
+      if (value.length >= 8) {
         return null;
       } else {
-        return "At least 6 digits";
+        return "At least 8 digits";
       }
     } else if (value != confirmPassword.text) {
       return "Passwords Not Matched";

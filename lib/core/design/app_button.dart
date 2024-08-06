@@ -58,6 +58,7 @@ class AppButton extends StatelessWidget {
           padding: EdgeInsets.all(24.r).copyWith(top: 8.h),
           child: AppButton(
             text: text,
+            isLoading: isLoading,
             onPress: onPress,
           ),
         );

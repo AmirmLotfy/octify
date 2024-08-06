@@ -37,9 +37,8 @@ class _ChatViewState extends State<ChatView> {
         leading: const AppBack(),
         title: Row(
           children: [
-            // todo: change this for app logo
             AppImage(
-              "chatbot.svg",
+              "logo.png",
               height: 32.h,
               width: 32.h,
             ),
@@ -199,7 +198,7 @@ class _Item extends StatelessWidget {
         children: [
           if (!model.isMe)
             AppImage(
-              "chatbot.svg",
+              "logo.png",
               height: 32.h,
               width: 32.h,
             ),

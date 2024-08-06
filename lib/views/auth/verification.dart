@@ -21,6 +21,8 @@ class _VerificationViewState extends State<VerificationView> {
   final countDownController = CountDownController();
   final codeController = TextEditingController();
   bool completed = false, isTimeFinished = false;
+  bool isLoading = false;
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,40 +53,47 @@ class _VerificationViewState extends State<VerificationView> {
               ),
             ),
             SizedBox(height: 30.h),
-            PinCodeTextField(
-              length: 4,
-              controller: codeController,
-              animationType: AnimationType.fade,
-              mainAxisAlignment: MainAxisAlignment.center,
-              keyboardType: TextInputType.number,
-              separatorBuilder: (context, index) => SizedBox(
-                width: 20.w,
+            Form(
+              key: formKey,
+              child: PinCodeTextField(
+                length: 4,
+                controller: codeController,
+                animationType: AnimationType.fade,
+                validator: (value) {
+                  //todo make the validation
+                  return null;
+                },
+                mainAxisAlignment: MainAxisAlignment.center,
+                keyboardType: TextInputType.number,
+                separatorBuilder: (context, index) => SizedBox(
+                  width: 20.w,
+                ),
+                cursorHeight: 24.h,
+                textStyle: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
+                cursorColor: Theme.of(context).primaryColor.withOpacity(.5),
+                enableActiveFill: true,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(12.r),
+                  fieldHeight: 48.h,
+                  fieldWidth: 48.h,
+                  activeFillColor: Theme.of(context).primaryColor,
+                  inactiveColor: const Color(0xffE9E9E9),
+                  activeColor: Theme.of(context).primaryColor,
+                  selectedColor: Theme.of(context).primaryColor,
+                  inactiveFillColor: Colors.transparent,
+                  selectedFillColor: Colors.transparent,
+                ),
+                animationDuration: const Duration(milliseconds: 300),
+                backgroundColor: Colors.transparent,
+                appContext: context,
               ),
-              cursorHeight: 24.h,
-              textStyle: TextStyle(
-                  fontSize:  16.sp,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white),
-              cursorColor: Theme.of(context).primaryColor.withOpacity(.5),
-              enableActiveFill: true,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-              ],
-              pinTheme: PinTheme(
-                shape: PinCodeFieldShape.box,
-                borderRadius: BorderRadius.circular(12.r),
-                fieldHeight: 48.h,
-                fieldWidth: 48.h,
-                activeFillColor: Theme.of(context).primaryColor,
-                inactiveColor: const Color(0xffE9E9E9),
-                activeColor: Theme.of(context).primaryColor,
-                selectedColor: Theme.of(context).primaryColor,
-                inactiveFillColor: Colors.transparent,
-                selectedFillColor: Colors.transparent,
-              ),
-              animationDuration: const Duration(milliseconds: 300),
-              backgroundColor: Colors.transparent,
-              appContext: context,
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -152,9 +161,19 @@ class _VerificationViewState extends State<VerificationView> {
       ),
       bottomNavigationBar: AppButton(
         text: "Verify",
+        isLoading: isLoading,
         type: ButtonType.bottomNav,
-        onPress: () {
-          navigateTo(const ResetPasswordView());
+        onPress: () async {
+          if (formKey.currentState!.validate()) {
+            isLoading = true;
+            setState(() {});
+
+            await Future.delayed(const Duration(seconds: 2));
+            isLoading = false;
+            setState(() {});
+
+            navigateTo(const ResetPasswordView());
+          }
         },
       ),
     );

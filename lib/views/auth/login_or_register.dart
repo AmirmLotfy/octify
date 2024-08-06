@@ -6,6 +6,8 @@ import 'package:octify/core/theme.dart';
 import 'package:octify/views/auth/login.dart';
 import 'package:octify/views/auth/register.dart';
 
+import '../../core/design/app_button.dart';
+
 
 class LoginOrRegisterView extends StatelessWidget {
   const LoginOrRegisterView({super.key});
@@ -21,7 +23,7 @@ class LoginOrRegisterView extends StatelessWidget {
             children: [
               const Spacer(flex: 3,),
               AppImage(
-                "",
+                "logo.png",
                 height: 114.h,
                 width: 120.w,
               ),
@@ -43,11 +45,11 @@ class LoginOrRegisterView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 44.h),
-              FilledButton(
-                onPressed: () {
+              AppButton(
+                onPress: () {
                   navigateTo(const RegisterView());
                 },
-                child: const Text("Create Account"),
+                text: "Create Account",
               ),
               TextButton(
                 onPressed: () {

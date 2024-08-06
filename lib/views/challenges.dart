@@ -10,6 +10,7 @@ import '../core/theme.dart';
 
 class ChallengesView extends StatefulWidget {
   final String personaName;
+
   const ChallengesView({super.key, required this.personaName});
 
   @override
@@ -26,9 +27,11 @@ class _ChallengesViewState extends State<ChallengesView> {
     "Shared Responsibilities",
     "Lifestyle Differences",
   ];
+  List<String> selectedTextsList = [];
+  List<int> selectedList = [];
+  final otherChallengesController = TextEditingController();
 
-  int? selectedIndex;
-  //todo: make it multi select and can also write challenge
+  bool isLoading  =false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +68,11 @@ class _ChallengesViewState extends State<ChallengesView> {
                 list.length,
                 (index) => GestureDetector(
                   onTap: () {
-                    selectedIndex = index;
+                    if (selectedList.contains(index)) {
+                      selectedList.remove(index);
+                    } else {
+                      selectedList.add(index);
+                    }
                     setState(() {});
                   },
                   child: Container(
@@ -74,10 +81,10 @@ class _ChallengesViewState extends State<ChallengesView> {
                       vertical: 8.h,
                     ),
                     decoration: BoxDecoration(
-                        color: selectedIndex == index
+                        color: selectedList.contains(index)
                             ? Theme.of(context).primaryColor
                             : null,
-                        border: selectedIndex != index
+                        border: !selectedList.contains(index)
                             ? Border.all(
                                 color: Theme.of(context).dividerColor,
                               )
@@ -87,7 +94,7 @@ class _ChallengesViewState extends State<ChallengesView> {
                       list[index],
                       style: TextStyle(
                         fontSize: 12.sp,
-                        color: selectedIndex == index
+                        color: selectedList.contains(index)
                             ? Colors.white
                             : const Color(0xff8c8c8c),
                       ),
@@ -98,23 +105,39 @@ class _ChallengesViewState extends State<ChallengesView> {
             ),
             SizedBox(height: 32.h),
             AppInput(
+              controller: otherChallengesController,
               label: "Other Challenges",
               hint: "Enter Other Challenges",
-              onChanged: (value) {
-                selectedIndex = null;
-                setState(() {});
-              },
             )
           ],
         ),
       ),
       bottomNavigationBar: AppButton(
         text: "Analyze",
+        isLoading: isLoading,
         type: ButtonType.bottomNav,
-        onPress: () {
+        onPress: () async{
+          isLoading= true;
+          setState(() {
+
+          });
+          selectedList.forEach(
+            (element) {
+              selectedTextsList.add(list[element]);
+            },
+          );
+          if (otherChallengesController.text.isNotEmpty) {
+            selectedTextsList.add(otherChallengesController.text);
+          }
+          await Future.delayed(const Duration(seconds: 2));
+          isLoading= false;
+          setState(() {
+
+          });
           navigateTo(ResultsView(title: widget.personaName));
         },
       ),
     );
   }
 }
+
