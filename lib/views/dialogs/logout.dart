@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:octify/core/design/app_button.dart';
 import 'package:octify/core/design/app_image.dart';
 import 'package:octify/core/logic/helper_methods.dart';
@@ -43,13 +45,13 @@ class _LogoutDialogState extends State<LogoutDialog> {
                 onPress: () async {
                   isLoading = true;
                   setState(() {});
-
-                  await Future.delayed(const Duration(seconds: 2));
+                  await GoogleSignIn().disconnect();
+                  await FirebaseAuth.instance.signOut();
+                  navigateTo(const LoginView(), keepHistory: false);
+                  // await Future.delayed(const Duration(seconds: 2));
                   isLoading = false;
                   setState(() {});
-
-                  navigateTo(const LoginView());
-                },
+                  },
                 text: "Logout",
               ),
             ),

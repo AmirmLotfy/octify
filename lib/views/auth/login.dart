@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/design/app_button.dart';
 import 'package:octify/core/design/app_image.dart';
 import 'package:octify/core/design/app_input.dart';
+import 'package:octify/core/logic/cache_helper.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/core/logic/input_validator.dart';
 import 'package:octify/views/auth/forget_password.dart';
@@ -19,10 +21,21 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  bool isRememberMe = false;
+  bool isRememberMe = CacheHelper.isRememberMe;
   final formKey = GlobalKey<FormState>();
 
   bool isLoading = false;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (isRememberMe) {
+      emailController.text = CacheHelper.email;
+      passwordController.text = CacheHelper.password;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +89,7 @@ class _LoginViewState extends State<LoginView> {
                 SizedBox(height: 30.h),
                 AppInput(
                   label: "Email Address",
+                  controller: emailController,
                   prefix: "mail.svg",
                   hint: "Enter Email Address",
                   validator: (value) => InputValidator.emailValidator(value!),
@@ -83,12 +97,12 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 AppInput(
                   label: "Password",
+                  controller: passwordController,
                   inputType: InputType.password,
                   prefix: "password.svg",
                   hint: "Enter Password",
-                  validator: (value) => InputValidator.passwordLoginValidator(
-                    value!,
-                  ),
+                  validator: (value) =>
+                      InputValidator.passwordLoginValidator(value!),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -135,12 +149,38 @@ class _LoginViewState extends State<LoginView> {
                     if (formKey.currentState!.validate()) {
                       isLoading = true;
                       setState(() {});
+                      try {
+                        final credential = await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text);
 
-                      await Future.delayed(const Duration(seconds: 2));
+                        if (credential.user!.emailVerified) {
+                          await CacheHelper.setRememberMe(isRememberMe);
+                          if (isRememberMe) {
+                            await CacheHelper.saveEmailAndPassword(
+                              emailController.text,
+                              passwordController.text,
+                            );
+                          }
+                          navigateTo(const HomeView(), keepHistory: false);
+                        } else {
+                          // await FirebaseAuth.instance.currentUser!
+                          //     .sendEmailVerification();
+                          showMessage(
+                            "Please Verify your email before login",
+                            type: MessageType.warning,
+                          );
+                        }
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'user-not-found') {
+                          showMessage("No user found for that email.");
+                        } else if (e.code == 'wrong-password') {
+                          showMessage("Wrong password provided for that user.");
+                        }
+                      }
                       isLoading = false;
                       setState(() {});
-
-                      navigateTo(const HomeView(), keepHistory: false);
                     }
                   },
                   text: "Sign In",

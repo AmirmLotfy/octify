@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class InputValidator {
@@ -9,7 +7,8 @@ class InputValidator {
   static final _arabicTextReg = RegExp(r"[\u0600-\u06ff]+");
   static final _cardNumbersReg = RegExp(r"\d.{4}");
   static final _saudiNumberReg = RegExp(r"((\+|00)?966|0)?5\d{8}$");
-  static final _strongPasswordReg = RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
+  static final _strongPasswordReg = RegExp(
+      r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
 
   static String? validatePhone(String? value) {
     if (value!.isEmpty) {
@@ -64,11 +63,13 @@ class InputValidator {
       return "At least 8 digits";
     }
   }
-  static String? passwordValidator(String value, TextEditingController confirmPassword, {lengthRequired = false}) {
+
+  static String? passwordValidator(
+      String value, TextEditingController confirmPassword,
+      {lengthRequired = false}) {
     if (value.isEmpty) {
       return "Password Required";
-    }
-    else if (lengthRequired) {
+    } else if (lengthRequired) {
       if (value.length >= 8) {
         return null;
       } else {
@@ -80,8 +81,10 @@ class InputValidator {
       return null;
     }
   }
+
   //
-  static String? confirmPasswordValidator(String password, TextEditingController confirmPassword) {
+  static String? confirmPasswordValidator(
+      String password, TextEditingController confirmPassword) {
     if (password.isEmpty) {
       return "Confirm Password Required";
     } else if (confirmPassword.text.isEmpty) {

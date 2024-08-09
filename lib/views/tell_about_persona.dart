@@ -7,6 +7,8 @@ import 'package:octify/core/design/second_app_bar.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/views/challenges.dart';
 
+enum PersonaType {general,child,partner,parent,pet,friend,myself,colleague}
+
 class TellAboutPersonaView extends StatefulWidget {
   final String personaName;
 
@@ -71,6 +73,167 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
               ],
               icon: 'gender.svg',
             ),
+            // todo add icon for grade
+            const AppInput(
+              prefix: "",
+              label: "School Grade",
+              hint: "Enter Grade",
+              keyboardType: TextInputType.number,
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Relationship with this persona",
+              hint: "",
+              keyboardType: TextInputType.number,
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Health Conditions",
+              hint: "Health Conditions",
+              keyboardType: TextInputType.number,
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Behavioral Traits",
+              hint: "Enter your behavioral traits",
+              keyboardType: TextInputType.number,
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Interests/Hobbies",
+              hint: "Enter your interests hobbies",
+              keyboardType: TextInputType.number,
+            ),
+            const AppExpansionTile(
+              title: "Select",
+              label: "Academic Performance",
+              list: [
+                "Very Bad",
+                "Bad",
+                "Neutral",
+                "Good",
+                "Very Good",
+              ],
+              icon: '',
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Social Relationships",
+              hint: "Enter your social relationships",
+              keyboardType: TextInputType.number,
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Occupation",
+              hint: "Enter your occupation",
+              keyboardType: TextInputType.number,
+            ),
+            // todo: make it like the comment months and years
+            const AppInput(
+              prefix: "",
+              label: "Relationship Duration",
+              hint: "MM/YY",
+              keyboardType: TextInputType.number,
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Communication Style",
+              hint: "Enter your communication style",
+              keyboardType: TextInputType.number,
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Life Goals",
+              hint: "Enter your Life Goals",
+            ),
+            // todo: make add button and clickable to show sheet
+            // in the sheet he enter the name of the date and select the date
+            // from calendat and then press save and it shown below the item
+            // he also can delete or edit it when click on it
+            const AppInput(
+              prefix: "",
+              label: "Important Dates",
+              hint: "Enter your important dates",
+              keyboardType: TextInputType.number,
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Living Situation",
+              hint: "Ex: alone, with family",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Support Needs",
+              hint: "Ex: alone, with family",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Emotional State",
+              hint: "Ex: loneliness, happiness",
+            ),
+            // todo: they will give me description for every input or choose
+            // and you will add info icon clickable to show tooltip description
+            const AppInput(
+              prefix: "",
+              label: "Personal Goals",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Support System",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Species/Breed",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Diet",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Exercise Needs",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Favorite Activities",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Position",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Department",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Work Style",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Project Involvement",
+              hint: "",
+            ),
+            const AppInput(
+              prefix: "",
+              label: "Professional Goals",
+              hint: "",
+            ),
+            // todo: they will see if they need it
+            // const AppInput(
+            //   prefix: "",
+            //   label: "Current Life Situation",
+            //   hint: "Ex: ",
+            // ),
             // const AppExpansionTile(
             //   title: "Select Blood Type",
             //   label: "Blood Group",

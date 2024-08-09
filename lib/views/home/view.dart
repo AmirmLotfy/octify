@@ -14,6 +14,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  // todo: remove add persona page that was for the empty case of home
   List<String> icons = [
     "home.svg",
     "home.svg",

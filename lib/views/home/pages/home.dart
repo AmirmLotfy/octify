@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) =>
                     ItemHistory(model: list[index]),
                 separatorBuilder: (context, index) => SizedBox(height: 16.5.h),
-                itemCount: list.length,
+                itemCount: list.length>4?4: list.length,
               ),
             ),
           ],

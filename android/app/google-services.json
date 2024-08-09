@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "761011857743",
+    "project_id": "octifyai",
+    "storage_bucket": "octifyai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761011857743:android:60745be007517bc4f1fd3a",
+        "android_client_info": {
+          "package_name": "com.araby.octify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWaDdl0In5RKwi1EM3S6rVpUM2PI4EXg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

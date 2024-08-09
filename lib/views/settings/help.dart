@@ -76,6 +76,7 @@ class _HelpViewState extends State<HelpView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const SecondAppBar(text: "Help and support"),
+      // todo: make it categories and with every category its questions
       body: ListView.separated(
         padding: EdgeInsets.all(24.r),
         itemBuilder: (context, index) => _Item(
@@ -84,6 +85,7 @@ class _HelpViewState extends State<HelpView> {
         separatorBuilder: (context, index) => SizedBox(height: 12.h),
         itemCount: list.length,
       ),
+      // todo: they need to add social media icons below the email
       bottomNavigationBar: SafeArea(
         child: Container(
           padding: EdgeInsets.all(10.r),
@@ -104,7 +106,7 @@ class _HelpViewState extends State<HelpView> {
               ),
               SizedBox(height: 8.h),
               Text(
-                "Our support team is here to help you. You can reach us via:",
+                "If you have any questions or concerns about this Data Privacy and Usage Policy, please contact us at:",
                 style: TextStyle(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w400,
@@ -113,7 +115,7 @@ class _HelpViewState extends State<HelpView> {
               SizedBox(height: 8.h),
               GestureDetector(
                 onTap: () {
-                  openUrl("mailto:support@octify.ai");
+                  openUrl("mailto:support@octify.frameless.co");
                 },
                 child: Container(
                   color: Colors.transparent,
@@ -128,7 +130,7 @@ class _HelpViewState extends State<HelpView> {
                       ),
                       Expanded(
                           child: Text(
-                        "support@octify.ai",
+                        "support@octify.frameless.co",
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,

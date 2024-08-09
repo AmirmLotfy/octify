@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:octify/core/logic/cache_helper.dart';
 import 'package:octify/views/auth/login_or_register.dart';
 
 import '../../core/design/app_button.dart';
@@ -48,7 +49,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 ? Align(
                     alignment: AlignmentDirectional.centerEnd,
                     child: TextButton(
-                      onPressed: () {
+                      onPressed: () async{
+                        await CacheHelper.setNotFirstTime();
                         navigateTo(const LoginOrRegisterView());
                       },
                       child: const Text("Skip"),
@@ -126,8 +128,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       bottomNavigationBar: AppButton(
         text: currentPage != list.length - 1 ? "Next" : "Get Started",
         type: ButtonType.bottomNav,
-        onPress: () {
+        onPress: () async{
           if (currentPage == list.length - 1) {
+            await CacheHelper.setNotFirstTime();
             navigateTo(const LoginOrRegisterView());
           } else {
             pageController.nextPage(

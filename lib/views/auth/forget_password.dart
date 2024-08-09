@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/logic/helper_methods.dart';
@@ -6,6 +7,7 @@ import 'package:octify/views/auth/verification.dart';
 import '../../core/design/app_button.dart';
 import '../../core/design/app_input.dart';
 import '../../core/design/second_app_bar.dart';
+import '../../core/logic/input_validator.dart';
 import '../../core/theme.dart';
 
 class ForgetPasswordView extends StatefulWidget {
@@ -18,6 +20,7 @@ class ForgetPasswordView extends StatefulWidget {
 class _ForgetPasswordViewState extends State<ForgetPasswordView> {
   final formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +53,12 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                 ),
               ),
               SizedBox(height: 30.h),
-               AppInput(
+              AppInput(
                 label: "Email Address",
                 prefix: "mail.svg",
+                controller: emailController,
                 hint: "Enter Email Address",
-                validator: (value) {
-                  //todo make the validation
-                  return null;
-                },
+                validator: (value) => InputValidator.emailValidator(value!),
                 keyboardType: TextInputType.emailAddress,
               ),
             ],
@@ -72,12 +73,22 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
           if (formKey.currentState!.validate()) {
             isLoading = true;
             setState(() {});
+            try {
+              await FirebaseAuth.instance
+                  .sendPasswordResetEmail(email: emailController.text)
+                  .then(
+                (value) {
+                  showMessage("Reset Password Link was sent to your email",
+                      type: MessageType.success);
+                  Navigator.pop(context);
+                },
+              );
+            } on FirebaseAuthException catch (ex) {
+              showMessage(ex.code);
+            }
 
-            await Future.delayed(const Duration(seconds: 2));
             isLoading = false;
             setState(() {});
-
-            navigateTo(const VerificationView());
           }
         },
       ),

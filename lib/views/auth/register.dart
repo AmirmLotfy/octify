@@ -1,12 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/core/theme.dart';
+import 'package:octify/views/auth/login.dart';
 import 'package:octify/views/auth/verification.dart';
+import 'package:octify/views/home/view.dart';
 
 import '../../core/design/app_button.dart';
 import '../../core/design/app_image.dart';
 import '../../core/design/app_input.dart';
+import '../../core/logic/input_validator.dart';
 import 'components/login_or_register.dart';
 
 class RegisterView extends StatefulWidget {
@@ -17,9 +21,14 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-
-  bool isLoading =false;
+  bool isLoading = false;
   final formKey = GlobalKey<FormState>();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,65 +77,91 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                 ),
                 SizedBox(height: 30.h),
-                 AppInput(
+                AppInput(
+                  controller: firstNameController,
                   label: "First Name",
                   prefix: "user_name.svg",
                   hint: "Enter First Name",
-                  validator: (value) {    //todo make the validation
-                    return null;
-                  },
-                ),
-                 AppInput(
-                  label: "Last Name",
-                  prefix: "user_name.svg",
-                  hint: "Enter Last Name",
-                  validator: (value) {    //todo make the validation
-                    return null;
-                  },
-                ),
-                 AppInput(
-                  label: "Email Address",
-                  prefix: "mail.svg",
-                  hint: "Enter Email Address",
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {    //todo make the validation
-                    return null;
-                  },
-                ),
-                 AppInput(
-                  label: "Phone Number",
-                  prefix: "phone.svg",
-                  hint: "Enter Phone Number",
-                  keyboardType: TextInputType.phone,
-                  validator: (value) {    //todo make the validation
+                  validator: (value) {
+                    if(value!.isEmpty)
+                      {
+                        return "First Name must be not empty";
+                      }
                     return null;
                   },
                 ),
                 AppInput(
-                  label: "Password",
-                  inputType: InputType.password,
-                  marginBottom: 30.h,
-                  prefix: "password.svg",
-                  hint: "Enter Password",
+                  controller: lastNameController,
+                  label: "Last Name",
+                  prefix: "user_name.svg",
+                  hint: "Enter Last Name",
+                  validator: (value) {
+                    if(value!.isEmpty)
+                    {
+                      return "Last Name must be not empty";
+                    }
+                    return null;
+                  },
+                ),
+                AppInput(
+                  controller: emailController,
+                  label: "Email Address",
+                  prefix: "mail.svg",
+                  hint: "Enter Email Address",
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) => InputValidator.emailValidator(value!),
+                ),
+                AppInput(
+                  controller: phoneController,
+                  label: "Phone Number",
+                  prefix: "phone.svg",
+                  hint: "Enter Phone Number",
+                  keyboardType: TextInputType.phone,
                   validator: (value) {
                     //todo make the validation
                     return null;
                   },
                 ),
+                AppInput(
+                  controller: passwordController,
+                  label: "Password",
+                  inputType: InputType.password,
+                  marginBottom: 30.h,
+                  prefix: "password.svg",
+                  hint: "Enter Password",
+                  validator: (value) =>
+                      InputValidator.passwordLoginValidator(value!),
+                ),
                 AppButton(
                   isLoading: isLoading,
-                  onPress: () async{
+                  onPress: () async {
                     if (formKey.currentState!.validate()) {
                       isLoading = true;
                       setState(() {});
-
-                      await Future.delayed(const Duration(seconds: 2));
+                      try {
+                        final credential = await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                        await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+                        // showMessage("msg");
+                        navigateTo(const LoginView(),keepHistory: false);
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'weak-password') {
+                          showMessage("The password provided is too weak.");
+                        } else if (e.code == 'email-already-in-use') {
+                          showMessage("The account already exists for that email.");
+                        }
+                      } catch (e) {
+                        showMessage(e.toString());
+                      }
+                      // await Future.delayed(const Duration(seconds: 2));
                       isLoading = false;
                       setState(() {});
 
-                      navigateTo(const VerificationView());
+                      // navigateTo(const VerificationView());
                     }
-
                   },
                   text: "Sign Up",
                 ),

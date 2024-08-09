@@ -20,8 +20,8 @@ class _PrivacyViewState extends State<PrivacyView> {
       subTitle:
           "Your data helps us enhance user experience, support functionality, and analyze trends. We use collected",
       items: [
-        "Personalizing your experience.",
-        "Improving app performance.",
+        "Age",
+        "Email",
         "Communicating updates and offers."
       ],
     ),
@@ -59,6 +59,8 @@ class _PrivacyViewState extends State<PrivacyView> {
         separatorBuilder: (context, index) => SizedBox(height: 24.h),
         itemCount: list.length,
       ),
+      //todo make like help Effective Date - This Data Privacy and Usage Policy is effective as of Aug 1st 2024.
+      // bottomNavigationBar: ,
     );
   }
 }

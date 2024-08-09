@@ -19,6 +19,13 @@ dependencies:
   kiwi: ^5.0.0
   dio: ^5.4.3+1
   quick_log: ^5.3.1
+  animate_do: ^3.3.4
+  firebase_core: ^3.3.0
+  firebase_messaging: ^15.0.4
+  firebase_auth: ^5.1.4
+  flutter_local_notifications: ^17.2.2
+  shared_preferences: ^2.3.1
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:

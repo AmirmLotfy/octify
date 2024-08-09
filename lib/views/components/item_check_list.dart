@@ -38,13 +38,15 @@ class ItemCheckList extends StatelessWidget {
                 ),
               ),
             ),
-          Column(
+          // todo: make it wrap
+          Wrap(
             children: List.generate(
               list.length,
               (index) => Padding(
                 padding:
                     EdgeInsets.only(bottom: index == list.length - 1 ? 0 : 6.h),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     AppImage(
                       "achievement.svg",
