@@ -8,6 +8,7 @@ import 'package:octify/views/components/item_check_list.dart';
 import 'package:octify/views/home/view.dart';
 
 import '../core/design/second_app_bar.dart';
+import 'chat/view.dart';
 
 class ResultsView extends StatefulWidget {
   final String title;
@@ -99,7 +100,7 @@ class _ResultsViewState extends State<ResultsView> {
               AppButton(
                 text: "Chat with Octify",
                 onPress: () {
-                  navigateTo(const ChatView());
+                  navigateTo( ChatView());
                 },
               ),
               AppButton(

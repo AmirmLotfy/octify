@@ -3,10 +3,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/design/app_image.dart';
 import 'package:octify/core/design/app_input.dart';
 import 'package:octify/core/logic/helper_methods.dart';
-import 'package:octify/views/tell_about_persona.dart';
+import 'package:octify/views/tell_about_persona/view.dart';
 
 import '../core/design/app_button.dart';
 import '../core/design/second_app_bar.dart';
+
+enum PersonaType {
+  general,
+  child,
+  partner,
+  parent,
+  pet,
+  friend,
+  myself,
+  colleague
+}
 
 class SelectPersonaView extends StatefulWidget {
   const SelectPersonaView({super.key});
@@ -17,18 +28,42 @@ class SelectPersonaView extends StatefulWidget {
 
 class _SelectPersonaViewState extends State<SelectPersonaView> {
   final list = [
-    _Model(text: "Parent", image: "parent.svg", color: const Color(0xff7FD2F2)),
-    _Model(text: "Child", image: "child.svg", color: const Color(0xffA6B2EE)),
     _Model(
-        text: "Partner", image: "partner.svg", color: const Color(0xff8FD1CD)),
+        text: "Parent",
+        personaType: PersonaType.parent,
+        image: "parent.svg",
+        color: const Color(0xff7FD2F2)),
     _Model(
-        text: "Myself", image: "my_self.svg", color: const Color(0xffEBCAE7)),
+        text: "Child",
+        personaType: PersonaType.child,
+        image: "child.svg",
+        color: const Color(0xffA6B2EE)),
+    _Model(
+        text: "Partner",
+        personaType: PersonaType.partner,
+        image: "partner.svg",
+        color: const Color(0xff8FD1CD)),
+    _Model(
+        text: "Myself",
+        personaType: PersonaType.myself,
+        image: "my_self.svg",
+        color: const Color(0xffEBCAE7)),
     _Model(
         text: "Colleague",
+        personaType: PersonaType.colleague,
         image: "colleague.svg",
         color: const Color(0xff96D9B0)),
-    _Model(text: "Friend", image: "friend.svg", color: const Color(0xffFEDEA5)),
-    _Model(text: "My Pet", image: "my_pet.svg", color: const Color(0xffFFCFB9)),
+    _Model(
+        text: "Friend",
+        personaType: PersonaType.friend,
+        image: "friend.svg",
+        color: const Color(0xffFEDEA5)),
+    _Model(
+      text: "My Pet",
+      personaType: PersonaType.pet,
+      image: "my_pet.svg",
+      color: const Color(0xffFFCFB9),
+    ),
   ];
 
   @override
@@ -86,8 +121,13 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
 class _Model {
   final String text, image;
   final Color color;
+  final PersonaType personaType;
 
-  _Model({required this.text, required this.image, required this.color});
+  _Model(
+      {required this.text,
+      required this.image,
+      required this.color,
+      required this.personaType});
 }
 
 class _Item extends StatelessWidget {
@@ -101,6 +141,7 @@ class _Item extends StatelessWidget {
       onTap: () {
         navigateTo(TellAboutPersonaView(
           personaName: model.text,
+          personaType: model.personaType,
         ));
       },
       child: Container(

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 import '../../../core/logic/dio_helper.dart';
+
 
 part 'events.dart';
 
@@ -19,6 +19,7 @@ class GetMessagesBloc extends Bloc<GetMessagesEvents, GetMessagesStates> {
     on<AppendMessageEvent>(_addData);
   }
 
+
   void _getData(
     GetMessagesEvent event,
     Emitter<GetMessagesStates> emit,
@@ -27,7 +28,7 @@ class GetMessagesBloc extends Bloc<GetMessagesEvents, GetMessagesStates> {
 
     final response = await _dio.get("");
     if (response.isSuccess) {
-      emit(GetMessagesSuccessState(list: _fakeList));
+      emit(GetMessagesSuccessState(list: []));
     } else {
       emit(GetMessagesFailedState(
           msg: response.msg, statusCode: response.statusCode));
@@ -36,14 +37,14 @@ class GetMessagesBloc extends Bloc<GetMessagesEvents, GetMessagesStates> {
 
   FutureOr<void> _addData(
       AppendMessageEvent event, Emitter<GetMessagesStates> emit) {
-    _fakeList.insert(
-        0,
-        MessageModel(
-            id: 1,
-            data: event.data,
-            isMe: true,
-            date: DateFormat.jm().format(DateTime.now()),
-         ));
+    // _fakeList.insert(
+    //     0,
+    //     MessageModel(
+    //         id: 1,
+    //         data: event.data,
+    //         isMe: true,
+    //         date: DateFormat.jm().format(DateTime.now()),
+    //      ));
 
     emit(
       GetMessagesSuccessState(list: _fakeList),

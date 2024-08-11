@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/design/app_button.dart';
@@ -25,8 +26,8 @@ class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
 
   bool isLoading = false;
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: "amramer522@gmail.com");
+  final passwordController = TextEditingController(text: "123456789");
 
   @override
   void initState() {
@@ -163,6 +164,20 @@ class _LoginViewState extends State<LoginView> {
                               passwordController.text,
                             );
                           }
+                          final snapShot = await FirebaseDatabase.instance
+                              .ref("users")
+                              .child(credential.user!.uid)
+                              .get();
+                          final details = snapShot.value as Map;
+                          await CacheHelper.saveUserData(
+                            image: details["image"] ?? "",
+                            email: details["email"] ?? "",
+                            firstName: details["firstName"] ?? "",
+                            lastName: details["lastName"] ?? "",
+                            phone: details["phone"] ?? "",
+                          );
+                          showMessage("Login Success",
+                              type: MessageType.success);
                           navigateTo(const HomeView(), keepHistory: false);
                         } else {
                           // await FirebaseAuth.instance.currentUser!
@@ -177,7 +192,10 @@ class _LoginViewState extends State<LoginView> {
                           showMessage("No user found for that email.");
                         } else if (e.code == 'wrong-password') {
                           showMessage("Wrong password provided for that user.");
-                        }
+                        }else
+                          {
+                            showMessage(e.code);
+                          }
                       }
                       isLoading = false;
                       setState(() {});

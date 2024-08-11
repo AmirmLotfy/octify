@@ -14,14 +14,14 @@ import '../features/send_message/bloc.dart';
 
 // id patient person
 // id support person
-class ChatView extends StatefulWidget {
-  const ChatView({super.key});
+class ChatView2 extends StatefulWidget {
+  const ChatView2({super.key});
 
   @override
-  State<ChatView> createState() => _ChatViewState();
+  State<ChatView2> createState() => _ChatView2State();
 }
 
-class _ChatViewState extends State<ChatView> {
+class _ChatView2State extends State<ChatView2> {
   final bloc = KiwiContainer().resolve<GetMessagesBloc>()
     ..add(GetMessagesEvent());
   final messageController = TextEditingController();
@@ -90,7 +90,7 @@ class _ChatViewState extends State<ChatView> {
                   );
                 } else if (state is GetMessagesSuccessState) {
                   if (state.list.isEmpty) {
-                    return const AppEmpty(image: "image", title: "title");
+                    return const AppEmpty(image: "", title: "No Messages Yet.");
                   }
                   return ListView.separated(
                     controller: listController,
@@ -119,9 +119,7 @@ class _ChatViewState extends State<ChatView> {
                   child: TextFormField(
                     controller: messageController,
                     textDirection: inputDirection,
-                    style: TextStyle(
-                      fontSize: 14.sp
-                    ),
+                    style: TextStyle(fontSize: 14.sp),
                     onChanged: (value) {
                       setState(() {});
                       /*
@@ -233,7 +231,7 @@ class _TextMessage extends StatelessWidget {
                   bottomEnd: model.isMe ? Radius.zero : Radius.circular(12.r),
                 )),
             child: Text(
-              model.data,
+              model.message.toString(),
               style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,
@@ -244,72 +242,12 @@ class _TextMessage extends StatelessWidget {
           Align(
             alignment: AlignmentDirectional.centerStart,
             child: Text(
-              model.date,
+              model.timeSent.toString(),
               style: TextStyle(
                 fontSize: 8.sp,
                 fontWeight: FontWeight.w400,
                 color: const Color(0xff8C8C8C),
               ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _ImageMessage extends StatelessWidget {
-  final MessageModel model;
-
-  const _ImageMessage({required this.model});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 200,
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        border: Border.all(
-            color: Theme.of(context).primaryColor,
-            width: 3.r,
-            strokeAlign: BorderSide.strokeAlignOutside),
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      child: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
-        children: [
-          // todo change to AppImage
-          Image.file(
-            File(model.data),
-            // isClickable: true,
-          ),
-          Container(
-            padding: EdgeInsets.all(4.r),
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                  blurRadius: 15,
-                  offset: const Offset(0, 4),
-                  color: Colors.black.withOpacity(.6)),
-            ]),
-            child: Row(
-              children: [
-                const Spacer(),
-                Text(
-                  model.date,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(width: 4.w),
-                Icon(
-                  Icons.check,
-                  color: Colors.white,
-                  size: 12.sp,
-                ),
-                // Icon(Icons.checklist_rounded,color: Colors.white,size: 12.sp,),
-              ],
             ),
           )
         ],

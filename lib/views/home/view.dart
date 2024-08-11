@@ -5,6 +5,8 @@ import 'package:octify/views/home/pages/home.dart';
 import 'package:octify/views/home/pages/settings.dart';
 
 import '../../core/design/app_image.dart';
+import '../../core/logic/helper_methods.dart';
+import '../select_persona.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -39,10 +41,12 @@ class _HomeViewState extends State<HomeView> {
       body: pages[currentIndex],
       floatingActionButton: GestureDetector(
         onTap: () {
-          currentIndex=1;
-          setState(() {
+          navigateTo(SelectPersonaView());
 
-          });
+          // currentIndex=1;
+          // setState(() {
+          //
+          // });
         },
         child: Container(
             height: 60.h,
@@ -75,7 +79,8 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
         child: BottomAppBar(
-          height: 80.h,
+          height: 70.h,
+          padding: EdgeInsets.zero,
           elevation: 8,
           shape: const CircularNotchedRectangle(),
           notchMargin: 16.r,
@@ -90,9 +95,10 @@ class _HomeViewState extends State<HomeView> {
                           currentIndex = index;
                           setState(() {});
                         },
-                        child: SizedBox(
-                          height: 80.h,
+                        child: Container(
+                          // height: 80.h,
                           // color: Colors.green,
+                          padding: EdgeInsets.symmetric(vertical:8.h),
                           child: Column(
                             children: [
                               AppImage(

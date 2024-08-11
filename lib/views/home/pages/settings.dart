@@ -82,36 +82,39 @@ class _Item extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 20.h),
       child: GestureDetector(
         onTap: onPress,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                AppImage(
-                  image,
-                  height: 32.h,
-                  width: 32.h,
-                ),
-                SizedBox(width: 12.w),
-                Expanded(
-                    child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
+        child: Container(
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  AppImage(
+                    image,
+                    height: 32.h,
+                    width: 32.h,
                   ),
-                )),
-                SizedBox(width: 12.w),
-                AppImage(
-                  "arrow_right.svg",
-                  height: 20.h,
-                  width: 20.h,
-                )
-              ],
-            ),
-            SizedBox(height: 12.w),
-            if (withDivider) const Divider(),
-          ],
+                  SizedBox(width: 12.w),
+                  Expanded(
+                      child: Text(
+                    text,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )),
+                  SizedBox(width: 12.w),
+                  AppImage(
+                    "arrow_right.svg",
+                    height: 20.h,
+                    width: 20.h,
+                  )
+                ],
+              ),
+              SizedBox(height: 12.w),
+              if (withDivider) const Divider(),
+            ],
+          ),
         ),
       ),
     );

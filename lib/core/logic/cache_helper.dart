@@ -1,6 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class CacheHelper {
   static late SharedPreferences _ref;
 
@@ -25,17 +24,15 @@ class CacheHelper {
   }
 
   static bool get isAuthed {
-    return token.isNotEmpty ;
+    return token.isNotEmpty;
   }
-
-
 
   static Future<void> setIsAuthed() async {
     _ref.setBool("isAuthed", true);
   }
 
   static String get name {
-    return lang == "en" ? _engName : _arbName;
+    return firstName+" "+lastName;
   }
 
   static String get _engName {
@@ -53,6 +50,7 @@ class CacheHelper {
   static String get telephone {
     return _ref.getString("telephone") ?? "";
   }
+
   static int get fileNum {
     return _ref.getInt("fileNum") ?? 0;
   }
@@ -60,6 +58,7 @@ class CacheHelper {
   static String get address {
     return _ref.getString("address") ?? "";
   }
+
   static bool get isFirstTime {
     return _ref.getBool("isFirstTime") ?? true;
   }
@@ -76,23 +75,48 @@ class CacheHelper {
     print("Token Saved $token");
     _ref.setString("token", token);
   }
+
   static Future<void> setRememberMe(bool value) async {
     _ref.setBool("isRememberMe", value);
   }
 
   static bool get isRememberMe {
-    return _ref.getBool("isRememberMe")??false;
+    return _ref.getBool("isRememberMe") ?? false;
   }
-  static Future<void> saveEmailAndPassword(String email,String password) async {
+
+  static Future<void> saveEmailAndPassword(
+      String email, String password) async {
     _ref.setString("email", email);
     _ref.setString("password", password);
+  }
+
+  static Future<void> saveUserData({
+   required String firstName,
+   required String lastName,
+   required String image,
+   required String phone,
+   required String email,
+  }) async {
+    _ref.setString("firstName", firstName);
+    _ref.setString("lastName", lastName);
+    _ref.setString("image", image);
+    _ref.setString("phone", phone);
+    _ref.setString("email", email);
+  }
+  static String get firstName {
+    return _ref.getString("firstName") ?? "";
+  }
+  static String get lastName {
+    return _ref.getString("lastName") ?? "";
   }
   static String get email {
     return _ref.getString("email") ?? "";
   }
+
   static String get password {
     return _ref.getString("password") ?? "";
   }
+
   // static Future<void> saveData(UserModel model) async {
   //   _ref.setInt("id", model.id);
   //   _ref.setString("arbName", model.arbName);

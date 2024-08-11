@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:octify/core/logic/helper_methods.dart';
 
 import 'app_image.dart';
 
@@ -8,7 +9,7 @@ enum InputType { normal, password, money, phone }
 
 class AppInput extends StatefulWidget {
   final InputType inputType;
-  final String? hint, label;
+  final String? hint, label, description;
   final Widget? suffix;
   final String? prefix;
   final double? marginBottom;
@@ -26,6 +27,7 @@ class AppInput extends StatefulWidget {
     super.key,
     this.hint,
     this.marginBottom,
+    this.description,
     this.prefix,
     this.prefixColor,
     this.inputType = InputType.normal,
@@ -160,7 +162,20 @@ class _AppInputState extends State<AppInput> {
                             : 0xff8C8C8C),
                       ),
                     )
-                  : widget.suffix ?? const SizedBox(),
+                  : widget.suffix ??
+                      (widget.description != null
+                          ? IconButton(
+                              onPressed: () {
+                                // show tooltip
+                                showMessage(widget.description ?? "",
+                                    type: MessageType.warning);
+                              },
+                              icon: const Icon(
+                                Icons.info_outline,
+                                color: Color(0xffFFCC00),
+                              ),
+                            )
+                          : const SizedBox()),
             ),
           ),
         ],

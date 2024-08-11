@@ -45,13 +45,17 @@ class _LogoutDialogState extends State<LogoutDialog> {
                 onPress: () async {
                   isLoading = true;
                   setState(() {});
-                  await GoogleSignIn().disconnect();
+                  if (await GoogleSignIn().isSignedIn()) {
+                    await GoogleSignIn().disconnect();
+                  }
+
                   await FirebaseAuth.instance.signOut();
                   navigateTo(const LoginView(), keepHistory: false);
                   // await Future.delayed(const Duration(seconds: 2));
+                  showMessage("Signed out Success",type: MessageType.success);
                   isLoading = false;
                   setState(() {});
-                  },
+                },
                 text: "Logout",
               ),
             ),

@@ -1,7 +1,14 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:octify/core/design/app_button.dart';
+import 'package:octify/core/logic/cache_helper.dart';
+import 'package:octify/core/logic/helper_methods.dart';
 
 import '../../core/design/app_expansion_tile.dart';
 import '../../core/design/app_image.dart';
@@ -17,6 +24,13 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   String? selectedImage;
+  final firstNameController =
+      TextEditingController(text: CacheHelper.firstName);
+  final lastNameController = TextEditingController(text: CacheHelper.lastName);
+  final emailController = TextEditingController(text: CacheHelper.email);
+  final phoneController = TextEditingController(text: CacheHelper.phone);
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +47,7 @@ class _ProfileViewState extends State<ProfileView> {
                 child: GestureDetector(
                   onTap: () async {
                     final image = await ImagePicker().pickImage(
-                      source: ImageSource.gallery,
-                    );
+                        source: ImageSource.gallery, imageQuality: 20);
 
                     if (image != null) {
                       selectedImage = image.path;
@@ -57,7 +70,7 @@ class _ProfileViewState extends State<ProfileView> {
                         child: AppImage(
                           selectedImage != null
                               ? selectedImage!
-                              : "https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg",
+                              : CacheHelper.image,
                           height: 80.h,
                           width: 80.h,
                           fit: BoxFit.cover,
@@ -73,23 +86,32 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
               ),
               SizedBox(height: 30.h),
-              const AppInput(
+              AppInput(
                 label: "First Name",
+                controller: firstNameController,
                 prefix: "user_name.svg",
                 hint: "Enter First Name",
               ),
-              const AppInput(
+              AppInput(
                 label: "Last Name",
+                controller: lastNameController,
                 prefix: "user_name.svg",
                 hint: "Enter Last Name",
               ),
-              const AppInput(
-                label: "Email Address",
-                prefix: "mail.svg",
-                hint: "Enter Email Address",
-                keyboardType: TextInputType.emailAddress,
+              AbsorbPointer(
+                child: Opacity(
+                  opacity: .5,
+                  child: AppInput(
+                    controller: emailController,
+                    label: "Email Address",
+                    prefix: "mail.svg",
+                    hint: "Enter Email Address",
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                ),
               ),
-              const AppInput(
+              AppInput(
+                controller: phoneController,
                 label: "Phone Number",
                 prefix: "phone.svg",
                 hint: "Enter Phone Number",
@@ -106,7 +128,47 @@ class _ProfileViewState extends State<ProfileView> {
               //   icon: 'select_languages.svg',
               // ),
               AppButton(
-                onPress: () {},
+                isLoading: isLoading,
+                onPress: () async {
+                  isLoading = true;
+                  setState(() {});
+                  String? imageUrl;
+                  try {
+                    if (selectedImage != null) {
+                      final refStorage = FirebaseStorage.instance
+                          .ref("users_images")
+                          .child(CacheHelper.email);
+                      await refStorage.putFile(File(selectedImage!));
+                      imageUrl = await refStorage.getDownloadURL();
+                    }
+
+                    await FirebaseDatabase.instance
+                        .ref()
+                        .child("users")
+                        .child(FirebaseAuth.instance.currentUser!.uid)
+                        .update(
+                      {
+                        "firstName": firstNameController.text,
+                        "lastName": lastNameController.text,
+                        "phone": phoneController.text,
+                        "email": emailController.text,
+                        "image": imageUrl ?? ""
+                      },
+                    );
+                    await CacheHelper.saveUserData(
+                      firstName: firstNameController.text,
+                      lastName: lastNameController.text,
+                      image: imageUrl ?? "",
+                      phone: phoneController.text,
+                      email: emailController.text,
+                    );
+                    showMessage("Updated Success", type: MessageType.success);
+                  } catch (ex) {
+                    showMessage(ex.toString());
+                  }
+                  isLoading = false;
+                  setState(() {});
+                },
                 text: "Save Changes",
               ),
             ],

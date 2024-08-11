@@ -16,6 +16,7 @@ class AppEmpty extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if(image.isNotEmpty)
           AppImage(
             image,
             height: 200.h,

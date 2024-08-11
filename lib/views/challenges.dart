@@ -4,14 +4,20 @@ import 'package:octify/core/design/app_button.dart';
 import 'package:octify/core/design/app_input.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/views/results.dart';
+import 'package:octify/views/select_persona.dart';
 
 import '../core/design/second_app_bar.dart';
 import '../core/theme.dart';
 
 class ChallengesView extends StatefulWidget {
   final String personaName;
+  final PersonaType type;
 
-  const ChallengesView({super.key, required this.personaName});
+  const ChallengesView({
+    super.key,
+    required this.personaName,
+    required this.type,
+  });
 
   @override
   State<ChallengesView> createState() => _ChallengesViewState();
@@ -31,7 +37,8 @@ class _ChallengesViewState extends State<ChallengesView> {
   List<int> selectedList = [];
   final otherChallengesController = TextEditingController();
 
-  bool isLoading  =false;
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,11 +123,9 @@ class _ChallengesViewState extends State<ChallengesView> {
         text: "Analyze",
         isLoading: isLoading,
         type: ButtonType.bottomNav,
-        onPress: () async{
-          isLoading= true;
-          setState(() {
-
-          });
+        onPress: () async {
+          isLoading = true;
+          setState(() {});
           selectedList.forEach(
             (element) {
               selectedTextsList.add(list[element]);
@@ -130,14 +135,11 @@ class _ChallengesViewState extends State<ChallengesView> {
             selectedTextsList.add(otherChallengesController.text);
           }
           await Future.delayed(const Duration(seconds: 2));
-          isLoading= false;
-          setState(() {
-
-          });
+          isLoading = false;
+          setState(() {});
           navigateTo(ResultsView(title: widget.personaName));
         },
       ),
     );
   }
 }
-

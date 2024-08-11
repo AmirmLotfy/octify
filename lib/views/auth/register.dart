@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/logic/helper_methods.dart';
@@ -23,11 +24,11 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   bool isLoading = false;
   final formKey = GlobalKey<FormState>();
-  final firstNameController = TextEditingController();
-  final lastNameController = TextEditingController();
-  final phoneController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final firstNameController = TextEditingController(text: "Amr");
+  final lastNameController = TextEditingController(text: "Bakr");
+  final phoneController = TextEditingController(text: "01027545022");
+  final emailController = TextEditingController(text: "amramer522@gmail.com");
+  final passwordController = TextEditingController(text: "123456789");
 
   @override
   Widget build(BuildContext context) {
@@ -83,10 +84,9 @@ class _RegisterViewState extends State<RegisterView> {
                   prefix: "user_name.svg",
                   hint: "Enter First Name",
                   validator: (value) {
-                    if(value!.isEmpty)
-                      {
-                        return "First Name must be not empty";
-                      }
+                    if (value!.isEmpty) {
+                      return "First Name must be not empty";
+                    }
                     return null;
                   },
                 ),
@@ -96,8 +96,7 @@ class _RegisterViewState extends State<RegisterView> {
                   prefix: "user_name.svg",
                   hint: "Enter Last Name",
                   validator: (value) {
-                    if(value!.isEmpty)
-                    {
+                    if (value!.isEmpty) {
                       return "Last Name must be not empty";
                     }
                     return null;
@@ -118,6 +117,9 @@ class _RegisterViewState extends State<RegisterView> {
                   hint: "Enter Phone Number",
                   keyboardType: TextInputType.phone,
                   validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Phone must be not empty";
+                    }
                     //todo make the validation
                     return null;
                   },
@@ -144,23 +146,36 @@ class _RegisterViewState extends State<RegisterView> {
                           email: emailController.text,
                           password: passwordController.text,
                         );
-                        await FirebaseAuth.instance.currentUser!.sendEmailVerification();
-                        // showMessage("msg");
-                        navigateTo(const LoginView(),keepHistory: false);
+                        await FirebaseDatabase.instance
+                            .ref()
+                            .child("users")
+                            .child(credential.user!.uid)
+                            .set({
+                          "firstName": firstNameController.text,
+                          "lastName": lastNameController.text,
+                          "phone": phoneController.text,
+                          "email": emailController.text,
+                          "image": ""
+                        });
+                        await FirebaseAuth.instance.currentUser!
+                            .sendEmailVerification();
+                        await FirebaseAuth.instance.signOut();
+                        showMessage(
+                            "Signed up Success Please Verify your email",
+                            type: MessageType.success);
+                        navigateTo(const LoginView(), keepHistory: false);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'weak-password') {
                           showMessage("The password provided is too weak.");
                         } else if (e.code == 'email-already-in-use') {
-                          showMessage("The account already exists for that email.");
+                          showMessage(
+                              "The account already exists for that email.");
                         }
                       } catch (e) {
                         showMessage(e.toString());
                       }
-                      // await Future.delayed(const Duration(seconds: 2));
                       isLoading = false;
                       setState(() {});
-
-                      // navigateTo(const VerificationView());
                     }
                   },
                   text: "Sign Up",

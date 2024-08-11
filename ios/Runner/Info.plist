@@ -4,6 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>This is required to access your photos</string>
+    <key>NSCameraUsageDescription</key>
+    <string>This is required to access your camera</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This is required to access your mic for voice inputs</string>
 	<key>CFBundleDisplayName</key>
 	<string>Octify</string>
 	<key>CFBundleExecutable</key>
