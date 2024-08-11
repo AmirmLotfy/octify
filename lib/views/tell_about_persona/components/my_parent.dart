@@ -21,12 +21,12 @@ class MyParentSection extends StatelessWidget {
         AppInput(
           prefix: "user_name.svg",
           label: " Name",
-          description: "Enter your parent's name",
+          hint: "Enter your parent's name",
         ),
         AppInput(
           prefix: "age.svg",
           label: "Age",
-          description: "Specify your parent's age",
+          hint: "Specify your parent's age",
           keyboardType: TextInputType.number,
         ),
         AppExpansionTile(
@@ -43,31 +43,37 @@ class MyParentSection extends StatelessWidget {
         AppInput(
           prefix: "interests.png",
           label: "Interests/Hobbies",
+          hint :"Enter Interests/Hobbies",
           description: "Add your parent's hobbies or favorite activities",
         ),
         AppInput(
           prefix: "challenges.png",
           label: "Challenges",
+          hint :"Enter Challenges",
           description: "List any challenges your parent may be facing",
         ),
         AppInput(
           prefix: "personality_type.png",
           label: "Personality Type",
+          hint :"Enter Personality Type",
           description: "Choose your parent's personality type",
         ),
         AppInput(
           prefix: "health.png",
           label: "Health Conditions",
+          hint :"Enter Health Conditions",
           description: "Include any health conditions for better guidance",
         ),
         AppInput(
           prefix: "communication_style.png",
           label: "Communication Style",
+          hint :"Enter Communication Style",
           description: "Select how your parent prefers to communicate",
         ),
         AppInput(
           prefix: "life_stage.png",
           label: "Life Stage",
+          hint: "Life Stage",
           description: "Indicate their current life stage (e.g., retirement)",
         ),
         AppButton(

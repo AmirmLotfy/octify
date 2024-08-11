@@ -27,7 +27,7 @@ class _RegisterViewState extends State<RegisterView> {
   final firstNameController = TextEditingController(text: "Amr");
   final lastNameController = TextEditingController(text: "Bakr");
   final phoneController = TextEditingController(text: "01027545022");
-  final emailController = TextEditingController(text: "amramer522@gmail.com");
+  final emailController = TextEditingController(text: "frameless.com@gmail.com");
   final passwordController = TextEditingController(text: "123456789");
 
   @override

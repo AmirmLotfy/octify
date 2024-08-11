@@ -26,7 +26,7 @@ class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
 
   bool isLoading = false;
-  final emailController = TextEditingController(text: "amramer522@gmail.com");
+  final emailController = TextEditingController(text: "frameless.com@gmail.com");
   final passwordController = TextEditingController(text: "123456789");
 
   @override

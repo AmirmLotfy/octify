@@ -12,7 +12,7 @@ class GenerativeChatService {
   late final ChatSession chat;
 
   GenerativeChatService() {
-    const apiKey = 'AIzaSyBBr-88hC8RYqbR345MSMf4fhBtcNVRnlM'; // Ensure to securely load the API key
+    const apiKey = 'AIzaSyCEMn-P4MDyVQYkC_LhtKbq4zm5GKGRqFM'; // Ensure to securely load the API key
     model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
     chat = model.startChat();
   }

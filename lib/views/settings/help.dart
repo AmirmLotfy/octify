@@ -156,35 +156,43 @@ class _HelpViewState extends State<HelpView> {
                 ),
               ),
               SizedBox(height: 8.h),
-              // todo: ask if they need to remove phone
-              // GestureDetector(
-              //   onTap: () {
-              //     openUrl("tel:");
-              //   },
-              //   child: Container(
-              //     color: Colors.transparent,
-              //     child: Row(
-              //       children: [
-              //         Text(
-              //           "Phone: ",
-              //           style: TextStyle(
-              //             fontSize: 12.sp,
-              //             fontWeight: FontWeight.w500,
-              //           ),
-              //         ),
-              //         Expanded(
-              //             child: Text(
-              //           "+1-800-555-1234",
-              //           style: TextStyle(
-              //             fontSize: 12.sp,
-              //             fontWeight: FontWeight.w400,
-              //             color: const Color(0xff8c8c8c),
-              //           ),
-              //         )),
-              //       ],
-              //     ),
-              //   ),
-              // )
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // todo need social media icons
+                  GestureDetector(
+                      onTap: () {
+                        openUrl("https://www.facebook.com/octifyai");
+                      },
+                      child: AppImage(
+                        "url",
+                        height: 32.h,
+                        width: 32.h,
+                      )),
+                  SizedBox(width: 16.w),
+                  GestureDetector(
+                    onTap: () {
+                      openUrl("https://www.instagram.com/octifyai/");
+                    },
+                    child: AppImage(
+                      "url",
+                      height: 32.h,
+                      width: 32.h,
+                    ),
+                  ),
+                  SizedBox(width: 16.w),
+                  GestureDetector(
+                    onTap: () {
+                      openUrl("https://www.youtube.com/@octifyai");
+                    },
+                    child: AppImage(
+                      "url",
+                      height: 32.h,
+                      width: 32.h,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
@@ -210,47 +218,52 @@ class _ItemState extends State<_Item> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.model.title,style: TextStyle(
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w700
-        ),),
+        Text(
+          widget.model.title,
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700),
+        ),
         SizedBox(height: 16.h),
-        ...List.generate(widget.model.list.length, (index) => Padding(
-          padding:  EdgeInsets.only(bottom: 12.h),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border.all(color: Theme.of(context).dividerColor),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: ExpansionTile(
-              title: Text(
-                widget.model.list[index].question,
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
-              ),
-              childrenPadding: EdgeInsets.all(16.r),
-              trailing: AppImage(isOpen ? "remove_selected.svg" : "add_selected.svg"),
-              onExpansionChanged: (value) {
-                isOpen = value;
-                setState(() {});
-              },
-              shape: RoundedRectangleBorder(
+        ...List.generate(
+          widget.model.list.length,
+          (index) => Padding(
+            padding: EdgeInsets.only(bottom: 12.h),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).dividerColor),
                 borderRadius: BorderRadius.circular(12.r),
-                // side: BorderSide(color: Theme.of(context).dividerColor),
               ),
-              backgroundColor: Theme.of(context).primaryColor.withOpacity(.08),
-              children: [
-                Text(
-                  widget.model.list[index].answer,
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    color: const Color(0xff8c8c8c),
-                  ),
-                )
-              ],
+              child: ExpansionTile(
+                title: Text(
+                  widget.model.list[index].question,
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                ),
+                childrenPadding: EdgeInsets.all(16.r),
+                trailing: AppImage(
+                    isOpen ? "remove_selected.svg" : "add_selected.svg"),
+                onExpansionChanged: (value) {
+                  isOpen = value;
+                  setState(() {});
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                  // side: BorderSide(color: Theme.of(context).dividerColor),
+                ),
+                backgroundColor:
+                    Theme.of(context).primaryColor.withOpacity(.08),
+                children: [
+                  Text(
+                    widget.model.list[index].answer,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: const Color(0xff8c8c8c),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-        ),)
-        ,
+        ),
       ],
     );
   }

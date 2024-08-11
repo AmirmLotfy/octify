@@ -77,10 +77,12 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           builder: (context, child) => MediaQuery(
-              data: MediaQuery.of(context)
-                  .copyWith(textScaler: TextScaler.linear(1.sp)),
-              child: child!),
-          home:  SplashView(),
+            data: MediaQuery.of(context).copyWith(
+              textScaler: TextScaler.linear(1.sp),
+            ),
+            child: child!,
+          ),
+          home: SplashView(),
         );
       },
     );

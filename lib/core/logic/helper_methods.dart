@@ -12,10 +12,10 @@ Future openUrl(url) async {
     if (!await launchUrl(Uri.parse(url),
         mode: Platform.isAndroid ? LaunchMode.externalNonBrowserApplication : LaunchMode.inAppWebView,
         webViewConfiguration: const WebViewConfiguration(enableJavaScript: true, enableDomStorage: true))) {
-      showMessage("LocaleKeys.someThingWrongWithUrl.tr()");
+      showMessage("something Wrong With Url");
     }
   } catch (ex) {
-    showMessage("LocaleKeys.someThingWrongWithUrl.tr()");
+    showMessage("something Wrong With Url");
   }
 }
 

@@ -24,6 +24,7 @@ class ChallengesView extends StatefulWidget {
 }
 
 class _ChallengesViewState extends State<ChallengesView> {
+  // todo: make it category with items
   final list = [
     "Communication Issues",
     "Trust Issues",

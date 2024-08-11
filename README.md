@@ -16,5 +16,4 @@ Flutter Version 3.22.0
 Dart Version : 3.4.0
 
 # @Copyright 2024
-Developer : Amr Bakr
-Phone Number : 01027545022
+A Frameless App
