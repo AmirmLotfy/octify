@@ -18,11 +18,10 @@ import 'components/my_pet.dart';
 import 'components/my_self.dart';
 
 class TellAboutPersonaView extends StatefulWidget {
-  final String personaName;
   final PersonaType personaType;
 
   const TellAboutPersonaView(
-      {super.key, required this.personaName, required this.personaType});
+      {super.key,required this.personaType});
 
   @override
   State<TellAboutPersonaView> createState() => _TellAboutPersonaViewState();
@@ -34,29 +33,26 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
   Widget get form {
     switch (widget.personaType) {
       case PersonaType.general:
-        return GeneralSection(
-            personaName: widget.personaName, type: widget.personaType);
+        return GeneralSection(type: widget.personaType);
       case PersonaType.child:
-        return MyChildSection(
-            personaName: widget.personaName, type: widget.personaType);
+        return MyChildSection(type: widget.personaType);
       case PersonaType.partner:
-        return MyPartnerSection(
-            personaName: widget.personaName, type: widget.personaType);
+        return MyPartnerSection(type: widget.personaType);
       case PersonaType.parent:
         return MyParentSection(
-            personaName: widget.personaName, type: widget.personaType);
+             type: widget.personaType);
       case PersonaType.pet:
         return MyPetSection(
-            personaName: widget.personaName, type: widget.personaType);
+             type: widget.personaType);
       case PersonaType.friend:
         return MyFriendSection(
-            personaName: widget.personaName, type: widget.personaType);
+             type: widget.personaType);
       case PersonaType.myself:
         return MySelfSection(
-            personaName: widget.personaName, type: widget.personaType);
+             type: widget.personaType);
       case PersonaType.colleague:
         return MyColleagueSection(
-            personaName: widget.personaName, type: widget.personaType);
+             type: widget.personaType);
     }
   }
 

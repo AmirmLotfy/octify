@@ -10,24 +10,24 @@ import '../../select_persona.dart';
 import '../view.dart';
 
 class MyColleagueSection extends StatefulWidget {
-  final String personaName;
+
   final PersonaType type;
 
   const MyColleagueSection(
-      {super.key, required this.personaName, required this.type});
+      {super.key,  required this.type});
 
   @override
   State<MyColleagueSection> createState() => _MyColleagueSectionState();
 }
 
 class _MyColleagueSectionState extends State<MyColleagueSection> {
-  final nameController = TextEditingController();
-  final ageController = TextEditingController();
-  final interestsController = TextEditingController();
-  final challengesController = TextEditingController();
+  final nameController = TextEditingController(text: "araby");
+  final ageController = TextEditingController(text: "23");
+  final interestsController = TextEditingController(text: "sketboard");
+  // final challengesController = TextEditingController();
   final personalityTypeController = TextEditingController();
   final communicationStyleController = TextEditingController();
-  final workRelationshipController = TextEditingController();
+  final workRelationshipController = TextEditingController(text: "team leader");
   String? gender;
   final formKey = GlobalKey<FormState>();
 
@@ -47,8 +47,8 @@ class _MyColleagueSectionState extends State<MyColleagueSection> {
           ),
           AppInput(
             prefix: "age.svg",
-            label: "Age",            validator: InputValidator.personaAgeValidator,
-
+            label: "Age",
+            validator: InputValidator.personaAgeValidator,
             controller: ageController,
             hint: "Specify your colleague's age",
             keyboardType: TextInputType.number,
@@ -73,20 +73,19 @@ class _MyColleagueSectionState extends State<MyColleagueSection> {
             controller: interestsController,
             validator: InputValidator.personaInterestsHobbiesValidator,
             hint: "Enter Interests/Hobbies",
-            description: "Add your colleague's professional interests or hobbies",
+            description:
+                "Add your colleague's professional interests or hobbies",
           ),
-          AppInput(
-            prefix: "challenges.png",
-            label: "Challenges",
-            validator: InputValidator.personaChallengesValidator,
-            controller: challengesController,
-            hint: "Enter Challenges",
-            description: "List any workplace challenges you both face",
-          ),
+          // AppInput(
+          //   prefix: "challenges.png",
+          //   label: "Challenges",
+          //   controller: challengesController,
+          //   hint: "Enter Challenges",
+          //   description: "List any workplace challenges you both face",
+          // ),
           AppInput(
             prefix: "personality_type.png",
             label: "Personality Type",
-            validator: InputValidator.personaPersonalityTypeValidator,
             controller: personalityTypeController,
             hint: "Enter Personality Type",
             description: "Choose your colleague's personality type",
@@ -94,7 +93,6 @@ class _MyColleagueSectionState extends State<MyColleagueSection> {
           AppInput(
             prefix: "communication_style.png",
             label: "Communication Style",
-            validator: InputValidator.personaCommunicationStyleValidator,
             controller: communicationStyleController,
             hint: "Enter Communication Style",
             description: "Choose how your colleague prefers to communicate",
@@ -111,28 +109,26 @@ class _MyColleagueSectionState extends State<MyColleagueSection> {
           AppButton(
             text: "Next",
             onPress: () {
-              if(formKey.currentState!.validate())
-              {
+              if (formKey.currentState!.validate()) {
                 if (gender == null) {
-                  showMessage("Gender must be not null", type: MessageType.warning);
+                  showMessage("Gender must be not null",
+                      type: MessageType.warning);
                 } else {
                   navigateTo(ChallengesView(
-                    personaName: widget.personaName,
+                    personaName: nameController.text,
                     type: widget.type,
                     personaModelData: PersonaModelData(
                         name: nameController.text,
                         age: ageController.text,
                         gender: gender,
                         personalityType: personalityTypeController.text,
-                        challenges: challengesController.text,
+                        // challenges: challengesController.text,
                         interestsHobbies: interestsController.text,
                         workRelationship: workRelationshipController.text,
                         communicationStyle: communicationStyleController.text),
                   ));
                 }
               }
-
-
             },
           )
         ],

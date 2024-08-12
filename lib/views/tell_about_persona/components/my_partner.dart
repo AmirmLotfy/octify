@@ -10,11 +10,11 @@ import '../../select_persona.dart';
 import '../view.dart';
 
 class MyPartnerSection extends StatefulWidget {
-  final String personaName;
+
   final PersonaType type;
 
   const MyPartnerSection(
-      {super.key, required this.personaName, required this.type});
+      {super.key,  required this.type});
 
   @override
   State<MyPartnerSection> createState() => _MyPartnerSectionState();
@@ -24,7 +24,7 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
   final interestsController = TextEditingController();
-  final challengesController = TextEditingController();
+  // final challengesController = TextEditingController();
   final personalityTypeController = TextEditingController();
   final communicationStyleController = TextEditingController();
   final loveLanguageController = TextEditingController();
@@ -76,19 +76,17 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
             controller: interestsController,
             description: "Add your partner's favorite activities or hobbies",
           ),
-          AppInput(
-            prefix: "challenges.png",
-            label: "Challenges",
-            controller: challengesController,
-            validator: InputValidator.personaChallengesValidator,
-            hint: "Enter Challenges",
-            description: "List any difficulties your partner may be facing",
-          ),
+          // AppInput(
+          //   prefix: "challenges.png",
+          //   label: "Challenges",
+          //   controller: challengesController,
+          //   hint: "Enter Challenges",
+          //   description: "List any difficulties your partner may be facing",
+          // ),
           AppInput(
             prefix: "personality_type.png",
             label: "Personality Type",
             controller: personalityTypeController,
-            validator: InputValidator.personaPersonalityTypeValidator,
             hint: "Enter Personality Type",
             description:
                 "Choose your partner's personality type for tailored insights",
@@ -106,7 +104,6 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
             prefix: "communication_style.png",
             label: "Communication Style",
             controller: communicationStyleController,
-            validator: InputValidator.personaCommunicationStyleValidator,
             hint: "Enter Communication Style",
             description: "Choose how your partner prefers to communicate",
           ),
@@ -128,7 +125,7 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
                   showMessage("Gender must be not null", type: MessageType.warning);
                 } else {
                   navigateTo(ChallengesView(
-                    personaName: widget.personaName,
+                    personaName: nameController.text,
                     type: widget.type,
                     personaModelData: PersonaModelData(
                       name: nameController.text,
@@ -136,7 +133,7 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
                       anniversaryDate: anniversaryController.text,
                       gender: gender,
                       personalityType: personalityTypeController.text,
-                      challenges: challengesController.text,
+                      // challenges: challengesController.text,
                       interestsHobbies: interestsController.text,
                       loveLanguage: loveLanguageController.text,
                       communicationStyle: communicationStyleController.text,

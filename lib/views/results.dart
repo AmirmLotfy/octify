@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:octify/core/design/app_button.dart';
+import 'package:octify/core/logic/cache_helper.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/core/theme.dart';
 import 'package:octify/views/chat.dart';
@@ -13,6 +16,7 @@ import 'package:octify/views/select_persona.dart';
 
 import '../core/design/second_app_bar.dart';
 import 'chat/view.dart';
+import 'home/pages/home.dart';
 import 'tell_about_persona/view.dart';
 
 class ResultsView extends StatefulWidget {
@@ -25,14 +29,14 @@ class ResultsView extends StatefulWidget {
       {super.key,
       required this.title,
       required this.challengesList,
-      required this.personaModelData, required this.personaType});
+      required this.personaModelData,
+      required this.personaType});
 
   @override
   State<ResultsView> createState() => _ResultsViewState();
 }
 
 class _ResultsViewState extends State<ResultsView> {
-
   @override
   void initState() {
     super.initState();
@@ -40,40 +44,47 @@ class _ResultsViewState extends State<ResultsView> {
   }
 
   bool isLoading = true;
+  bool isSaveLoading = false;
 
   String? result;
 
   void analysis() async {
-
     final model = GenerativeModel(
         model: 'gemini-pro', apiKey: "AIzaSyCEMn-P4MDyVQYkC_LhtKbq4zm5GKGRqFM");
 
-    late String doctorType;
-    switch(widget.personaType)
-    {
-
+    late String text;
+    switch (widget.personaType) {
       case PersonaType.general:
-        doctorType= "Psychotherapist";
+        text =
+            "As a behavioral specialist, suggest strategies for dealing with this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Provide actionable steps to improve interactions and build a more positive relationship.";
       case PersonaType.child:
-        doctorType= "therapist";
+        text =
+            "As a child psychologist, provide expert advice on how to manage this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}, including step-by-step actions to improve their behavior and support their emotional development.";
       case PersonaType.partner:
-        doctorType= "Psychotherapist";
+        text =
+            "As a relationship counselor, offer advice on how to improve my relationship with my partner, especially in dealing with this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Provide a step-by-step plan to deepen our emotional connection and resolve conflicts.";
       case PersonaType.parent:
-        doctorType= "Psychotherapist";
+        text =
+            "As a family therapist, offer guidance on improving the relationship with my parent, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include a step-by-step action plan to foster mutual understanding and respect";
       case PersonaType.pet:
-        doctorType= "Psychotherapist";
+        text =
+            "As a pet behaviorist, provide advice on managing this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include a step-by-step plan to improve my pet’s behavior and strengthen our bond.";
       case PersonaType.friend:
-        doctorType= "Psychotherapist";
+        text =
+            "As a life coach, suggest ways to strengthen my friendship with ${widget.personaModelData.name}, particularly in dealing with this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Provide actionable steps to enhance our connection and support each other better.";
       case PersonaType.myself:
-        doctorType= "Psychotherapist";
+        text =
+            "As a personal development coach, guide me on how to address this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Offer a detailed action plan to help me improve and achieve my personal goals.";
       case PersonaType.colleague:
-        doctorType= "Psychotherapist";
+        text =
+            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
     }
 
-    String text =
-        'Write a curated solution for this persona here are the persona info ${widget.personaModelData.toMap()} and the persona face some challenges like ${widget.challengesList.toString()} and return as html please and act like ${widget.personaType.name} ${doctorType}';
+    // String text =
+    //     'Write a curated solution for this persona  this persona is not me here are the persona info ${widget.personaModelData.toMap()} and the persona face some challenges like ${widget.challengesList.toString()} and return as html please and act like ${widget.personaType.name} ${doctorType}';
     final content = [
-      Content.text(text),
+      Content.text(text +
+          " and please don't show conclusion section or resources or links"),
     ];
     final response = await model.generateContent(content);
     debugPrint("*********************");
@@ -84,11 +95,147 @@ class _ResultsViewState extends State<ResultsView> {
     isLoading = false;
     setState(() {});
   }
+  List<HistoryModel> list = [
+    HistoryModel(
+      icon: "child_fill.svg",
+      title: "My Child",
+      body:
+      "Track your child's developmental milestones, challenges, and achievements. View past advice and insights tailored to their growth.",
+      bgShape: "shape1.svg",
+      color: 0xffA6B2EE,
+    ),
+    HistoryModel(
+      icon: "partner_filled.svg",
+      title: "My Partner",
+      body:
+      "Review your relationship history, past advice, and personalized insights. Monitor key moments and challenges faced together.",
+      bgShape: "shape2.svg",
+      color: 0xff8FD1CD,
+    ),
+    HistoryModel(
+      icon: "parent_fill.svg",
+      title: "My Parent",
+      body:
+      "Keep a record of your parent's health updates, caregiving tips, and relationship advice. Access previous guidance tailored to their needs.",
+      bgShape: "shape3.svg",
+      color: 0xff7FD2F2,
+    ),
+    HistoryModel(
+        icon: "friend_filled.svg",
+        title: "My Friend",
+        body:
+        "Maintain a history of your friend's important events, interests, and challenges. Revisit past advice to strengthen your friendship.",
+        bgShape: "shape4.svg",
+        color: 0xffFEDEA5),
+    HistoryModel(
+        icon: "my_self_fill.svg",
+        title: "Myself",
+        body:
+        "View your personal growth journey, self-care plans, and past advice. Reflect on your progress and revisit previous recommendations.",
+        bgShape: "shape1.svg",
+        color: 0xffEBCAE7),
+    HistoryModel(
+        icon: "my_pet_fill.svg",
+        title: "My Pet",
+        body:
+        "Record your pet’s health updates, care tips, and special moments. Access past advice to ensure your pet’s well-being.",
+        bgShape: "shape2.svg",
+        color: 0xffC2D6FE),
+    HistoryModel(
+        icon: "colleague_filled.svg",
+        title: "My Colleague",
+        body:
+        "Monitor key interactions, professional challenges, and milestones with your colleague. Access past advice to improve workplace relationships and collaboration.",
+        bgShape: "shape3.svg",
+        color: 0xff96D9B0),
+    HistoryModel(
+        icon: "general.svg",
+        title: "",
+        body:
+        "This is custom persona",
+        bgShape: "shape3.svg",
+        color: 0xff49d56d),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SecondAppBar(text: "Results and Solutions"),
+      appBar: SecondAppBar(
+        text: "Results and Solutions",
+        actions: [
+          if (!isLoading)
+            isSaveLoading
+                ? Padding(
+                    padding: EdgeInsetsDirectional.only(start: 16.w, end: 16.w),
+                    child: SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : IconButton(
+                    onPressed: () async {
+                      // save result
+                      // save selected Challenges
+                      // save persona model
+                      HistoryModel selectedModel;
+                      switch(widget.personaType)
+                      {
+                        case PersonaType.general:
+                          selectedModel=list[6];
+                          selectedModel.title= widget.personaModelData.name;
+                        case PersonaType.child:
+                        selectedModel=list[0];
+                        case PersonaType.partner:
+                          selectedModel=list[1];
+                        case PersonaType.parent:
+                          selectedModel=list[2];
+                        case PersonaType.pet:
+                          selectedModel=list[5];
+                        case PersonaType.friend:
+                        selectedModel=list[3];
+                        case PersonaType.myself:
+                          selectedModel=list[4];
+                        case PersonaType.colleague:
+                          selectedModel=list[6];
+                      }
+
+
+                      isSaveLoading = true;
+                      setState(() {});
+                      await FirebaseDatabase.instance
+                          .ref()
+                          .child("home")
+                          .child(FirebaseAuth.instance.currentUser!.uid).push()
+                          .set({
+                        "result": result,
+                        "personaShape":selectedModel.toMap(),
+                        "selectedChallenges": widget.challengesList,
+                        "personaModel": widget.personaModelData.toMap(),
+                      });
+                      isSaveLoading = false;
+                      setState(() {});
+                      showMessage("Persona Saved Successfully",
+                          type: MessageType.success);
+                    },
+                    icon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.save,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        SizedBox(width: 4.w),
+                        Text("Save",style: TextStyle(
+                          fontSize: 16.sp,
+                          color: Theme.of(context).primaryColor
+                        ),)
+                      ],
+                    ),
+                  )
+        ],
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(24.r),
         child: Column(

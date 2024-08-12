@@ -10,24 +10,24 @@ import '../../select_persona.dart';
 import '../view.dart';
 
 class MyPetSection extends StatefulWidget {
-  final String personaName;
+
   final PersonaType type;
 
   const MyPetSection(
-      {super.key, required this.personaName, required this.type});
+      {super.key,  required this.type});
 
   @override
   State<MyPetSection> createState() => _MyPetSectionState();
 }
 
 class _MyPetSectionState extends State<MyPetSection> {
-  final nameController = TextEditingController();
-  final ageController = TextEditingController();
-  final challengesController = TextEditingController();
-  final healthController = TextEditingController();
+  final nameController = TextEditingController(text: "x");
+  final ageController = TextEditingController(text: "5");
+  // final challengesController = TextEditingController();
+  final healthController = TextEditingController(text: "Healthy");
   final favoriteActivitiesController = TextEditingController();
-  final petTypeController = TextEditingController();
-  final breedController = TextEditingController();
+  final petTypeController = TextEditingController(text: "Dog");
+  final breedController = TextEditingController(text: "pitbull");
   final communicationStyleController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
@@ -81,25 +81,23 @@ class _MyPetSectionState extends State<MyPetSection> {
           AppInput(
             prefix: "favorite_activities.png",
             label: "Favorite Activities",
-            validator: InputValidator.personaFavoriteActivitiesValidator,
+            // validator: InputValidator.personaFavoriteActivitiesValidator,
             hint: "Enter Favorite Activities",
             controller: favoriteActivitiesController,
             description: "List activities your pet enjoys most",
             keyboardType: TextInputType.number,
           ),
-          AppInput(
-            prefix: "challenges.png",
-            label: "Challenges",
-            validator: InputValidator.personaChallengesValidator,
-            hint: "Enter Challenges",
-            controller: challengesController,
-            description:
-                "List any behavioral or health challenges your pet may have.",
-          ),
+          // AppInput(
+          //   prefix: "challenges.png",
+          //   label: "Challenges",
+          //   hint: "Enter Challenges",
+          //   controller: challengesController,
+          //   description:
+          //       "List any behavioral or health challenges your pet may have.",
+          // ),
           AppInput(
             prefix: "communication_style.png",
             label: "Communication Style",
-            validator: InputValidator.personaCommunicationStyleValidator,
             hint: "Enter Communication Style",
             controller: communicationStyleController,
             description: "Describe how your pet communicates or responds to you",
@@ -110,14 +108,14 @@ class _MyPetSectionState extends State<MyPetSection> {
               if(formKey.currentState!.validate())
               {
                 navigateTo(ChallengesView(
-                  personaName: widget.personaName,
+                  personaName: nameController.text,
                   type: widget.type,
                   personaModelData: PersonaModelData(
                       name: nameController.text,
                       age: ageController.text,
                       favoriteActivities: favoriteActivitiesController.text,
                       healthConditions: healthController.text,
-                      challenges: challengesController.text,
+                      // challenges: challengesController.text,
                       communicationStyle: communicationStyleController.text,
                       breed: breedController.text,
                       petType: petTypeController.text

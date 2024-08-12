@@ -172,7 +172,7 @@ class _AppInputState extends State<AppInput> {
                               },
                               icon: const Icon(
                                 Icons.info_outline,
-                                color: Color(0xffFFCC00),
+                                color: Color(0xff90ace1),
                               ),
                             )
                           : const SizedBox()),

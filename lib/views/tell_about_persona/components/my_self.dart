@@ -10,11 +10,11 @@ import '../../select_persona.dart';
 import '../view.dart';
 
 class MySelfSection extends StatefulWidget {
-  final String personaName;
+
   final PersonaType type;
 
   const MySelfSection(
-      {super.key, required this.personaName, required this.type});
+      {super.key,  required this.type});
 
   @override
   State<MySelfSection> createState() => _MySelfSectionState();
@@ -24,7 +24,7 @@ class _MySelfSectionState extends State<MySelfSection> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
   final interestsController = TextEditingController();
-  final challengesController = TextEditingController();
+  // final challengesController = TextEditingController();
   final personalityTypeController = TextEditingController();
   final healthController = TextEditingController();
   final goalsController = TextEditingController();
@@ -75,19 +75,17 @@ class _MySelfSectionState extends State<MySelfSection> {
             validator: InputValidator.personaInterestsHobbiesValidator,
             description: "Add your personal interests or hobbies",
           ),
-          AppInput(
-            prefix: "challenges.png",
-            controller: challengesController,
-            label: "Challenges",
-            hint: "Enter Challenges",
-            validator: InputValidator.personaChallengesValidator,
-            description: "List any personal challenges you're facing",
-          ),
+          // AppInput(
+          //   prefix: "challenges.png",
+          //   controller: challengesController,
+          //   label: "Challenges",
+          //   hint: "Enter Challenges",
+          //   description: "List any personal challenges you're facing",
+          // ),
           AppInput(
             prefix: "personality_type.png",
             label: "Personality Type",
             controller: personalityTypeController,
-            validator: InputValidator.personaPersonalityTypeValidator,
             hint: "Enter Personality Type",
             description: "Choose your personality type for self-insight",
           ),
@@ -116,7 +114,7 @@ class _MySelfSectionState extends State<MySelfSection> {
                       type: MessageType.warning);
                 } else {
                   navigateTo(ChallengesView(
-                    personaName: widget.personaName,
+                    personaName: nameController.text,
                     type: widget.type,
                     personaModelData: PersonaModelData(
                       name: nameController.text,
@@ -124,7 +122,7 @@ class _MySelfSectionState extends State<MySelfSection> {
                       goals: goalsController.text,
                       healthConditions: healthController.text,
                       personalityType: personalityTypeController.text,
-                      challenges: challengesController.text,
+                      // challenges: challengesController.text,
                       interestsHobbies: interestsController.text,
                     ),
                   ));

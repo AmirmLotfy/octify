@@ -121,7 +121,6 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
             AppButton(
               onPress: () {
                 navigateTo(TellAboutPersonaView(
-                  personaName: otherPersonaController.text,
                   personaType: PersonaType.general,
                 ));
               },
@@ -156,7 +155,6 @@ class _Item extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         navigateTo(TellAboutPersonaView(
-          personaName: model.text,
           personaType: model.personaType,
         ));
       },

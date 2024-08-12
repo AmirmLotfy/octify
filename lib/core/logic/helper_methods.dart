@@ -121,7 +121,7 @@ Color getBgColor(MessageType msgType) {
   return msgType == MessageType.success
       ? const Color(0xff53A653)
       : msgType == MessageType.warning
-          ? const Color(0xffFFCC00)
+          ? const Color(0xff90ace1)
           : const Color(0xffEF233C);
 }
 

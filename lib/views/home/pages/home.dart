@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:octify/core/design/app_image.dart';
@@ -16,61 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // todo: need the rest of bg shapes
-  List<HistoryModel> list = [
-    // HistoryModel(
-    //   icon: "child_fill.svg",
-    //   title: "My Child",
-    //   body:
-    //       "Track your child's developmental milestones, challenges, and achievements. View past advice and insights tailored to their growth.",
-    //   bgShape: "shape1.svg",
-    //   color: const Color(0xffA6B2EE),
-    // ),
-    // HistoryModel(
-    //   icon: "partner_filled.svg",
-    //   title: "My Partner",
-    //   body:
-    //       "Review your relationship history, past advice, and personalized insights. Monitor key moments and challenges faced together.",
-    //   bgShape: "shape2.svg",
-    //   color: const Color(0xff8FD1CD),
-    // ),
-    // HistoryModel(
-    //   icon: "parent_fill.svg",
-    //   title: "My Parent",
-    //   body:
-    //       "Keep a record of your parent's health updates, caregiving tips, and relationship advice. Access previous guidance tailored to their needs.",
-    //   bgShape: "shape3.svg",
-    //   color: const Color(0xff7FD2F2),
-    // ),
-    // HistoryModel(
-    //     icon: "friend_filled.svg",
-    //     title: "My Friend",
-    //     body:
-    //         "Maintain a history of your friend's important events, interests, and challenges. Revisit past advice to strengthen your friendship.",
-    //     bgShape: "shape4.svg",
-    //     color: const Color(0xffFEDEA5)),
-    // HistoryModel(
-    //     icon: "my_self_fill.svg",
-    //     title: "Myself",
-    //     body:
-    //         "View your personal growth journey, self-care plans, and past advice. Reflect on your progress and revisit previous recommendations.",
-    //     bgShape: "shape1.svg",
-    //     color: const Color(0xffEBCAE7)),
-    // HistoryModel(
-    //     icon: "my_pet_fill.svg",
-    //     title: "My Pet",
-    //     body:
-    //         "Record your pet’s health updates, care tips, and special moments. Access past advice to ensure your pet’s well-being.",
-    //     bgShape: "shape2.svg",
-    //     color: const Color(0xffC2D6FE)),
-    // HistoryModel(
-    //     icon: "colleague_filled.svg",
-    //     title: "My Colleague",
-    //     body:
-    //         "Monitor key interactions, professional challenges, and milestones with your colleague. Access past advice to improve workplace relationships and collaboration.",
-    //     bgShape: "shape3.svg",
-    //     color: const Color(0xff96D9B0)),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +49,9 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w700,
-                          color: Theme.of(context).primaryColor,
+                          color: Theme
+                              .of(context)
+                              .primaryColor,
                         ),
                       ),
                     ),
@@ -139,85 +91,125 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24).copyWith(top: 8.h),
-        child: Column(
-          children: [
-            if (list.length > 4)
-              Padding(
-                padding: EdgeInsets.only(bottom: 16.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "History",
-                      style: TextStyle(
-                          fontSize: 16.sp, fontWeight: FontWeight.w600),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          navigateTo(AllHistoryView(list: list));
-                        },
-                        child: const Text("View All"))
-                  ],
-                ),
-              ),
-            Expanded(
-              child: Builder(builder: (context) {
-                if (list.isEmpty) {
-                  return Padding(
-                    padding: EdgeInsets.all(24.r),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const AppImage("create_persona.svg"),
-                        Text(
-                          "Create a unique persona to tailor solutions\nthat perfectly align with your needs.",
-                          style: TextStyle(
-                              fontSize: 16.sp,
-                              color: Theme.of(context).hintColor),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 32.h),
-                        FilledButton.icon(
-                          icon: const AppImage("add.svg"),
-                          onPressed: () {
-                            navigateTo(SelectPersonaView());
-                          },
-                          label: const Text("Create Persona"),
-                        )
-                      ],
-                    ),
-                  );
+      body: FutureBuilder(
+        future: FirebaseDatabase.instance.ref().child("home").child(FirebaseAuth.instance.currentUser!.uid).get(),
+        builder: (context, snapshot) {
+
+          if (snapshot.hasData) {
+            HomeDataModel model;
+            if(snapshot.data!.value==null)
+              {
+                model = HomeDataModel(list: []);
+              }else
+                {
+                  final data =json.encode(snapshot.data!.value);
+                  model  =HomeDataModel.fromJson(json.decode(data));
                 }
-                return ListView.separated(
-                  // padding: EdgeInsets.all(24.r),
-                  itemBuilder: (context, index) =>
-                      ItemHistory(model: list[index]),
-                  separatorBuilder: (context, index) =>
-                      SizedBox(height: 16.5.h),
-                  itemCount: list.length > 4 ? 4 : list.length,
-                );
-              }),
-            ),
-          ],
-        ),
+            return Padding(
+              padding: const EdgeInsets.all(24).copyWith(top: 8.h),
+              child: Column(
+                children: [
+                  if (model.list.length > 4)
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 16.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "History",
+                            style: TextStyle(
+                                fontSize: 16.sp, fontWeight: FontWeight.w600),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                navigateTo(AllHistoryView(list: model.list));
+                              },
+                              child: const Text("View All"))
+                        ],
+                      ),
+                    ),
+                  Expanded(
+                    child: Builder(builder: (context) {
+                      if (model.list.isEmpty) {
+                        return Padding(
+                          padding: EdgeInsets.all(24.r),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const AppImage("create_persona.svg"),
+                              Text(
+                                "Create a unique persona to tailor solutions\nthat perfectly align with your needs.",
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: Theme.of(context).hintColor),
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(height: 32.h),
+                              FilledButton.icon(
+                                icon: const AppImage("add.svg"),
+                                onPressed: () {
+                                  navigateTo(SelectPersonaView());
+                                },
+                                label: const Text("Create Persona"),
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                      return ListView.separated(
+                        // padding: EdgeInsets.all(24.r),
+                        itemBuilder: (context, index) =>
+                            ItemHistory(model: model.list[index].personaShape),
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 16.5.h),
+                        itemCount: model.list.length > 4 ? 4 : model.list.length,
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Failed to load data"),);
+          } else {
+            return Center(child: CircularProgressIndicator(),);
+          }
+        },
       ),
     );
   }
 }
 
 class HistoryModel {
-  final String icon, title, body, bgShape;
-  final Color color;
+  late String icon, body, bgShape;
+  late String title;
+  late int color;
 
-  HistoryModel(
-      {required this.icon,
-      required this.title,
-      required this.body,
-      required this.bgShape,
-      required this.color});
+  HistoryModel({required this.icon,
+    required this.title,
+    required this.body,
+    required this.bgShape,
+    required this.color});
+
+  HistoryModel.fromJson(Map<String, dynamic> json){
+    bgShape = json['bgShape'] ?? "";
+    body = json['body'] ?? "";
+    color = json['color'] ?? 0xffffffff;
+    icon = json['icon'] ?? "";
+    title = json['title'] ?? "";
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "icon": icon,
+      "title": title,
+      "body": body,
+      "bgShape": bgShape,
+      "color": color,
+    };
+  }
+
 }
 
 class ItemHistory extends StatelessWidget {
@@ -238,7 +230,7 @@ class ItemHistory extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: model.color,
+            color: Color(model.color),
           ),
           child: Stack(
             fit: StackFit.expand,
@@ -287,5 +279,57 @@ class ItemHistory extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+
+class HomeDataModel {
+  late final List<HomeData> list;
+
+  HomeDataModel({required this.list});
+
+  HomeDataModel.fromJson(Map<dynamic, dynamic>json)
+  {
+    list= [];
+    json.forEach((key, value) {
+      list.add(HomeData.fromJson(value));
+    },);
+  }
+}
+
+
+class HomeData {
+  late final PersonaModel personaModel;
+  late final HistoryModel personaShape;
+  late final String result;
+  late final List<String> selectedChallenges;
+
+  HomeData.fromJson(Map<String, dynamic> json){
+    personaModel = PersonaModel.fromJson(json['personaModel'] ?? {});
+    personaShape = HistoryModel.fromJson(json['personaShape'] ?? {});
+    result = json['result'] ?? "";
+    selectedChallenges =
+        List.castFrom<dynamic, String>(json['selectedChallenges'] ?? []);
+  }
+
+}
+
+class PersonaModel {
+  late final String age;
+  late final String communicationStyle;
+  late final String gender;
+  late final String interestsHobbies;
+  late final String name;
+  late final String personalityType;
+  late final String workRelationship;
+
+  PersonaModel.fromJson(Map<String, dynamic> json){
+    age = json['age'] ?? 0;
+    communicationStyle = json['communicationStyle'] ?? "";
+    gender = json['gender'] ?? "";
+    interestsHobbies = json['interestsHobbies'] ?? "";
+    name = json['name'] ?? "";
+    personalityType = json['personalityType'] ?? "";
+    workRelationship = json['workRelationship'] ?? "";
   }
 }

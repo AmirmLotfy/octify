@@ -10,11 +10,11 @@ import '../../challenges.dart';
 import '../../select_persona.dart';
 
 class MyChildSection extends StatefulWidget {
-  final String personaName;
+
   final PersonaType type;
 
   const MyChildSection(
-      {super.key, required this.personaName, required this.type});
+      {super.key,  required this.type});
 
   @override
   State<MyChildSection> createState() => _MyChildSectionState();
@@ -24,7 +24,7 @@ class _MyChildSectionState extends State<MyChildSection> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
   final interestsController = TextEditingController();
-  final challengesController = TextEditingController();
+  // final challengesController = TextEditingController();
   final personalityTypeController = TextEditingController();
   final healthController = TextEditingController();
   final communicationStyleController = TextEditingController();
@@ -77,18 +77,16 @@ class _MyChildSectionState extends State<MyChildSection> {
             hint: "Enter Interests/Hobbies",
             description: "Add your child's hobbies or passions",
           ),
-          AppInput(
-            prefix: "challenges.png",
-            label: "Challenges",
-            controller: challengesController,
-            validator: InputValidator.personaChallengesValidator,
-            hint: "Enter Challenges",
-            description: "List any difficulties your child may be facing",
-          ),
+          // AppInput(
+          //   prefix: "challenges.png",
+          //   label: "Challenges",
+          //   controller: challengesController,
+          //   hint: "Enter Challenges",
+          //   description: "List any difficulties your child may be facing",
+          // ),
           AppInput(
             prefix: "personality_type.png",
             label: "Personality Type",
-            validator: InputValidator.personaPersonalityTypeValidator,
             controller: personalityTypeController,
             hint: "Enter Personality Type",
             description:
@@ -106,7 +104,6 @@ class _MyChildSectionState extends State<MyChildSection> {
             prefix: "communication_style.png",
             label: "Communication Style",
             controller: communicationStyleController,
-            validator: InputValidator.personaCommunicationStyleValidator,
             hint: "Enter Communication Style",
             description: "Select how your child prefers to communicate",
           ),
@@ -124,7 +121,7 @@ class _MyChildSectionState extends State<MyChildSection> {
             prefix: "favorite_activities.png",
             label: "Favorite Activities",
             controller: favoriteActivitiesController,
-            validator: InputValidator.personaFavoriteActivitiesValidator,
+            // validator: InputValidator.personaFavoriteActivitiesValidator,
             hint: "Enter Favorite Activities",
             description: "List activities your child enjoys most",
           ),
@@ -137,14 +134,14 @@ class _MyChildSectionState extends State<MyChildSection> {
                   showMessage("Gender must be not null", type: MessageType.warning);
                 } else {
                   navigateTo(ChallengesView(
-                    personaName: widget.personaName,
+                    personaName: nameController.text,
                     type: widget.type,
                     personaModelData: PersonaModelData(
                         name: nameController.text,
                         age: ageController.text,
                         gender: gender,
                         personalityType: personalityTypeController.text,
-                        challenges: challengesController.text,
+                        // challenges: challengesController.text,
                         healthConditions: healthController.text,
                         interestsHobbies: interestsController.text,
                         favoriteActivities: favoriteActivitiesController.text,

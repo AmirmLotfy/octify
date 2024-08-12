@@ -20,49 +20,49 @@ class LoginOrRegister extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          SizedBox(height: 30.h),
-          Row(
-            children: [
-              Expanded(
-                  child: Divider(
-                endIndent: 24.w,
-                indent: 24.w,
-              )),
-              Text(
-                "or",
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).hintColor,
-                ),
-              ),
-              Expanded(
-                  child: Divider(
-                indent: 24.w,
-                endIndent: 24.w,
-              )),
-            ],
-          ),
-          SizedBox(height: 30.h),
-          Row(
-            children: [
-              _ItemSocial(
-                image: "google.svg",
-                onPress: signInWithGoogle,
-              ),
-              SizedBox(width: 12.w),
-              _ItemSocial(
-                image: "facebook.png",
-                onPress: () {},
-              ),
-              SizedBox(width: 12.w),
-              _ItemSocial(
-                image: "apple.svg",
-                onPress: () {},
-              ),
-            ],
-          ),
-          SizedBox(height: 30.h),
+          // SizedBox(height: 30.h),
+          // Row(
+          //   children: [
+          //     Expanded(
+          //         child: Divider(
+          //       endIndent: 24.w,
+          //       indent: 24.w,
+          //     )),
+          //     Text(
+          //       "or",
+          //       style: TextStyle(
+          //         fontSize: 14.sp,
+          //         fontWeight: FontWeight.w600,
+          //         color: Theme.of(context).hintColor,
+          //       ),
+          //     ),
+          //     Expanded(
+          //         child: Divider(
+          //       indent: 24.w,
+          //       endIndent: 24.w,
+          //     )),
+          //   ],
+          // ),
+          // SizedBox(height: 30.h),
+          // Row(
+          //   children: [
+          //     _ItemSocial(
+          //       image: "google.svg",
+          //       onPress: signInWithGoogle,
+          //     ),
+          //     SizedBox(width: 12.w),
+          //     _ItemSocial(
+          //       image: "facebook.png",
+          //       onPress: () {},
+          //     ),
+          //     SizedBox(width: 12.w),
+          //     _ItemSocial(
+          //       image: "apple.svg",
+          //       onPress: () {},
+          //     ),
+          //   ],
+          // ),
+          SizedBox(height: 16.h),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -72,16 +72,30 @@ class LoginOrRegister extends StatelessWidget {
                     : "Already have an account?",
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
               ),
-              TextButton(
-                onPressed: () {
+              SizedBox(width: 8.w),
+              GestureDetector(
+                onTap: () {
                   if (isLogin) {
                     navigateTo(const RegisterView());
                   } else {
                     Navigator.pop(context);
                   }
                 },
-                child: Text(isLogin ? "Sign Up" : "Sign In"),
-              )
+                child: Text(isLogin ? "Sign Up" : "Sign In",style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).primaryColor
+                ),),
+              ),
+              // TextButton(
+              //   style: TextButton.styleFrom(
+              //     visualDensity: VisualDensity.compact
+              //   ),
+              //   onPressed: () {
+              //
+              //   },
+              //   child: ,
+              // )
             ],
           ),
         ],

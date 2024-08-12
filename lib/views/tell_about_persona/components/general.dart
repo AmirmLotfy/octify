@@ -10,11 +10,10 @@ import '../../select_persona.dart';
 import '../view.dart';
 
 class GeneralSection extends StatefulWidget {
-  final String personaName;
   final PersonaType type;
 
   const GeneralSection(
-      {super.key, required this.personaName, required this.type});
+      {super.key, required this.type});
 
   @override
   State<GeneralSection> createState() => _GeneralSectionState();
@@ -72,7 +71,7 @@ class _GeneralSectionState extends State<GeneralSection> {
                         "Gender must be not null", type: MessageType.warning);
                   } else {
                     navigateTo(ChallengesView(
-                      personaName: widget.personaName,
+                      personaName: nameController.text,
                       type: widget.type,
                       personaModelData: PersonaModelData(
                           name: nameController.text,

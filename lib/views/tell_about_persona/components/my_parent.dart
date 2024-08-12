@@ -10,11 +10,11 @@ import '../../select_persona.dart';
 import '../view.dart';
 
 class MyParentSection extends StatefulWidget {
-  final String personaName;
+
   final PersonaType type;
 
   const MyParentSection(
-      {super.key, required this.personaName, required this.type});
+      {super.key,  required this.type});
 
   @override
   State<MyParentSection> createState() => _MyParentSectionState();
@@ -24,7 +24,7 @@ class _MyParentSectionState extends State<MyParentSection> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
   final interestsController = TextEditingController();
-  final challengesController = TextEditingController();
+  // final challengesController = TextEditingController();
   final personalityTypeController = TextEditingController();
   final healthController = TextEditingController();
   final communicationStyleController = TextEditingController();
@@ -76,20 +76,18 @@ class _MyParentSectionState extends State<MyParentSection> {
             validator: InputValidator.personaInterestsHobbiesValidator,
             description: "Add your parent's hobbies or favorite activities",
           ),
-          AppInput(
-            prefix: "challenges.png",
-            label: "Challenges",
-            controller: challengesController,
-            hint: "Enter Challenges",
-            validator: InputValidator.personaChallengesValidator,
-            description: "List any challenges your parent may be facing",
-          ),
+          // AppInput(
+          //   prefix: "challenges.png",
+          //   label: "Challenges",
+          //   controller: challengesController,
+          //   hint: "Enter Challenges",
+          //   description: "List any challenges your parent may be facing",
+          // ),
           AppInput(
             prefix: "personality_type.png",
             label: "Personality Type",
             controller: personalityTypeController,
             hint: "Enter Personality Type",
-            validator: InputValidator.personaPersonalityTypeValidator,
             description: "Choose your parent's personality type",
           ),
           AppInput(
@@ -104,7 +102,6 @@ class _MyParentSectionState extends State<MyParentSection> {
             prefix: "communication_style.png",
             label: "Communication Style",
             controller: communicationStyleController,
-            validator: InputValidator.personaCommunicationStyleValidator,
             hint: "Enter Communication Style",
             description: "Select how your parent prefers to communicate",
           ),
@@ -112,7 +109,6 @@ class _MyParentSectionState extends State<MyParentSection> {
             prefix: "life_stage.png",
             label: "Life Stage",
             controller: lifeStageController,
-            validator: InputValidator.personaLifeStageValidator,
             hint: "Life Stage",
             description: "Indicate their current life stage (e.g., retirement)",
           ),
@@ -126,14 +122,14 @@ class _MyParentSectionState extends State<MyParentSection> {
                 } else {
                   navigateTo(
                     ChallengesView(
-                      personaName: widget.personaName,
+                      personaName: nameController.text,
                       type: widget.type,
                       personaModelData: PersonaModelData(
                         name: nameController.text,
                         age: ageController.text,
                         gender: gender,
                         personalityType: personalityTypeController.text,
-                        challenges: challengesController.text,
+                        // challenges: challengesController.text,
                         healthConditions: healthController.text,
                         interestsHobbies: interestsController.text,
                         lifeStage: lifeStageController.text,
