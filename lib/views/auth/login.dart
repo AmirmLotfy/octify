@@ -26,8 +26,8 @@ class _LoginViewState extends State<LoginView> {
   final formKey = GlobalKey<FormState>();
 
   bool isLoading = false;
-  final emailController = TextEditingController(text: "frameless.com@gmail.com");
-  final passwordController = TextEditingController(text: "123456789");
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -55,16 +55,6 @@ class _LoginViewState extends State<LoginView> {
                   height: 120.h,
                   width: 120.h,
                 ),
-                // SizedBox(height: 16.h),
-                // Center(
-                //   child: Text(
-                //     "Octify",
-                //     style: TextStyle(
-                //       fontSize: 20.sp,
-                //       fontWeight: FontWeight.w700,
-                //     ),
-                //   ),
-                // ),
                 SizedBox(height: 30.h),
                 Center(
                   child: Text(
@@ -180,8 +170,6 @@ class _LoginViewState extends State<LoginView> {
                               type: MessageType.success);
                           navigateTo(const HomeView(), keepHistory: false);
                         } else {
-                          // await FirebaseAuth.instance.currentUser!
-                          //     .sendEmailVerification();
                           showMessage(
                             "Please Verify your email before login",
                             type: MessageType.warning,

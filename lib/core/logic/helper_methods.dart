@@ -187,7 +187,7 @@ void showLoading() {
             children: [
               PopScope(
                 onPopInvoked: (value) {
-                  print(value);
+                  debugPrint(value.toString());
                 },
                 child: Container(
                   color: Colors.transparent,

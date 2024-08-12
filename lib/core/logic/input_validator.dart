@@ -131,4 +131,147 @@ class InputValidator {
     }
     return phoneCode;
   }
+
+  // todo: specify right validation
+  static String? personaNameValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Name Required";
+    }
+    if (value.length >= 2) {
+      return null;
+    } else {
+      return "At least 2 digits";
+    }
+  }
+
+  static String? personaAgeValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Age Required";
+    }
+    if (value.length >= 1) {
+      return null;
+    } else {
+      return "At least 1 digits";
+    }
+  }
+  static String? personaInterestsHobbiesValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Interests/Hobbies Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaSharedInterestsValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Shared Interests Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaPetTypeValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Pet Type Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaChallengesValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Challenges Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaPersonalityTypeValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Personality Type Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaHealthConditionsValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Health Conditions Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaCommunicationStyleValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Communication Style Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaWorkRelationshipValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Work Relationship Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaEducationLevelValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Education Level Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaLifeStageValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Life Stage Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaLoveLanguageValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Love Language Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaAnniversaryDateValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Anniversary Date Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaBreedValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Breed Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaGoalsValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Goals Required";
+    }
+    else {
+      return null;
+    }
+  }
+  static String? personaFavoriteActivitiesValidator(String? value) {
+    if (value!.isEmpty) {
+      return "Favorite Activities Required";
+    }
+    else {
+      return null;
+    }
+  }
 }

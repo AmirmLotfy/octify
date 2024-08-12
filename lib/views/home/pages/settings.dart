@@ -8,6 +8,8 @@ import 'package:octify/views/settings/notifications.dart';
 import 'package:octify/views/settings/privacy.dart';
 import 'package:octify/views/settings/profile.dart';
 
+import '../../dialogs/delete_account.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -48,6 +50,15 @@ class SettingsPage extends StatelessWidget {
                 }),
             // todo: make delete account
             // todo: wait for rate us item to made in UI
+            _Item(
+                text: "Delete Account",
+                image: "delete_account.svg",
+                onPress: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const DeleteAccountDialog(),
+                  );
+                }),
             _Item(
                 text: "Logout",
                 image: "logout.svg",

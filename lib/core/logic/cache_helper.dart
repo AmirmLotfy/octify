@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
@@ -72,7 +73,7 @@ class CacheHelper {
   }
 
   static Future<void> setToken(String token) async {
-    print("Token Saved $token");
+    debugPrint("Token Saved $token");
     _ref.setString("token", token);
   }
 
@@ -131,6 +132,8 @@ class CacheHelper {
   // }
 
   static Future<void> logOut() async {
+
     await _ref.clear();
+    await setNotFirstTime();
   }
 }

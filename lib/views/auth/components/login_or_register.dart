@@ -112,6 +112,17 @@ class LoginOrRegister extends StatelessWidget {
     //     .child("users")
     //     .child(credential.user!.uid)
     //     .set({
+    //   "firstName": firstNameController.text,
+    //   "lastName": lastNameController.text,
+    //   "phone": phoneController.text,
+    //   "email": emailController.text,
+    //   "image": ""
+    // });
+    // await FirebaseDatabase.instance
+    //     .ref()
+    //     .child("users")
+    //     .child(credential.user!.uid)
+    //     .set({
     //   "firstName": credential.,
     //   "lastName": lastNameController.text,
     //   "phone": phoneController.text,

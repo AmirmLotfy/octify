@@ -24,11 +24,11 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   bool isLoading = false;
   final formKey = GlobalKey<FormState>();
-  final firstNameController = TextEditingController(text: "Amr");
-  final lastNameController = TextEditingController(text: "Bakr");
-  final phoneController = TextEditingController(text: "01027545022");
-  final emailController = TextEditingController(text: "frameless.com@gmail.com");
-  final passwordController = TextEditingController(text: "123456789");
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +119,10 @@ class _RegisterViewState extends State<RegisterView> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Phone must be not empty";
-                    }
-                    //todo make the validation
+                    }else if(value.length<9)
+                      {
+                        return "Phone must be greater than 9 digits";
+                      }
                     return null;
                   },
                 ),

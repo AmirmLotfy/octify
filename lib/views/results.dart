@@ -1,50 +1,89 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:octify/core/design/app_button.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/core/theme.dart';
 import 'package:octify/views/chat.dart';
 import 'package:octify/views/components/item_check_list.dart';
 import 'package:octify/views/home/view.dart';
+import 'package:octify/views/select_persona.dart';
 
 import '../core/design/second_app_bar.dart';
 import 'chat/view.dart';
+import 'tell_about_persona/view.dart';
 
 class ResultsView extends StatefulWidget {
   final String title;
-  const ResultsView({super.key, required this.title});
+  final PersonaType personaType;
+  final List<String> challengesList;
+  final PersonaModelData personaModelData;
+
+  const ResultsView(
+      {super.key,
+      required this.title,
+      required this.challengesList,
+      required this.personaModelData, required this.personaType});
 
   @override
   State<ResultsView> createState() => _ResultsViewState();
 }
 
 class _ResultsViewState extends State<ResultsView> {
-  final list = [
-    _Model(
-      title: "Solution 1: Improve Communication",
-      list: [
-        "Schedule weekly check-ins to discuss concerns and achievements.",
-        "Use active listening techniques during conversations.",
-        "Set clear and respectful communication boundaries.",
-      ],
-    ),
-    _Model(
-      title: "Solution 2: Build Trust",
-      list: [
-        "Be consistent with actions and words.",
-        "Share feelings and thoughts honestly.",
-        "Create and honor mutual agreements.",
-      ],
-    ),
-    _Model(
-      title: "Solution 3: Manage Conflicts",
-      list: [
-        "Identify the root cause of conflicts calmly.",
-        "Use “I” statements to express feelings without blaming.",
-        "Seek compromise and find mutually acceptable solutions.",
-      ],
-    ),
-  ];
+
+  @override
+  void initState() {
+    super.initState();
+    analysis();
+  }
+
+  bool isLoading = true;
+
+  String? result;
+
+  void analysis() async {
+
+    final model = GenerativeModel(
+        model: 'gemini-pro', apiKey: "AIzaSyCEMn-P4MDyVQYkC_LhtKbq4zm5GKGRqFM");
+
+    late String doctorType;
+    switch(widget.personaType)
+    {
+
+      case PersonaType.general:
+        doctorType= "Psychotherapist";
+      case PersonaType.child:
+        doctorType= "therapist";
+      case PersonaType.partner:
+        doctorType= "Psychotherapist";
+      case PersonaType.parent:
+        doctorType= "Psychotherapist";
+      case PersonaType.pet:
+        doctorType= "Psychotherapist";
+      case PersonaType.friend:
+        doctorType= "Psychotherapist";
+      case PersonaType.myself:
+        doctorType= "Psychotherapist";
+      case PersonaType.colleague:
+        doctorType= "Psychotherapist";
+    }
+
+    String text =
+        'Write a curated solution for this persona here are the persona info ${widget.personaModelData.toMap()} and the persona face some challenges like ${widget.challengesList.toString()} and return as html please and act like ${widget.personaType.name} ${doctorType}';
+    final content = [
+      Content.text(text),
+    ];
+    final response = await model.generateContent(content);
+    debugPrint("*********************");
+    debugPrint(text);
+    debugPrint("---------------------");
+    debugPrint(response.text);
+    result = response.text;
+    isLoading = false;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,56 +103,82 @@ class _ResultsViewState extends State<ResultsView> {
                 children: [
                   const TextSpan(text: "Suggested Solutions"),
                   TextSpan(
-                      text: " to deal with \n ${widget.title}",
-                      style: TextStyle(color: Theme.of(context).primaryColor)),
+                    text: " to deal with \n ${widget.personaModelData.name}",
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
                 ],
               ),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 18.h),
-            Text(
-              "Curated Solutions:",
-              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700),
-            ),
-            SizedBox(height: 14.h),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: List.generate(
-                list.length,
-                (index) => Padding(
-                  padding: EdgeInsets.only(bottom: 14.h),
-                  child: ItemCheckList(
-                      title: list[index].title, list: list[index].list),
-                ),
-              ),
-            )
+            isLoading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Text(
+                      //   "Curated Solutions:",
+                      //   style: TextStyle(
+                      //       fontSize: 18.sp, fontWeight: FontWeight.w700),
+                      // ),
+                      //
+                      // SizedBox(height: 14.h),
+                      if (result != null) ItemCheckList(title: result!),
+                      if (result == null)
+                        Text(
+                          "No Results Found",
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w700,
+                              color: Theme.of(context).primaryColor),
+                        )
+                      // Column(
+                      //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                      //   children: List.generate(
+                      //     list.length,
+                      //     (index) => Padding(
+                      //       padding: EdgeInsets.only(bottom: 14.h),
+                      //       child: ItemCheckList(
+                      //           title: list[index].title,
+                      //           list: list[index].list),
+                      //     ),
+                      //   ),
+                      // )
+                    ],
+                  )
           ],
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(24.r),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AppButton(
-                text: "Chat with Octify",
-                onPress: () {
-                  navigateTo( ChatView());
-                },
+      bottomNavigationBar: isLoading
+          ? SizedBox.shrink()
+          : SafeArea(
+              child: Padding(
+                padding: EdgeInsets.all(24.r),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AppButton(
+                      text: "Chat with Octify",
+                      onPress: () {
+                        navigateTo(ChatView());
+                      },
+                    ),
+                    AppButton(
+                      text: "Go to Home",
+                      type: ButtonType.outlined,
+                      onPress: () {
+                        navigateTo(const HomeView(), keepHistory: false);
+                      },
+                    )
+                  ],
+                ),
               ),
-              AppButton(
-                text: "Go to Home",
-                type: ButtonType.outlined,
-                onPress: () {
-                  navigateTo(const HomeView(), keepHistory: false);
-                },
-              )
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

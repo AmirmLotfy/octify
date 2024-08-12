@@ -229,9 +229,10 @@ class ItemHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        navigateTo(ResultsView(
-          title: model.title,
-        ));
+        // todo: it suppose that you will save the result that gemini ai return with the persona in firebase
+        // navigateTo(ResultsView(
+        //   title: model.title,
+        // ));
       },
       child: IntrinsicHeight(
         child: Container(

@@ -132,7 +132,7 @@ class _HomeViewState extends State<HomeView> {
       //   currentIndex: currentIndex,
       //   elevation: 20,
       //   onTap: (value) {
-      //     print(value);
+      //     debugPrint(value);
       //     currentIndex = value;
       //     setState(() {});
       //   },

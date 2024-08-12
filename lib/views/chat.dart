@@ -29,7 +29,6 @@ class _ChatView2State extends State<ChatView2> {
   final sendMessageBloc = KiwiContainer().resolve<SendMessageBloc>();
   var inputDirection = TextDirection.ltr;
 
-  // todo: need network error or server error
   @override
   Widget build(BuildContext context) {
     return Scaffold(

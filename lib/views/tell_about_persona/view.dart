@@ -6,6 +6,7 @@ import 'package:octify/core/design/app_input.dart';
 import 'package:octify/core/design/second_app_bar.dart';
 import 'package:octify/core/logic/helper_methods.dart';
 import 'package:octify/views/challenges.dart';
+import 'package:octify/views/tell_about_persona/components/general.dart';
 import 'package:octify/views/tell_about_persona/components/my_colleague.dart';
 import 'package:octify/views/tell_about_persona/components/my_partner.dart';
 
@@ -28,8 +29,36 @@ class TellAboutPersonaView extends StatefulWidget {
 }
 
 class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
-  final list = ["Peanuts", "Shellfish", "Pollen", "Pollen", "Hypertension"];
   List<int> selectedList = [];
+
+  Widget get form {
+    switch (widget.personaType) {
+      case PersonaType.general:
+        return GeneralSection(
+            personaName: widget.personaName, type: widget.personaType);
+      case PersonaType.child:
+        return MyChildSection(
+            personaName: widget.personaName, type: widget.personaType);
+      case PersonaType.partner:
+        return MyPartnerSection(
+            personaName: widget.personaName, type: widget.personaType);
+      case PersonaType.parent:
+        return MyParentSection(
+            personaName: widget.personaName, type: widget.personaType);
+      case PersonaType.pet:
+        return MyPetSection(
+            personaName: widget.personaName, type: widget.personaType);
+      case PersonaType.friend:
+        return MyFriendSection(
+            personaName: widget.personaName, type: widget.personaType);
+      case PersonaType.myself:
+        return MySelfSection(
+            personaName: widget.personaName, type: widget.personaType);
+      case PersonaType.colleague:
+        return MyColleagueSection(
+            personaName: widget.personaName, type: widget.personaType);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +77,8 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
                 ),
                 children: [
                   const TextSpan(
-                      text: "Please provide the following details to help us "),
+                      text:
+                          "Please provide the following details about the Persona to help us "),
                   TextSpan(
                     text: "understand your needs better.",
                     style: TextStyle(
@@ -60,126 +90,77 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 24.h),
-            if (widget.personaType == PersonaType.child)
-              MyChildSection(
-                personaName: widget.personaName,
-                type: widget.personaType,
-              ),
-            if (widget.personaType == PersonaType.partner)
-              MyPartnerSection(
-                personaName: widget.personaName,
-                type: widget.personaType,
-              ),
-            if (widget.personaType == PersonaType.parent)
-              MyParentSection(
-                personaName: widget.personaName,
-                type: widget.personaType,
-              ),
-            if (widget.personaType == PersonaType.friend)
-              MyFriendSection(
-                personaName: widget.personaName,
-                type: widget.personaType,
-              ),
-            if (widget.personaType == PersonaType.myself)
-              MySelfSection(
-                personaName: widget.personaName,
-                type: widget.personaType,
-              ),
-            if (widget.personaType == PersonaType.pet)
-              MyPetSection(
-                personaName: widget.personaName,
-                type: widget.personaType,
-              ),
-            if (widget.personaType == PersonaType.colleague)
-              MyColleagueSection(
-                personaName: widget.personaName,
-                type: widget.personaType,
-              ),
-
-            //todo: make it like the comment months and years
-            //   const AppInput(
-            //     prefix: "",
-            //     label: "Relationship Duration",
-            //     hint: "MM/YY",
-            //     keyboardType: TextInputType.number,
-            //   ),
-
-            // // todo: make add button and clickable to show sheet
-            // // in the sheet he enter the name of the date and select the date
-            // // from calendat and then press save and it shown below the item
-            // // he also can delete or edit it when click on it
-            //   const AppInput(
-            //     prefix: "",
-            //     label: "Important Dates",
-            //     hint: "Enter your important dates",
-            //     keyboardType: TextInputType.number,
-            //   ),
-            // SizedBox(height: 16.h),
-            // Text(
-            //   "Allergies",
-            //   style: TextStyle(
-            //     fontSize: 12.sp,
-            //     fontWeight: FontWeight.w400,
-            //   ),
-            // ),
-            // SizedBox(height: 16.h),
-            // Wrap(
-            //   alignment: WrapAlignment.start,
-            //   crossAxisAlignment: WrapCrossAlignment.start,
-            //   spacing: 16.w,
-            //   runSpacing: 16.h,
-            //   children: List.generate(
-            //     list.length,
-            //     (index) => GestureDetector(
-            //       onTap: () {
-            //         if (selectedList.contains(index)) {
-            //           selectedList.remove(index);
-            //         } else {
-            //           selectedList.add(index);
-            //         }
-            //
-            //         setState(() {});
-            //       },
-            //       child: Container(
-            //         padding: EdgeInsets.symmetric(
-            //           horizontal: 27.w,
-            //           vertical: 8.h,
-            //         ),
-            //         decoration: BoxDecoration(
-            //             color: selectedList.contains(index)
-            //                 ? Theme.of(context).primaryColor
-            //                 : null,
-            //             border: !selectedList.contains(index)
-            //                 ? Border.all(
-            //                     color: Theme.of(context).dividerColor,
-            //                   )
-            //                 : null,
-            //             borderRadius: BorderRadius.circular(8.r)),
-            //         child: Text(
-            //           list[index],
-            //           style: TextStyle(
-            //             fontSize: 12.sp,
-            //             color: selectedList.contains(index)
-            //                 ? Colors.white
-            //                 : const Color(0xff8c8c8c),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // SizedBox(height: 24.h),
-            // TextFormField(
-            //   minLines: 3,
-            //   maxLines: 7,
-            //   decoration: const InputDecoration(
-            //     hintText: "Medical/Mental Health Issues",
-            //   ),
-            // ),
-            // SizedBox(height: 24.h),
+            form,
           ],
         ),
       ),
     );
+  }
+}
+
+class PersonaModelData {
+  final String name;
+  final String? interestsHobbies,
+      sharedInterests,
+      gender,
+      challenges,
+      personalityType,
+      healthConditions,
+      communicationStyle,
+      workRelationship,
+      educationLevel,
+      petType,
+      lifeStage,
+      loveLanguage,
+      anniversaryDate,
+      breed,
+      goals,
+      favoriteActivities;
+  final String? age;
+
+  PersonaModelData({
+    required this.name,
+    this.gender,
+    this.interestsHobbies,
+    this.sharedInterests,
+    this.petType,
+    this.challenges,
+    this.personalityType,
+    this.healthConditions,
+    this.communicationStyle,
+    this.workRelationship,
+    this.educationLevel,
+    this.lifeStage,
+    this.loveLanguage,
+    this.anniversaryDate,
+    this.breed,
+    this.goals,
+    this.favoriteActivities,
+    required this.age,
+  });
+
+  Map<String, dynamic> toMap() {
+    final data = {
+      "name":name,
+      "gender":gender,
+      "interestsHobbies":interestsHobbies,
+      "sharedInterests":sharedInterests,
+      "petType":petType,
+      "challenges":challenges,
+      "personalityType":personalityType,
+      "healthConditions":healthConditions,
+      "communicationStyle":communicationStyle,
+      "workRelationship":workRelationship,
+      "educationLevel":educationLevel,
+      "lifeStage":lifeStage,
+      "loveLanguage":loveLanguage,
+      "anniversaryDate":anniversaryDate,
+      "breed":breed,
+      "goals":goals,
+      "favoriteActivities":favoriteActivities,
+      "age":age,
+    };
+    data.removeWhere((key, value) => value==null,);
+    return data;
   }
 }

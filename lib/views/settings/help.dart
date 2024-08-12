@@ -90,7 +90,6 @@ class _HelpViewState extends State<HelpView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const SecondAppBar(text: "Help and support"),
-      // todo: make it categories and with every category its questions
       body: ListView.separated(
         padding: EdgeInsets.all(24.r),
         itemBuilder: (context, index) => _Item(
@@ -99,7 +98,6 @@ class _HelpViewState extends State<HelpView> {
         separatorBuilder: (context, index) => SizedBox(height: 16.h),
         itemCount: list.length,
       ),
-      // todo: they need to add social media icons below the email
       bottomNavigationBar: SafeArea(
         child: Container(
           padding: EdgeInsets.all(10.r),
@@ -159,13 +157,12 @@ class _HelpViewState extends State<HelpView> {
               Row(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // todo need social media icons
                   GestureDetector(
                       onTap: () {
                         openUrl("https://www.facebook.com/octifyai");
                       },
                       child: AppImage(
-                        "url",
+                        "facebook.png",
                         height: 32.h,
                         width: 32.h,
                       )),
@@ -175,7 +172,7 @@ class _HelpViewState extends State<HelpView> {
                       openUrl("https://www.instagram.com/octifyai/");
                     },
                     child: AppImage(
-                      "url",
+                      "instagram.png",
                       height: 32.h,
                       width: 32.h,
                     ),
@@ -186,7 +183,7 @@ class _HelpViewState extends State<HelpView> {
                       openUrl("https://www.youtube.com/@octifyai");
                     },
                     child: AppImage(
-                      "url",
+                      "youtube.png",
                       height: 32.h,
                       width: 32.h,
                     ),

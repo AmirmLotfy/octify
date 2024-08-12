@@ -9,6 +9,7 @@ class AppExpansionTile extends StatefulWidget {
   final String title, label;
   final String icon;
   final List<String> list;
+  final ValueChanged<String?> onChange;
   final double? marginBottom;
 
   const AppExpansionTile({
@@ -18,6 +19,7 @@ class AppExpansionTile extends StatefulWidget {
     required this.list,
     this.marginBottom,
     required this.icon,
+    required this.onChange,
   });
 
   @override
@@ -89,6 +91,7 @@ class _AppExpansionTileState extends State<AppExpansionTile> {
                         selectedValue = widget.list[index];
                         controller.collapse();
                         setState(() {});
+                        widget.onChange(selectedValue);
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 16.h),

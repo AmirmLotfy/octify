@@ -47,10 +47,10 @@ class _SplashViewState extends State<SplashView> {
       body: Center(
         child: Swing(
           child: AppImage(
-            // todo: add the good quality logo in figma and remove the bg and save as svg and replace this
             "logo.png",
             height: 180.h,
             width: 180.h,
+            color: Theme.of(context).primaryColor,
           ),
         ),
       ),

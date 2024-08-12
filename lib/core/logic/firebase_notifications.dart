@@ -26,7 +26,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage data) async {
   //       data.notification.body,
   //       data.notification.apple.imageUrl);
   // }
-  // print("Handling a background message: ${data.data}");
+  // debugPrint("Handling a background message: ${data.data}");
 }
 //todo there is error while send notification on backgroud fix it
 class GlobalNotification {
@@ -42,9 +42,9 @@ class GlobalNotification {
       //   GlobalNotification().updateFcm();
       // }
       // Prefs.setString("device_token", _deviceToken);
-      print("--------- Global Notification Logger --------> \x1B[37m------ FCM TOKEN -----\x1B[0m");
-      print('<--------- Global Notification Logger --------> \x1B[32m $_deviceToken\x1B[0m');
-      // print("device token : $_deviceToken");
+      debugPrint("--------- Global Notification Logger --------> \x1B[37m------ FCM TOKEN -----\x1B[0m");
+      debugPrint('<--------- Global Notification Logger --------> \x1B[32m $_deviceToken\x1B[0m');
+      // debugPrint("device token : $_deviceToken");
       return _deviceToken;
     } catch (e) {
       return _deviceToken;

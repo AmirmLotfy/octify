@@ -65,6 +65,8 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
       color: const Color(0xffFFCFB9),
     ),
   ];
+  final otherPersonaController = TextEditingController();
+  bool isGeneralPersona = false;
 
   @override
   Widget build(BuildContext context) {
@@ -102,13 +104,27 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
               ),
             ),
             SizedBox(height: 24.h),
-            // todo: hide button until the user write in the input
-            const AppInput(
+            AppInput(
+              controller: otherPersonaController,
               label: "Other Persona",
               hint: "Enter other persona",
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  isGeneralPersona = true;
+                } else {
+                  isGeneralPersona = false;
+                }
+                setState(() {});
+              },
             ),
+            if(isGeneralPersona)
             AppButton(
-              onPress: () {},
+              onPress: () {
+                navigateTo(TellAboutPersonaView(
+                  personaName: otherPersonaController.text,
+                  personaType: PersonaType.general,
+                ));
+              },
               text: "Next",
             )
           ],

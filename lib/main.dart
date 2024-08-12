@@ -23,7 +23,9 @@ import 'features/get_messages/bloc.dart';
 import 'features/service_locator.dart';
 import 'firebase_options.dart';
 import 'views/auth/splash.dart';
+import 'views/challenges.dart';
 import 'views/chat/view.dart';
+import 'views/results.dart';
 import 'views/tell_about_persona/view.dart';
 
 // todo: download google services again and replace with android and ios because we add google sign in
@@ -39,6 +41,7 @@ void main() async {
   initKiwi();
   // await GetMessagesBloc.initHive();
   // await FirebaseAuth.instance.signOut();
+  // await CacheHelper.logOut();
   runApp(ProviderScope(child: const MyApp()));
 }
 
@@ -55,12 +58,12 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user != null) {
-        print(user.uid);
-        print("*" * 30);
-        print("User is signed in");
+        debugPrint(user.uid);
+        debugPrint("*" * 30);
+        debugPrint("User is signed in");
       } else {
-        print("*" * 30);
-        print("User is currently signed out!");
+        debugPrint("*" * 30);
+        debugPrint("User is currently signed out!");
       }
     });
   }
@@ -88,6 +91,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-// Firebase
-//  Register ( first name - last name - email address - phone number - password )
-//  Login ( email address - password )
