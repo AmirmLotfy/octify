@@ -21,13 +21,13 @@ class MyColleagueSection extends StatefulWidget {
 }
 
 class _MyColleagueSectionState extends State<MyColleagueSection> {
-  final nameController = TextEditingController(text: "araby");
-  final ageController = TextEditingController(text: "23");
-  final interestsController = TextEditingController(text: "sketboard");
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
+  final interestsController = TextEditingController();
   // final challengesController = TextEditingController();
   final personalityTypeController = TextEditingController();
   final communicationStyleController = TextEditingController();
-  final workRelationshipController = TextEditingController(text: "team leader");
+  final workRelationshipController = TextEditingController();
   String? gender;
   final formKey = GlobalKey<FormState>();
 

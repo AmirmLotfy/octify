@@ -21,13 +21,12 @@ class MyPetSection extends StatefulWidget {
 }
 
 class _MyPetSectionState extends State<MyPetSection> {
-  final nameController = TextEditingController(text: "x");
-  final ageController = TextEditingController(text: "5");
-  // final challengesController = TextEditingController();
-  final healthController = TextEditingController(text: "Healthy");
+  final nameController = TextEditingController();
+  final ageController = TextEditingController();
+  final healthController = TextEditingController();
   final favoriteActivitiesController = TextEditingController();
-  final petTypeController = TextEditingController(text: "Dog");
-  final breedController = TextEditingController(text: "pitbull");
+  final petTypeController = TextEditingController();
+  final breedController = TextEditingController();
   final communicationStyleController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
