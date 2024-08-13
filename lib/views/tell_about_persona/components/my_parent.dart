@@ -126,6 +126,7 @@ class _MyParentSectionState extends State<MyParentSection> {
                       type: widget.type,
                       personaModelData: PersonaModelData(
                         name: nameController.text,
+                        type: PersonaType.parent,
                         age: ageController.text,
                         gender: gender,
                         personalityType: personalityTypeController.text,

@@ -140,6 +140,7 @@ class _MyChildSectionState extends State<MyChildSection> {
                         name: nameController.text,
                         age: ageController.text,
                         gender: gender,
+                        type: PersonaType.child,
                         personalityType: personalityTypeController.text,
                         // challenges: challengesController.text,
                         healthConditions: healthController.text,

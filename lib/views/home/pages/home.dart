@@ -11,6 +11,7 @@ import 'package:octify/views/results.dart';
 
 import '../../all_history.dart';
 import '../../select_persona.dart';
+import '../../tell_about_persona/view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,8 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +48,7 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.w700,
-                          color: Theme
-                              .of(context)
-                              .primaryColor,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ),
@@ -92,19 +89,20 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: FutureBuilder(
-        future: FirebaseDatabase.instance.ref().child("home").child(FirebaseAuth.instance.currentUser!.uid).get(),
+        future: FirebaseDatabase.instance
+            .ref()
+            .child("home")
+            .child(FirebaseAuth.instance.currentUser!.uid)
+            .get(),
         builder: (context, snapshot) {
-
           if (snapshot.hasData) {
             HomeDataModel model;
-            if(snapshot.data!.value==null)
-              {
-                model = HomeDataModel(list: []);
-              }else
-                {
-                  final data =json.encode(snapshot.data!.value);
-                  model  =HomeDataModel.fromJson(json.decode(data));
-                }
+            if (snapshot.data!.value == null) {
+              model = HomeDataModel(list: []);
+            } else {
+              final data = json.encode(snapshot.data!.value);
+              model = HomeDataModel.fromJson(json.decode(data));
+            }
             return Padding(
               padding: const EdgeInsets.all(24).copyWith(top: 8.h),
               child: Column(
@@ -160,10 +158,11 @@ class _HomePageState extends State<HomePage> {
                       return ListView.separated(
                         // padding: EdgeInsets.all(24.r),
                         itemBuilder: (context, index) =>
-                            ItemHistory(model: model.list[index].personaShape),
+                            ItemHistory(model: model.list[index]),
                         separatorBuilder: (context, index) =>
                             SizedBox(height: 16.5.h),
-                        itemCount: model.list.length > 4 ? 4 : model.list.length,
+                        itemCount:
+                            model.list.length > 4 ? 4 : model.list.length,
                       );
                     }),
                   ),
@@ -171,9 +170,13 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           } else if (snapshot.hasError) {
-            return Center(child: Text("Failed to load data"),);
+            return Center(
+              child: Text("Failed to load data"),
+            );
           } else {
-            return Center(child: CircularProgressIndicator(),);
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
         },
       ),
@@ -186,13 +189,14 @@ class HistoryModel {
   late String title;
   late int color;
 
-  HistoryModel({required this.icon,
-    required this.title,
-    required this.body,
-    required this.bgShape,
-    required this.color});
+  HistoryModel(
+      {required this.icon,
+      required this.title,
+      required this.body,
+      required this.bgShape,
+      required this.color});
 
-  HistoryModel.fromJson(Map<String, dynamic> json){
+  HistoryModel.fromJson(Map<String, dynamic> json) {
     bgShape = json['bgShape'] ?? "";
     body = json['body'] ?? "";
     color = json['color'] ?? 0xffffffff;
@@ -209,11 +213,10 @@ class HistoryModel {
       "color": color,
     };
   }
-
 }
 
 class ItemHistory extends StatelessWidget {
-  final HistoryModel model;
+  final HomeData model;
 
   const ItemHistory({super.key, required this.model});
 
@@ -221,22 +224,27 @@ class ItemHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+
         // todo: it suppose that you will save the result that gemini ai return with the persona in firebase
-        // navigateTo(ResultsView(
-        //   title: model.title,
-        // ));
+        navigateTo(ResultsView(
+          title: "",
+          result: model.result,
+          personaType: model.personaModel.type,
+          personaModelData: model.personaModel,
+          challengesList: model.selectedChallenges,
+        ));
       },
       child: IntrinsicHeight(
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
-            color: Color(model.color),
+            color: Color(model.personaShape.color),
           ),
           child: Stack(
             fit: StackFit.expand,
             children: [
               AppImage(
-                model.bgShape,
+                model.personaShape.bgShape,
                 height: 132.h,
                 fit: BoxFit.cover,
                 width: double.infinity,
@@ -249,13 +257,13 @@ class ItemHistory extends StatelessWidget {
                     Row(
                       children: [
                         AppImage(
-                          model.icon,
+                          model.personaShape.icon,
                           height: 48.h,
                           width: 48.h,
                         ),
                         SizedBox(width: 16.w),
                         Text(
-                          model.title,
+                          model.personaShape.title,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
@@ -265,7 +273,7 @@ class ItemHistory extends StatelessWidget {
                     ),
                     SizedBox(height: 16.h),
                     Text(
-                      model.body,
+                      model.personaShape.body,
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
@@ -282,54 +290,52 @@ class ItemHistory extends StatelessWidget {
   }
 }
 
-
 class HomeDataModel {
   late final List<HomeData> list;
 
   HomeDataModel({required this.list});
 
-  HomeDataModel.fromJson(Map<dynamic, dynamic>json)
-  {
-    list= [];
-    json.forEach((key, value) {
-      list.add(HomeData.fromJson(value));
-    },);
+  HomeDataModel.fromJson(Map<dynamic, dynamic> json) {
+    list = [];
+    json.forEach(
+      (key, value) {
+        list.add(HomeData.fromJson(value));
+      },
+    );
   }
 }
 
-
 class HomeData {
-  late final PersonaModel personaModel;
+  late final PersonaModelData personaModel;
   late final HistoryModel personaShape;
   late final String result;
   late final List<String> selectedChallenges;
 
-  HomeData.fromJson(Map<String, dynamic> json){
-    personaModel = PersonaModel.fromJson(json['personaModel'] ?? {});
+  HomeData.fromJson(Map<String, dynamic> json) {
+    personaModel = PersonaModelData.fromJson(json['personaModel'] ?? {});
     personaShape = HistoryModel.fromJson(json['personaShape'] ?? {});
     result = json['result'] ?? "";
     selectedChallenges =
         List.castFrom<dynamic, String>(json['selectedChallenges'] ?? []);
   }
-
 }
 
-class PersonaModel {
-  late final String age;
-  late final String communicationStyle;
-  late final String gender;
-  late final String interestsHobbies;
-  late final String name;
-  late final String personalityType;
-  late final String workRelationship;
-
-  PersonaModel.fromJson(Map<String, dynamic> json){
-    age = json['age'] ?? 0;
-    communicationStyle = json['communicationStyle'] ?? "";
-    gender = json['gender'] ?? "";
-    interestsHobbies = json['interestsHobbies'] ?? "";
-    name = json['name'] ?? "";
-    personalityType = json['personalityType'] ?? "";
-    workRelationship = json['workRelationship'] ?? "";
-  }
-}
+// class PersonaModel {
+//   late final String age;
+//   late final String communicationStyle;
+//   late final String gender;
+//   late final String interestsHobbies;
+//   late final String name;
+//   late final String personalityType;
+//   late final String workRelationship;
+//
+//   PersonaModel.fromJson(Map<String, dynamic> json) {
+//     age = json['age'] ?? 0;
+//     communicationStyle = json['communicationStyle'] ?? "";
+//     gender = json['gender'] ?? "";
+//     interestsHobbies = json['interestsHobbies'] ?? "";
+//     name = json['name'] ?? "";
+//     personalityType = json['personalityType'] ?? "";
+//     workRelationship = json['workRelationship'] ?? "";
+//   }
+// }

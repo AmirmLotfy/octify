@@ -120,6 +120,7 @@ class _MySelfSectionState extends State<MySelfSection> {
                       name: nameController.text,
                       age: ageController.text,
                       goals: goalsController.text,
+                      type: PersonaType.myself,
                       healthConditions: healthController.text,
                       personalityType: personalityTypeController.text,
                       // challenges: challengesController.text,

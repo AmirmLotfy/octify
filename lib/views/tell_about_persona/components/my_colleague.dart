@@ -120,6 +120,7 @@ class _MyColleagueSectionState extends State<MyColleagueSection> {
                     personaModelData: PersonaModelData(
                         name: nameController.text,
                         age: ageController.text,
+                        type: PersonaType.colleague,
                         gender: gender,
                         personalityType: personalityTypeController.text,
                         // challenges: challengesController.text,

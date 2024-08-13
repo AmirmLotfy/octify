@@ -119,6 +119,7 @@ class _MyFriendSectionState extends State<MyFriendSection> {
                     type: widget.type,
                     personaModelData: PersonaModelData(
                         name: nameController.text,
+                        type: PersonaType.friend,
                         age: ageController.text,
                         gender: gender,
                         personalityType: personalityTypeController.text,

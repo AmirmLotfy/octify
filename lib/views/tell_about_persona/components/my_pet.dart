@@ -113,6 +113,7 @@ class _MyPetSectionState extends State<MyPetSection> {
                   personaModelData: PersonaModelData(
                       name: nameController.text,
                       age: ageController.text,
+                      type: PersonaType.pet,
                       favoriteActivities: favoriteActivitiesController.text,
                       healthConditions: healthController.text,
                       // challenges: challengesController.text,

@@ -21,6 +21,7 @@ import 'tell_about_persona/view.dart';
 
 class ResultsView extends StatefulWidget {
   final String title;
+  final String? result;
   final PersonaType personaType;
   final List<String> challengesList;
   final PersonaModelData personaModelData;
@@ -28,6 +29,7 @@ class ResultsView extends StatefulWidget {
   const ResultsView(
       {super.key,
       required this.title,
+      this.result,
       required this.challengesList,
       required this.personaModelData,
       required this.personaType});
@@ -40,7 +42,14 @@ class _ResultsViewState extends State<ResultsView> {
   @override
   void initState() {
     super.initState();
-    analysis();
+    if(widget.result==null)
+      {
+        analysis();
+      }else{
+      isLoading =false;
+      result = widget.result;
+    }
+
   }
 
   bool isLoading = true;
@@ -164,7 +173,7 @@ class _ResultsViewState extends State<ResultsView> {
       appBar: SecondAppBar(
         text: "Results and Solutions",
         actions: [
-          if (!isLoading)
+          if (!isLoading && widget.result==null)
             isSaveLoading
                 ? Padding(
                     padding: EdgeInsetsDirectional.only(start: 16.w, end: 16.w),

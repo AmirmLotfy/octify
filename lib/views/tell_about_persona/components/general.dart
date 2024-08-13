@@ -75,6 +75,7 @@ class _GeneralSectionState extends State<GeneralSection> {
                       type: widget.type,
                       personaModelData: PersonaModelData(
                           name: nameController.text,
+                          type: PersonaType.general,
                           age: ageController.text,
                           gender: gender
                       ),

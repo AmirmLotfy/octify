@@ -130,6 +130,7 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
                     personaModelData: PersonaModelData(
                       name: nameController.text,
                       age: ageController.text,
+                      type: PersonaType.partner,
                       anniversaryDate: anniversaryController.text,
                       gender: gender,
                       personalityType: personalityTypeController.text,

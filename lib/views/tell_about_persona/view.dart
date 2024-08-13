@@ -95,8 +95,9 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
 }
 
 class PersonaModelData {
-  final String name;
-  final String? interestsHobbies,
+  late final String name;
+  late final PersonaType type;
+  late final String? interestsHobbies,
       sharedInterests,
       gender,
       challenges,
@@ -112,7 +113,31 @@ class PersonaModelData {
       breed,
       goals,
       favoriteActivities;
-  final String? age;
+  late final String? age;
+
+  PersonaModelData.fromJson(Map<String, dynamic> json) {
+    age = json['age'] ?? 0;
+    communicationStyle = json['communicationStyle'] ?? "";
+    gender = json['gender'] ?? "";
+    interestsHobbies = json['interestsHobbies'] ?? "";
+    name = json['name'] ?? "";
+    personalityType = json['personalityType'] ?? "";
+    workRelationship = json['workRelationship'] ?? "";
+    sharedInterests = json['sharedInterests'] ?? "";
+    petType = json['petType'] ?? "";
+    challenges = json['challenges'] ?? "";
+    healthConditions = json['healthConditions'] ?? "";
+    educationLevel = json['educationLevel'] ?? "";
+    lifeStage = json['lifeStage'] ?? "";
+    loveLanguage = json['loveLanguage'] ?? "";
+    anniversaryDate = json['anniversaryDate'] ?? "";
+    breed = json['breed'] ?? "";
+    goals = json['goals'] ?? "";
+    favoriteActivities = json['favoriteActivities'] ?? "";
+    String myType = json["personaType"]??"";
+    type = PersonaType.values.where((element) => element.name==myType,).first;
+    print(type);
+  }
 
   PersonaModelData({
     required this.name,
@@ -131,11 +156,13 @@ class PersonaModelData {
     this.anniversaryDate,
     this.breed,
     this.goals,
+    required this.type,
     this.favoriteActivities,
     required this.age,
   });
 
   Map<String, dynamic> toMap() {
+
     final data = {
       "name":name,
       "gender":gender,
@@ -155,6 +182,7 @@ class PersonaModelData {
       "goals":goals,
       "favoriteActivities":favoriteActivities,
       "age":age,
+      "personaType":type.name,
     };
     data.removeWhere((key, value) => value==null,);
     return data;
