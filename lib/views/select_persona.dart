@@ -16,7 +16,13 @@ enum PersonaType {
   pet,
   friend,
   myself,
-  colleague
+  colleague,
+  sibling,
+  teenager,
+  baby,
+  neighbor,
+  customer,
+  teacher,
 }
 
 class SelectPersonaView extends StatefulWidget {
@@ -64,6 +70,36 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
       image: "my_pet.svg",
       color: const Color(0xffFFCFB9),
     ),
+    _Model(
+        personaType: PersonaType.sibling,
+        image: "",
+        text: "Sibling",
+        color: const Color(0xff96D9B0)),
+    _Model(
+        personaType: PersonaType.teenager,
+        image: "",
+        text: "Teenager",
+        color: const Color(0xff96D9B0)),
+    _Model(
+        personaType: PersonaType.baby,
+        image: "",
+        text: "Baby",
+        color: const Color(0xff96D9B0)),
+    _Model(
+        personaType: PersonaType.neighbor,
+        image: "",
+        text: "Neighbor",
+        color: const Color(0xff96D9B0)),
+    _Model(
+        personaType: PersonaType.customer,
+        image: "",
+        text: "Customer",
+        color: const Color(0xff96D9B0)),
+    _Model(
+        personaType: PersonaType.teacher,
+        image: "",
+        text: "Teacher",
+        color: const Color(0xff96D9B0)),
   ];
   final otherPersonaController = TextEditingController();
   bool isGeneralPersona = false;

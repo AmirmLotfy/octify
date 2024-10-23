@@ -42,14 +42,12 @@ class _ResultsViewState extends State<ResultsView> {
   @override
   void initState() {
     super.initState();
-    if(widget.result==null)
-      {
-        analysis();
-      }else{
-      isLoading =false;
+    if (widget.result == null) {
+      analysis();
+    } else {
+      isLoading = false;
       result = widget.result;
     }
-
   }
 
   bool isLoading = true;
@@ -87,6 +85,25 @@ class _ResultsViewState extends State<ResultsView> {
       case PersonaType.colleague:
         text =
             "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+      // todo: change these to real
+      case PersonaType.sibling:
+        text =
+            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+      case PersonaType.teenager:
+        text =
+            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+      case PersonaType.baby:
+        text =
+            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+      case PersonaType.neighbor:
+        text =
+            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+      case PersonaType.customer:
+        text =
+            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+      case PersonaType.teacher:
+        text =
+            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
     }
 
     // String text =
@@ -104,12 +121,13 @@ class _ResultsViewState extends State<ResultsView> {
     isLoading = false;
     setState(() {});
   }
+
   List<HistoryModel> list = [
     HistoryModel(
       icon: "child_fill.svg",
       title: "My Child",
       body:
-      "Track your child's developmental milestones, challenges, and achievements. View past advice and insights tailored to their growth.",
+          "Track your child's developmental milestones, challenges, and achievements. View past advice and insights tailored to their growth.",
       bgShape: "shape1.svg",
       color: 0xffA6B2EE,
     ),
@@ -117,7 +135,7 @@ class _ResultsViewState extends State<ResultsView> {
       icon: "partner_filled.svg",
       title: "My Partner",
       body:
-      "Review your relationship history, past advice, and personalized insights. Monitor key moments and challenges faced together.",
+          "Review your relationship history, past advice, and personalized insights. Monitor key moments and challenges faced together.",
       bgShape: "shape2.svg",
       color: 0xff8FD1CD,
     ),
@@ -125,7 +143,7 @@ class _ResultsViewState extends State<ResultsView> {
       icon: "parent_fill.svg",
       title: "My Parent",
       body:
-      "Keep a record of your parent's health updates, caregiving tips, and relationship advice. Access previous guidance tailored to their needs.",
+          "Keep a record of your parent's health updates, caregiving tips, and relationship advice. Access previous guidance tailored to their needs.",
       bgShape: "shape3.svg",
       color: 0xff7FD2F2,
     ),
@@ -133,39 +151,73 @@ class _ResultsViewState extends State<ResultsView> {
         icon: "friend_filled.svg",
         title: "My Friend",
         body:
-        "Maintain a history of your friend's important events, interests, and challenges. Revisit past advice to strengthen your friendship.",
+            "Maintain a history of your friend's important events, interests, and challenges. Revisit past advice to strengthen your friendship.",
         bgShape: "shape4.svg",
         color: 0xffFEDEA5),
     HistoryModel(
         icon: "my_self_fill.svg",
         title: "Myself",
         body:
-        "View your personal growth journey, self-care plans, and past advice. Reflect on your progress and revisit previous recommendations.",
+            "View your personal growth journey, self-care plans, and past advice. Reflect on your progress and revisit previous recommendations.",
         bgShape: "shape1.svg",
         color: 0xffEBCAE7),
     HistoryModel(
         icon: "my_pet_fill.svg",
         title: "My Pet",
         body:
-        "Record your pet’s health updates, care tips, and special moments. Access past advice to ensure your pet’s well-being.",
+            "Record your pet’s health updates, care tips, and special moments. Access past advice to ensure your pet’s well-being.",
         bgShape: "shape2.svg",
         color: 0xffC2D6FE),
     HistoryModel(
         icon: "colleague_filled.svg",
         title: "My Colleague",
         body:
-        "Monitor key interactions, professional challenges, and milestones with your colleague. Access past advice to improve workplace relationships and collaboration.",
+            "Monitor key interactions, professional challenges, and milestones with your colleague. Access past advice to improve workplace relationships and collaboration.",
         bgShape: "shape3.svg",
         color: 0xff96D9B0),
     HistoryModel(
         icon: "general.svg",
         title: "",
-        body:
-        "This is custom persona",
+        body: "This is custom persona",
+        bgShape: "shape3.svg",
+        color: 0xff49d56d),
+    HistoryModel(
+        icon: "",
+        title: "Sibling",
+        body: "",
+        bgShape: "shape3.svg",
+        color: 0xff49d56d),
+    HistoryModel(
+        icon: "",
+        title: "Teenager",
+        body: "",
+        bgShape: "shape3.svg",
+        color: 0xff49d56d),
+    HistoryModel(
+        icon: "",
+        title: "Baby",
+        body: "",
+        bgShape: "shape3.svg",
+        color: 0xff49d56d),
+    HistoryModel(
+        icon: "",
+        title: "Neighbor",
+        body: "",
+        bgShape: "shape3.svg",
+        color: 0xff49d56d),
+    HistoryModel(
+        icon: "",
+        title: "Customer",
+        body: "",
+        bgShape: "shape3.svg",
+        color: 0xff49d56d),
+    HistoryModel(
+        icon: "",
+        title: "Teacher",
+        body: "",
         bgShape: "shape3.svg",
         color: 0xff49d56d),
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +225,7 @@ class _ResultsViewState extends State<ResultsView> {
       appBar: SecondAppBar(
         text: "Results and Solutions",
         actions: [
-          if (!isLoading && widget.result==null)
+          if (!isLoading && widget.result == null)
             isSaveLoading
                 ? Padding(
                     padding: EdgeInsetsDirectional.only(start: 16.w, end: 16.w),
@@ -189,37 +241,48 @@ class _ResultsViewState extends State<ResultsView> {
                       // save selected Challenges
                       // save persona model
                       HistoryModel selectedModel;
-                      switch(widget.personaType)
-                      {
+                      switch (widget.personaType) {
                         case PersonaType.general:
-                          selectedModel=list[6];
-                          selectedModel.title= widget.personaModelData.name;
+                          selectedModel = list[6];
+                          selectedModel.title = widget.personaModelData.name;
                         case PersonaType.child:
-                        selectedModel=list[0];
+                          selectedModel = list[0];
                         case PersonaType.partner:
-                          selectedModel=list[1];
+                          selectedModel = list[1];
                         case PersonaType.parent:
-                          selectedModel=list[2];
+                          selectedModel = list[2];
                         case PersonaType.pet:
-                          selectedModel=list[5];
+                          selectedModel = list[5];
                         case PersonaType.friend:
-                        selectedModel=list[3];
+                          selectedModel = list[3];
                         case PersonaType.myself:
-                          selectedModel=list[4];
+                          selectedModel = list[4];
                         case PersonaType.colleague:
-                          selectedModel=list[6];
+                          selectedModel = list[6];
+                        case PersonaType.sibling:
+                          selectedModel = list[8];
+                        case PersonaType.teenager:
+                          selectedModel = list[9];
+                        case PersonaType.baby:
+                          selectedModel = list[10];
+                        case PersonaType.neighbor:
+                          selectedModel = list[11];
+                        case PersonaType.customer:
+                          selectedModel = list[12];
+                        case PersonaType.teacher:
+                          selectedModel = list[13];
                       }
-
 
                       isSaveLoading = true;
                       setState(() {});
                       await FirebaseDatabase.instance
                           .ref()
                           .child("home")
-                          .child(FirebaseAuth.instance.currentUser!.uid).push()
+                          .child(FirebaseAuth.instance.currentUser!.uid)
+                          .push()
                           .set({
                         "result": result,
-                        "personaShape":selectedModel.toMap(),
+                        "personaShape": selectedModel.toMap(),
                         "selectedChallenges": widget.challengesList,
                         "personaModel": widget.personaModelData.toMap(),
                       });
@@ -236,10 +299,12 @@ class _ResultsViewState extends State<ResultsView> {
                           color: Theme.of(context).primaryColor,
                         ),
                         SizedBox(width: 4.w),
-                        Text("Save",style: TextStyle(
-                          fontSize: 16.sp,
-                          color: Theme.of(context).primaryColor
-                        ),)
+                        Text(
+                          "Save",
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Theme.of(context).primaryColor),
+                        )
                       ],
                     ),
                   )

@@ -10,11 +10,9 @@ import '../../select_persona.dart';
 import '../view.dart';
 
 class MyColleagueSection extends StatefulWidget {
-
   final PersonaType type;
 
-  const MyColleagueSection(
-      {super.key,  required this.type});
+  const MyColleagueSection({super.key, required this.type});
 
   @override
   State<MyColleagueSection> createState() => _MyColleagueSectionState();
@@ -22,13 +20,9 @@ class MyColleagueSection extends StatefulWidget {
 
 class _MyColleagueSectionState extends State<MyColleagueSection> {
   final nameController = TextEditingController();
-  final ageController = TextEditingController();
-  final interestsController = TextEditingController();
-  // final challengesController = TextEditingController();
-  final personalityTypeController = TextEditingController();
-  final communicationStyleController = TextEditingController();
-  final workRelationshipController = TextEditingController();
-  String? gender;
+  final positionController = TextEditingController();
+  final departmentController = TextEditingController();
+  String? workRelationship;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -40,78 +34,42 @@ class _MyColleagueSectionState extends State<MyColleagueSection> {
         children: [
           AppInput(
             prefix: "user_name.svg",
-            label: " Name",
+            label: "Name",
             hint: "Enter your colleague's name",
-            validator: InputValidator.personaNameValidator,
             controller: nameController,
           ),
           AppInput(
-            prefix: "age.svg",
-            label: "Age",
-            validator: InputValidator.personaAgeValidator,
-            controller: ageController,
-            hint: "Specify your colleague's age",
-            keyboardType: TextInputType.number,
+            prefix: "",
+            label: "Position",
+            hint: "Enter your colleague’s position",
+            // validator: InputValidator.personaNameValidator,
+            controller: positionController,
+          ),
+          AppInput(
+            prefix: "",
+            label: "Department",
+            hint: "Which department do they work in?",
+            controller: departmentController,
           ),
           AppExpansionTile(
-            title: "Select your colleague's gender",
-            label: "Gender",
+            title: "What is your working relationship with this colleague?",
+            label: "Working Relationship",
             onChange: (value) {
-              gender = value;
+              workRelationship = value;
             },
             list: [
-              "Male",
-              "Female",
-              "Other",
-              "Prefer not to say",
+              "Peer",
+              "Supervisor",
+              "Subordinate",
             ],
-            icon: 'gender.svg',
-          ),
-          AppInput(
-            prefix: "interests.png",
-            label: "Interests/Hobbies",
-            controller: interestsController,
-            validator: InputValidator.personaInterestsHobbiesValidator,
-            hint: "Enter Interests/Hobbies",
-            description:
-                "Add your colleague's professional interests or hobbies",
-          ),
-          // AppInput(
-          //   prefix: "challenges.png",
-          //   label: "Challenges",
-          //   controller: challengesController,
-          //   hint: "Enter Challenges",
-          //   description: "List any workplace challenges you both face",
-          // ),
-          AppInput(
-            prefix: "personality_type.png",
-            label: "Personality Type",
-            controller: personalityTypeController,
-            hint: "Enter Personality Type",
-            description: "Choose your colleague's personality type",
-          ),
-          AppInput(
-            prefix: "communication_style.png",
-            label: "Communication Style",
-            controller: communicationStyleController,
-            hint: "Enter Communication Style",
-            description: "Choose how your colleague prefers to communicate",
-          ),
-          AppInput(
-            prefix: "work_relationship.png",
-            label: "Work Relationship",
-            validator: InputValidator.personaWorkRelationshipValidator,
-            controller: workRelationshipController,
-            hint: "Enter Work Relationship",
-            description:
-                "Define the nature of your professional relationship (e.g., peer, supervisor).",
+            icon: '',
           ),
           AppButton(
             text: "Next",
             onPress: () {
               if (formKey.currentState!.validate()) {
-                if (gender == null) {
-                  showMessage("Gender must be not null",
+                if (workRelationship == null) {
+                  showMessage("you must choose the work relation",
                       type: MessageType.warning);
                 } else {
                   navigateTo(ChallengesView(
@@ -119,14 +77,10 @@ class _MyColleagueSectionState extends State<MyColleagueSection> {
                     type: widget.type,
                     personaModelData: PersonaModelData(
                         name: nameController.text,
-                        age: ageController.text,
                         type: PersonaType.colleague,
-                        gender: gender,
-                        personalityType: personalityTypeController.text,
-                        // challenges: challengesController.text,
-                        interestsHobbies: interestsController.text,
-                        workRelationship: workRelationshipController.text,
-                        communicationStyle: communicationStyleController.text),
+                        position: positionController.text,
+                        department: departmentController.text,
+                        workRelationship: workRelationship),
                   ));
                 }
               }

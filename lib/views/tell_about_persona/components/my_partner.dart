@@ -10,11 +10,9 @@ import '../../select_persona.dart';
 import '../view.dart';
 
 class MyPartnerSection extends StatefulWidget {
-
   final PersonaType type;
 
-  const MyPartnerSection(
-      {super.key,  required this.type});
+  const MyPartnerSection({super.key, required this.type});
 
   @override
   State<MyPartnerSection> createState() => _MyPartnerSectionState();
@@ -22,14 +20,8 @@ class MyPartnerSection extends StatefulWidget {
 
 class _MyPartnerSectionState extends State<MyPartnerSection> {
   final nameController = TextEditingController();
-  final ageController = TextEditingController();
-  final interestsController = TextEditingController();
-  // final challengesController = TextEditingController();
-  final personalityTypeController = TextEditingController();
-  final communicationStyleController = TextEditingController();
-  final loveLanguageController = TextEditingController();
-  final anniversaryController = TextEditingController();
-  String? gender;
+  final durationOfRelationController = TextEditingController();
+  String? relationStatus, liveTogether, loveLanguage;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -46,105 +38,78 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
             label: " Name",
             hint: "Enter your partner's name",
           ),
-          AppInput(
-            prefix: "age.svg",
-            label: "Age",            validator: InputValidator.personaAgeValidator,
-
-            controller: ageController,
-            hint: "Specify your partner's age",
-            keyboardType: TextInputType.number,
-          ),
           AppExpansionTile(
-            title: "Select your partner's gender",
-            label: "Gender",
+            title: "Select your relationship status.",
+            label: "Relationship Status",
             onChange: (value) {
-              gender = value;
+              relationStatus = value;
             },
             list: [
-              "Male",
-              "Female",
-              "Other",
-              "Prefer not to say",
+              "Married",
+              "Dating",
+              "Engaged",
+              "Domestic Partners",
             ],
-            icon: 'gender.svg',
+            icon: '',
           ),
           AppInput(
-            prefix: "interests.png",
-            label: "Interests/Hobbies",
-            validator: InputValidator.personaInterestsHobbiesValidator,
-            hint: "Enter Interests/Hobbies",
-            controller: interestsController,
-            description: "Add your partner's favorite activities or hobbies",
-          ),
-          // AppInput(
-          //   prefix: "challenges.png",
-          //   label: "Challenges",
-          //   controller: challengesController,
-          //   hint: "Enter Challenges",
-          //   description: "List any difficulties your partner may be facing",
-          // ),
-          AppInput(
-            prefix: "personality_type.png",
-            label: "Personality Type",
-            controller: personalityTypeController,
-            hint: "Enter Personality Type",
+            prefix: "",
+            label: "Duration of Relationship",
+            hint: "How long have you been together?",
+            keyboardType: TextInputType.number,
+            controller: durationOfRelationController,
             description:
-                "Choose your partner's personality type for tailored insights",
+                "How long have you been together? (Number Input - Years)",
           ),
-          AppInput(
-            prefix: "love_language.png",
+          AppExpansionTile(
+            title: "Do you live together?",
+            label: "Living Together",
+            onChange: (value) {
+              liveTogether = value;
+            },
+            list: [
+              "Yes",
+              "No",
+              "Occasionally",
+            ],
+            icon: '',
+          ),
+          AppExpansionTile(
+            title:
+                "Choose your partner's primary love language for relationship tips.",
             label: "Love Language",
-            validator: InputValidator.personaLoveLanguageValidator,
-            controller: loveLanguageController,
-            hint: "Enter Love Language",
-            description:
-                "Select their preferred way of expressing and receiving love",
-          ),
-          AppInput(
-            prefix: "communication_style.png",
-            label: "Communication Style",
-            controller: communicationStyleController,
-            hint: "Enter Communication Style",
-            description: "Choose how your partner prefers to communicate",
-          ),
-          AppInput(
-            prefix: "anniversary.png",
-            label: "Anniversary Date",
-            validator: InputValidator.personaAnniversaryDateValidator,
-            controller: anniversaryController,
-            hint: "Enter Anniversary Date",
-            description:
-                "Enter the date of your anniversary for important reminders",
+            onChange: (value) {
+              loveLanguage = value;
+            },
+            list: [
+              "Words of Affirmation",
+              "Acts of Service",
+              "Receiving Gifts",
+              "Quality Time",
+              "Physical Touch",
+            ],
+            icon: '',
           ),
           AppButton(
             text: "Next",
             onPress: () {
-              if(formKey.currentState!.validate())
-              {
-                if (gender == null) {
-                  showMessage("Gender must be not null", type: MessageType.warning);
+              if (formKey.currentState!.validate()) {
+                if (relationStatus == null) {
+                  showMessage("you must choose your Relation Status",
+                      type: MessageType.warning);
                 } else {
                   navigateTo(ChallengesView(
                     personaName: nameController.text,
                     type: widget.type,
                     personaModelData: PersonaModelData(
-                      name: nameController.text,
-                      age: ageController.text,
-                      type: PersonaType.partner,
-                      anniversaryDate: anniversaryController.text,
-                      gender: gender,
-                      personalityType: personalityTypeController.text,
-                      // challenges: challengesController.text,
-                      interestsHobbies: interestsController.text,
-                      loveLanguage: loveLanguageController.text,
-                      communicationStyle: communicationStyleController.text,
-                    ),
+                        name: nameController.text,
+                        type: PersonaType.partner,
+                        loveLanguage: loveLanguage,
+                        liveTogether: liveTogether,
+                        relationStatus: relationStatus),
                   ));
                 }
               }
-
-
-
             },
           )
         ],

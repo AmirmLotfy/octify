@@ -9,19 +9,20 @@ import '../../../core/logic/input_validator.dart';
 import '../../challenges.dart';
 import '../../select_persona.dart';
 
-class MyChildSection extends StatefulWidget {
+class NeighborSection extends StatefulWidget {
   final PersonaType type;
 
-  const MyChildSection({super.key, required this.type});
+  const NeighborSection({super.key, required this.type});
 
   @override
-  State<MyChildSection> createState() => _MyChildSectionState();
+  State<NeighborSection> createState() => _NeighborSectionState();
 }
 
-class _MyChildSectionState extends State<MyChildSection> {
+class _NeighborSectionState extends State<NeighborSection> {
   final nameController = TextEditingController();
-  final ageController = TextEditingController();
-  String? gender, relationship;
+  final sharedCommunityInterestsController = TextEditingController();
+  String? gender,preferredCommunicationMethod;
+
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -33,21 +34,13 @@ class _MyChildSectionState extends State<MyChildSection> {
         children: [
           AppInput(
             prefix: "user_name.svg",
-            label: " Name",
+            label: "Name",
             controller: nameController,
             validator: InputValidator.personaNameValidator,
-            hint: "Enter the name of your child",
-          ),
-          AppInput(
-            prefix: "age.svg",
-            controller: ageController,
-            label: "Age",
-            validator: InputValidator.personaAgeValidator,
-            hint: "Specify the age of your child",
-            keyboardType: TextInputType.number,
+            hint: "Enter your neighbor's full name",
           ),
           AppExpansionTile(
-            title: "Select your child’s gender",
+            title: "Select your neighbor's gender",
             label: "Gender",
             onChange: (value) {
               gender = value;
@@ -55,25 +48,32 @@ class _MyChildSectionState extends State<MyChildSection> {
             list: [
               "Male",
               "Female",
-              "Non-Binary",
-              "Prefer not to say",
+              "Other",
             ],
             icon: 'gender.svg',
           ),
-          // todo: new -> need icon for relationship
+          AppInput(
+            prefix: "",
+            label: "Shared Community Interests",
+            controller: sharedCommunityInterestsController,
+            description: "List common community interests for local event suggestions",
+          ),
+
           AppExpansionTile(
-            title: "Specify your relationship to the child",
-            label: "Relationship",
+            title: "Indicate how your neighbor prefers to communicate",
+            label: "Preferred Communication Method",
             onChange: (value) {
-              relationship = value;
+              preferredCommunicationMethod = value;
             },
             list: [
-              "Biological",
-              "Adopted",
-              "Stepchild",
+              "In-person",
+              "Phone",
+              "Email",
+              "Text",
             ],
             icon: '',
           ),
+
           AppButton(
             text: "Next",
             onPress: () {
@@ -86,11 +86,12 @@ class _MyChildSectionState extends State<MyChildSection> {
                     personaName: nameController.text,
                     type: widget.type,
                     personaModelData: PersonaModelData(
-                        name: nameController.text,
-                        age: ageController.text,
-                        gender: gender,
-                        type: PersonaType.child,
-                        relationship: relationship),
+                      name: nameController.text,
+                      sharedCommunityInterests: sharedCommunityInterestsController.text,
+                      gender: gender,
+                      preferredCommunicationMethod: preferredCommunicationMethod,
+                      type: PersonaType.neighbor,
+                    ),
                   ));
                 }
               }

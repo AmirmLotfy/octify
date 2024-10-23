@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:octify/views/tell_about_persona/view.dart';
 
 import '../../../core/design/app_button.dart';
 import '../../../core/design/app_expansion_tile.dart';
@@ -7,21 +8,20 @@ import '../../../core/logic/helper_methods.dart';
 import '../../../core/logic/input_validator.dart';
 import '../../challenges.dart';
 import '../../select_persona.dart';
-import '../view.dart';
 
-class MyFriendSection extends StatefulWidget {
+class TeacherSection extends StatefulWidget {
   final PersonaType type;
 
-  const MyFriendSection({super.key, required this.type});
+  const TeacherSection({super.key, required this.type});
 
   @override
-  State<MyFriendSection> createState() => _MyFriendSectionState();
+  State<TeacherSection> createState() => _TeacherSectionState();
 }
 
-class _MyFriendSectionState extends State<MyFriendSection> {
+class _TeacherSectionState extends State<TeacherSection> {
   final nameController = TextEditingController();
-  final friendshipDurationController = TextEditingController();
-  String? friendshipType, frequencyOfInteraction;
+  String? subjectTaught, teachingStyle, studentAgeGroup;
+
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -33,47 +33,51 @@ class _MyFriendSectionState extends State<MyFriendSection> {
         children: [
           AppInput(
             prefix: "user_name.svg",
+            label: "Name",
             controller: nameController,
-            label: " Name",
-            hint: "Enter your friend's name",
             validator: InputValidator.personaNameValidator,
-          ),
-          AppInput(
-            prefix: "",
-            label: "Friendship Duration",
-            hint: "How long have you been friends?",
-            keyboardType: TextInputType.number,
-            controller: friendshipDurationController,
-            description:
-                "How long have you been friends? How long have you been friends?",
+            hint: "Enter the teacher's full name.",
           ),
           AppExpansionTile(
-            title: "Select the type of friendship.",
-            label: "Friendship Type",
+            title: "Select the subject the teacher specializes in",
+            label: "Subject Taught",
             onChange: (value) {
-              friendshipType = value;
+              subjectTaught = value;
             },
             list: [
-              "Childhood",
-              "College",
-              "Work",
-              "Online",
-              "Other",
+              "Math",
+              "Science",
+              "History",
+              "Language Arts",
+              "Physical Education",
+              "Art",
+              "Music",
+              "Other"
             ],
             icon: '',
           ),
           AppExpansionTile(
-            title: "How often do you interact?",
-            label: "Frequency of Interaction",
+            title: "Describe the teacher's preferred teaching style.",
+            label: "Teaching Style",
             onChange: (value) {
-              frequencyOfInteraction = value;
+              teachingStyle = value;
             },
             list: [
-              "Daily",
-              "Weekly",
-              "Monthly",
-              "Rarely",
+              "Traditional",
+              "Hands-On",
+              "Lecture-Based",
+              "Project-Based",
+              "Other"
             ],
+            icon: '',
+          ),
+          AppExpansionTile(
+            title: "Specify the age group the tea primarily works with.",
+            label: "Student Age Group",
+            onChange: (value) {
+              studentAgeGroup = value;
+            },
+            list: ["Elementary", "Middle School", "High School", "College"],
             icon: '',
           ),
           AppButton(
@@ -84,11 +88,11 @@ class _MyFriendSectionState extends State<MyFriendSection> {
                   personaName: nameController.text,
                   type: widget.type,
                   personaModelData: PersonaModelData(
-                    type: PersonaType.friend,
                     name: nameController.text,
-                    friendshipType: friendshipType,
-                    frequencyOfInteraction: frequencyOfInteraction,
-                    friendshipDuration: friendshipDurationController.text,
+                    subjectTaught: subjectTaught,
+                    teachingStyle: teachingStyle,
+                    studentAgeGroup: studentAgeGroup,
+                    type: PersonaType.teacher,
                   ),
                 ));
               }

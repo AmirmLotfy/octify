@@ -9,19 +9,19 @@ import '../../../core/logic/input_validator.dart';
 import '../../challenges.dart';
 import '../../select_persona.dart';
 
-class MyChildSection extends StatefulWidget {
+class SiblingSection extends StatefulWidget {
   final PersonaType type;
 
-  const MyChildSection({super.key, required this.type});
+  const SiblingSection({super.key, required this.type});
 
   @override
-  State<MyChildSection> createState() => _MyChildSectionState();
+  State<SiblingSection> createState() => _SiblingSectionState();
 }
 
-class _MyChildSectionState extends State<MyChildSection> {
+class _SiblingSectionState extends State<SiblingSection> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
-  String? gender, relationship;
+  String? birthOrder, liveTogether;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -36,41 +36,38 @@ class _MyChildSectionState extends State<MyChildSection> {
             label: " Name",
             controller: nameController,
             validator: InputValidator.personaNameValidator,
-            hint: "Enter the name of your child",
+            hint: "Enter your sibling’s name.",
           ),
           AppInput(
             prefix: "age.svg",
             controller: ageController,
             label: "Age",
-            validator: InputValidator.personaAgeValidator,
-            hint: "Specify the age of your child",
+            hint: "Specify your sibling’s age.",
             keyboardType: TextInputType.number,
           ),
           AppExpansionTile(
-            title: "Select your child’s gender",
-            label: "Gender",
+            title: "Select your sibling’s birth order relative to you.",
+            label: "Birth Order",
             onChange: (value) {
-              gender = value;
+              birthOrder = value;
             },
             list: [
-              "Male",
-              "Female",
-              "Non-Binary",
-              "Prefer not to say",
+              "Older",
+              "Younger",
+              "Twin",
             ],
             icon: 'gender.svg',
           ),
-          // todo: new -> need icon for relationship
           AppExpansionTile(
-            title: "Specify your relationship to the child",
-            label: "Relationship",
+            title: "Do you live together?",
+            label: "Live Together",
             onChange: (value) {
-              relationship = value;
+              liveTogether = value;
             },
             list: [
-              "Biological",
-              "Adopted",
-              "Stepchild",
+              "Yes",
+              "No",
+              "Occasionally",
             ],
             icon: '',
           ),
@@ -78,8 +75,8 @@ class _MyChildSectionState extends State<MyChildSection> {
             text: "Next",
             onPress: () {
               if (formKey.currentState!.validate()) {
-                if (gender == null) {
-                  showMessage("Gender must be not null",
+                if (birthOrder == null) {
+                  showMessage("You must choose the Birth Order",
                       type: MessageType.warning);
                 } else {
                   navigateTo(ChallengesView(
@@ -88,9 +85,9 @@ class _MyChildSectionState extends State<MyChildSection> {
                     personaModelData: PersonaModelData(
                         name: nameController.text,
                         age: ageController.text,
-                        gender: gender,
-                        type: PersonaType.child,
-                        relationship: relationship),
+                        birthOrder: birthOrder,
+                        type: PersonaType.sibling,
+                        liveTogether: liveTogether),
                   ));
                 }
               }

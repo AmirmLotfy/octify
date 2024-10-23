@@ -46,6 +46,19 @@ class _ChallengesViewState extends State<ChallengesView> {
         return mySelf;
       case PersonaType.colleague:
         return myColleague;
+        // todo: change these lists
+      case PersonaType.sibling:
+        return childList;
+      case PersonaType.teenager:
+        return childList;
+      case PersonaType.baby:
+        return childList;
+      case PersonaType.neighbor:
+        return childList;
+      case PersonaType.customer:
+        return childList;
+      case PersonaType.teacher:
+        return childList;
     }
   }
 
@@ -54,7 +67,7 @@ class _ChallengesViewState extends State<ChallengesView> {
 
   final childList = [
     _Category(
-      title: "Behavioral Issues",
+      title: "Communication",
       list: [
         "Tantrums",
         "Defiance",

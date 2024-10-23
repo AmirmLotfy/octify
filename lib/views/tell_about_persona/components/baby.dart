@@ -9,19 +9,22 @@ import '../../../core/logic/input_validator.dart';
 import '../../challenges.dart';
 import '../../select_persona.dart';
 
-class MyChildSection extends StatefulWidget {
+class BabySection extends StatefulWidget {
   final PersonaType type;
 
-  const MyChildSection({super.key, required this.type});
+  const BabySection({super.key, required this.type});
 
   @override
-  State<MyChildSection> createState() => _MyChildSectionState();
+  State<BabySection> createState() => _BabySectionState();
 }
 
-class _MyChildSectionState extends State<MyChildSection> {
+class _BabySectionState extends State<BabySection> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
-  String? gender, relationship;
+  final sleepScheduleController = TextEditingController();
+  final developmentalMilestonesController = TextEditingController();
+  String? gender;
+
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -33,21 +36,21 @@ class _MyChildSectionState extends State<MyChildSection> {
         children: [
           AppInput(
             prefix: "user_name.svg",
-            label: " Name",
+            label: "Name",
             controller: nameController,
             validator: InputValidator.personaNameValidator,
-            hint: "Enter the name of your child",
+            hint: "Enter the baby's name.",
           ),
           AppInput(
             prefix: "age.svg",
             controller: ageController,
             label: "Age",
             validator: InputValidator.personaAgeValidator,
-            hint: "Specify the age of your child",
+            hint: "Provide the baby's age to track developmental milestones.",
             keyboardType: TextInputType.number,
           ),
           AppExpansionTile(
-            title: "Select your child’s gender",
+            title: "Select the baby's gender.",
             label: "Gender",
             onChange: (value) {
               gender = value;
@@ -55,24 +58,22 @@ class _MyChildSectionState extends State<MyChildSection> {
             list: [
               "Male",
               "Female",
-              "Non-Binary",
-              "Prefer not to say",
+              "Other",
             ],
             icon: 'gender.svg',
           ),
-          // todo: new -> need icon for relationship
-          AppExpansionTile(
-            title: "Specify your relationship to the child",
-            label: "Relationship",
-            onChange: (value) {
-              relationship = value;
-            },
-            list: [
-              "Biological",
-              "Adopted",
-              "Stepchild",
-            ],
-            icon: '',
+          AppInput(
+            prefix: "",
+            label: "Sleep Schedule",
+            controller: sleepScheduleController,
+            description: "Track sleep patterns for better routine management.",
+            hint: "Track sleep patterns for better routine management.",
+          ),
+          AppInput(
+            prefix: "",
+            label: "Name",
+            controller: developmentalMilestonesController,
+            hint: "Enter the name of your child",
           ),
           AppButton(
             text: "Next",
@@ -86,11 +87,13 @@ class _MyChildSectionState extends State<MyChildSection> {
                     personaName: nameController.text,
                     type: widget.type,
                     personaModelData: PersonaModelData(
-                        name: nameController.text,
-                        age: ageController.text,
-                        gender: gender,
-                        type: PersonaType.child,
-                        relationship: relationship),
+                      name: nameController.text,
+                      age: ageController.text,
+                      sleepSchedule: sleepScheduleController.text,
+                      developmentalMilestones: developmentalMilestonesController.text,
+                      gender: gender,
+                      type: PersonaType.baby,
+                    ),
                   ));
                 }
               }

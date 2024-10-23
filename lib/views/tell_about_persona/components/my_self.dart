@@ -24,7 +24,6 @@ class _MySelfSectionState extends State<MySelfSection> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
   final interestsController = TextEditingController();
-  // final challengesController = TextEditingController();
   final personalityTypeController = TextEditingController();
   final healthController = TextEditingController();
   final goalsController = TextEditingController();
@@ -121,7 +120,6 @@ class _MySelfSectionState extends State<MySelfSection> {
                       age: ageController.text,
                       goals: goalsController.text,
                       type: PersonaType.myself,
-                      healthConditions: healthController.text,
                       personalityType: personalityTypeController.text,
                       // challenges: challengesController.text,
                       interestsHobbies: interestsController.text,
