@@ -29,9 +29,6 @@ class ChallengesView extends StatefulWidget {
 class _ChallengesViewState extends State<ChallengesView> {
   List<_Category> get list {
     switch (widget.type) {
-      case PersonaType.general:
-        // todo: need the challenges for general persona
-        return [];
       case PersonaType.child:
         return childList;
       case PersonaType.partner:
@@ -46,19 +43,18 @@ class _ChallengesViewState extends State<ChallengesView> {
         return mySelf;
       case PersonaType.colleague:
         return myColleague;
-        // todo: change these lists
       case PersonaType.sibling:
-        return childList;
+        return sibling;
       case PersonaType.teenager:
-        return childList;
+        return teenager;
       case PersonaType.baby:
-        return childList;
+        return baby;
       case PersonaType.neighbor:
-        return childList;
+        return neighbor;
       case PersonaType.customer:
-        return childList;
+        return customer;
       case PersonaType.teacher:
-        return childList;
+        return teacher;
     }
   }
 
@@ -69,270 +65,395 @@ class _ChallengesViewState extends State<ChallengesView> {
     _Category(
       title: "Communication",
       list: [
-        "Tantrums",
-        "Defiance",
-        "Difficulty following rules",
+        "Expressing Feelings",
+        "Understanding Instructions",
+        "Developing Social Skills",
       ],
     ),
     _Category(
-      title: "Academic Struggles",
-      list: [
-        "Difficulty with schoolwork",
-        "Lack of motivation",
-        "Learning disabilities"
-      ],
+      title: "Learning",
+      list: ["Attention Span", "Learning Differences", "Motivation"],
     ),
-    _Category(title: "Social Challenges", list: [
-      "Trouble making friends",
-      "Bullying",
-      "Social anxiety",
+    _Category(title: "Behavior", list: [
+      "Temper Tantrums",
+      "Rule Following",
+      "Impulse Control",
     ]),
+  ];
+
+  final myParent = [
     _Category(
-      title: "Health Concerns",
+      title: "Communication Issues",
       list: [
-        "Frequent illnesses",
-        "Managing chronic conditions",
-        "Sleep problems"
+        "Misunderstandings",
+        "Generational Gap",
+        "Expressing Emotions",
       ],
     ),
     _Category(
-      title: "Emotional Well-being",
+      title: "Boundaries and Independence",
       list: [
-        "Anxiety",
-        "Depression",
-        "Low self-esteem",
+        "Overprotection",
+        "Setting Boundaries",
+        "Expectations vs. Reality",
+      ],
+    ),
+    _Category(
+      title: "Decision-Making Conflicts",
+      list: [
+        "Life Choices",
+        "Financial Decisions",
+        "Living Arrangements",
+      ],
+    ),
+    _Category(
+      title: "Health and Well-being",
+      list: [
+        "Aging Parents",
+        "Mental Health",
+        "Lifestyle Differences",
+      ],
+    ),
+    _Category(
+      title: "Cultural Differences",
+      list: [
+        "Tradition vs. Modernity",
+        "Cultural Expectations",
+      ],
+    ),
+    _Category(
+      title: "Support and Caregiving",
+      list: [
+        "Caregiving Strain",
+        "Reciprocity",
+        "Guilt and Obligation",
       ],
     ),
   ];
 
   final myPartner = [
     _Category(
-      title: "Communication Problems",
+      title: "Communication",
       list: [
-        "Misunderstandings",
-        "Lack of effective communication",
-        "Frequent arguments",
+        "Active Listening",
+        "Conflict Resolution",
+        "Emotional Transparency",
       ],
     ),
     _Category(
-      title: "Trust Issues",
+      title: "Relationship Growth",
       list: [
-        "Infidelity",
-        "Jealousy",
-        "Past betrayals affecting trust",
+        "Maintaining Romance",
+        "Shared Goals",
+        "Navigating Life Changes",
       ],
     ),
     _Category(
-      title: "Financial Disagreements",
+      title: "Trust & Loyalty",
       list: [
-        "Differing views on spending",
-        "Saving",
-        "Financial priorities",
-      ],
-    ),
-    _Category(
-      title: "Intimacy Issues",
-      list: ["Lack of physical", "Emotional intimacy"],
-    ),
-    _Category(
-      title: "Life Stage Differences",
-      list: [
-        "Different goals ",
-        "Priorities based on career",
-        "Family",
-        "Personal growth",
-      ],
-    ),
-  ];
-
-  final myParent = [
-    _Category(
-      title: "Health Management",
-      list: [
-        "Chronic illnesses",
-        "mobility issues",
-        "managing medications",
-      ],
-    ),
-    _Category(
-      title: "Communication Difficulties",
-      list: [
-        "Generational gaps",
-        "Memory loss",
-        "Hearing problems",
-      ],
-    ),
-    _Category(
-      title: "Independence vs. Support",
-      list: [
-        "Balancing their need for independence with the need for support",
-      ],
-    ),
-    _Category(
-      title: "Emotional Well-being",
-      list: [
-        "Loneliness",
-        "Depression",
-        "Dealing with loss",
-      ],
-    ),
-    _Category(
-      title: "Family Dynamics",
-      list: [
-        "Sibling disagreements about care or conflicting family roles",
-      ],
-    ),
-  ];
-
-  final myFriend = [
-    _Category(
-      title: "Maintaining Connection",
-      list: [
-        "Staying in touch despite busy schedules",
-        "Long distances",
-      ],
-    ),
-    _Category(
-      title: "Providing Support",
-      list: [
-        "Offering emotional support during tough times",
-      ],
-    ),
-    _Category(
-      title: "Managing Conflicts",
-      list: [
-        "Resolving disagreements",
-        "Misunderstandings",
-      ],
-    ),
-    _Category(
-      title: "Balancing Time",
-      list: [
-        "Finding time to spend together amidst other commitments",
-      ],
-    ),
-    _Category(
-      title: "Encouraging Growth",
-      list: [
-        "Supporting their personal",
-        "Professional growth without jealousy",
-      ],
-    ),
-  ];
-
-  final mySelf = [
-    _Category(
-      title: "Work-Life Balance",
-      list: [
-        "Managing professional responsibilities ",
-        "Personal Life",
-      ],
-    ),
-    _Category(
-      title: "Mental Health",
-      list: [
-        "Dealing with stress",
-        "Anxiety",
-        "Depression",
-      ],
-    ),
-    _Category(
-      title: "Physical Health",
-      list: [
-        "Maintaining a healthy lifestyle",
-        "Managing chronic conditions",
-        "Fitness",
-      ],
-    ),
-    _Category(
-      title: "Personal Growth",
-      list: [
-        "Setting and achieving personal goals",
-        "Overcoming procrastination",
-      ],
-    ),
-    _Category(
-      title: "Social Relationships",
-      list: [
-        "Building and maintaining meaningful relationships",
-      ],
-    ),
-  ];
-  final myPet = [
-    _Category(
-      title: "Health Issues",
-      list: ["Chronic illnesses", "Regular vet visits", "Managing medications"],
-    ),
-    _Category(
-      title: "Behavioral Problems",
-      list: [
-        "Aggression",
-        "Anxiety",
-        "Destructive behavior",
-      ],
-    ),
-    _Category(
-      title: "Training Challenges",
-      list: [
-        "House training",
-        "Obedience",
-        "Specific skill training",
-      ],
-    ),
-    _Category(
-      title: "Diet and Nutrition",
-      list: [
-        "Ensuring a balanced diet",
-        "Managing allergies",
-        "Weight issues",
-      ],
-    ),
-    _Category(
-      title: "Exercise Needs",
-      list: [
-        "Providing enough physical activity and mental stimulation",
+        "Rebuilding Trust",
+        "Maintaining Fidelity",
+        "Jealousy Management",
       ],
     ),
   ];
 
   final myColleague = [
     _Category(
-      title: "Communication Barriers",
+      title: "Workplace Communication",
       list: [
-        "Misunderstandings",
-        "lack of clarity",
-        "differing communication styles",
+        "Email/Message Clarity",
+        "Feedback Sensitivity",
+        "Remote Work Coordination",
       ],
     ),
     _Category(
-      title: "Collaboration Issues",
+      title: "Team Dynamics",
       list: [
-        "Difficulty working together on projects",
-        "differing work styles"
+        "Role Clarity",
+        "Conflict Management",
+        "Collaborative Effort",
       ],
     ),
     _Category(
-      title: "Conflict Resolution",
+      title: "Professional Growth",
       list: [
-        "Handling disagreements",
-        "Conflicts professionally",
+        "Career Progression",
+        "Skill Development",
+        "Work-Life Integration",
+      ],
+    ),
+
+  ];
+
+  final myPet = [
+    _Category(
+      title: "Health & Wellness",
+      list: [
+        "Dietary Needs",
+        "Exercise Requirements",
+        "Veterinary Care",
       ],
     ),
     _Category(
-      title: "Workload Management",
+      title: "Behavior",
       list: [
-        "Balancing tasks and responsibilities",
-        "avoiding burnout",
+        "Training Consistency",
+        "Separation Anxiety",
+        "Socialization",
       ],
     ),
     _Category(
-      title: "Professional Development",
+      title: "Bonding",
       list: [
-        "Supporting each other’s career growth and development.",
+        "Building Trust",
+        "Interactive Play",
+        "Understanding Needs",
       ],
     ),
   ];
 
+
+  final myFriend = [
+    _Category(
+      title: "Communication",
+      list: [
+        "Staying in Touch",
+        "Handling Misunderstandings",
+        "Balancing Openness",
+      ],
+    ),
+    _Category(
+      title: "Support",
+      list: [
+        "Being Present",
+        "Setting Boundaries",
+        "Avoiding Codependency",
+      ],
+    ),
+    _Category(
+      title: "Friendship Growth",
+      list: [
+        "Nurturing the Bond",
+        "Managing Group Dynamics",
+        "Handling Life Changes",
+      ],
+    ),
+
+  ];
+
+  final mySelf = [
+    _Category(
+      title: "Self-Improvement",
+      list: [
+        "Goal Setting",
+        "Time Management",
+        "Overcoming Procrastination",
+      ],
+    ),
+    _Category(
+      title: "Emotional Well-being",
+      list: [
+        "Stress Management",
+        "Mindfulness",
+        "Self-Esteem",
+      ],
+    ),
+    _Category(
+      title: "Work-Life Balance",
+      list: [
+        "Avoiding Burnout",
+        "Pursuing Hobbies",
+        "Maintaining Health",
+      ],
+    ),
+  ];
+
+  final sibling = [
+    _Category(
+      title: "Sibling Rivalry",
+      list: [
+        "Jealousy",
+        "Competing for Attention",
+        "Differences in Treatment",
+      ],
+    ),
+    _Category(
+      title: "Communication",
+      list: [
+        "Differences in Treatment",
+        "Conflict Resolution",
+        "Understanding Perspectives",
+      ],
+    ),
+    _Category(
+      title: "Bonding",
+      list: [
+        "Shared Interests",
+        "Support System",
+        "Strengthening the Relationship",
+      ],
+    ),
+  ];
+
+  final teenager = [
+    _Category(
+      title: "Identity Development",
+      list: [
+        "Self-Exploration",
+        "Peer Pressure",
+        "Cultural Expectations",
+      ],
+    ),
+    _Category(
+      title: "Independence",
+      list: [
+        "Autonomy",
+        "Decision Making",
+        "Financial Responsibility",
+      ],
+    ),
+    _Category(
+      title: "Emotional Health",
+      list: [
+        "Mood Swings",
+        "Stress Management",
+        "Building Resilience",
+      ],
+    ),
+  ];
+
+  final baby = [
+    _Category(
+      title: "Health & Nutrition",
+      list: [
+        "Feeding difficulties",
+        "Sleep schedule",
+        "Immunizations",
+      ],
+    ),
+    _Category(
+      title: "Developmental Milestones",
+      list: [
+        "Crawling",
+        "Walking",
+        "First words",
+      ],
+    ),
+    _Category(
+      title: "Comfort & Care",
+      list: [
+        "Soothing during crying",
+        "Bathing routines",
+        "Diaper changes",
+      ],
+    ),
+  ];
+
+  final neighbor = [
+    _Category(
+      title: "Building Relationships",
+      list: [
+        "Introducing oneself",
+        "Maintaining friendly interactions",
+        "Addressing conflicts",
+      ],
+    ),
+    _Category(
+      title: "Community Involvement",
+      list: [
+        "Participating in neighborhood events",
+        "Collaborating on community projects",
+        "Staying informed about local issues",
+      ],
+    ),
+    _Category(
+      title: "Safety & Security",
+      list: [
+        "Keeping the neighborhood safe",
+        "Reporting suspicious activities",
+        "Supporting neighborhood watch programs",
+      ],
+    ),
+  ];
+
+  final customer = [
+    _Category(
+      title: "Communication",
+      list: [
+        "Responding to inquiries",
+        "Providing clear information",
+        "Handling complaints",
+      ],
+    ),
+    _Category(
+      title: "Customer Satisfaction",
+      list: [
+        "Meeting customer expectations",
+        "Offering personalized service",
+        "Ensuring product quality",
+      ],
+    ),
+    _Category(
+      title: "Loyalty & Retention",
+      list: [
+        "Encouraging repeat purchases",
+        "Building brand loyalty",
+        "Managing feedback and reviews",
+      ],
+    ),
+  ];
+  final teacher = [
+    _Category(
+      title: "Understanding Communication",
+      list: [
+        "Misunderstanding instructions",
+        "Difficulty expressing concerns",
+        "Unclear feedback",
+      ],
+    ),
+    _Category(
+      title: "Navigating Academic Expectations",
+      list: [
+        "High academic demands",
+        "Supporting assignments",
+        "Balancing expectations",
+      ],
+    ),
+    _Category(
+      title: "Building a Collaborative Relationship",
+      list: [
+        "Establishing rapport",
+        "Unresponsive teacher",
+        "Advocacy balance",
+      ],
+    ),
+    _Category(
+      title: "Addressing Behavioral Concerns",
+      list: [
+        "Disciplinary disagreements",
+        "Behavior expectations",
+        "Managing actions",
+      ],
+    ),
+    _Category(
+      title: "Dealing with Overwhelm",
+      list: [
+        "Excessive demands",
+        "Frequent communications",
+        "Instructional pressure",
+      ],
+    ),
+    _Category(
+      title: "Understanding Educational Changes",
+      list: [
+        "Adapting to new methods",
+        "Curriculum confusion",
+        "Technology expectations",
+      ],
+    ),
+
+  ];
   bool isLoading = false;
 
   @override

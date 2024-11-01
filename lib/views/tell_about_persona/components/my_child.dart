@@ -33,7 +33,7 @@ class _MyChildSectionState extends State<MyChildSection> {
         children: [
           AppInput(
             prefix: "user_name.svg",
-            label: " Name",
+            label: "Name",
             controller: nameController,
             validator: InputValidator.personaNameValidator,
             hint: "Enter the name of your child",
@@ -60,7 +60,6 @@ class _MyChildSectionState extends State<MyChildSection> {
             ],
             icon: 'gender.svg',
           ),
-          // todo: new -> need icon for relationship
           AppExpansionTile(
             title: "Specify your relationship to the child",
             label: "Relationship",
@@ -72,7 +71,7 @@ class _MyChildSectionState extends State<MyChildSection> {
               "Adopted",
               "Stepchild",
             ],
-            icon: '',
+            icon: 'relationship.png',
           ),
           AppButton(
             text: "Next",

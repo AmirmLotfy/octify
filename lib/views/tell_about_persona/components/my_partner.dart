@@ -50,7 +50,7 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
               "Engaged",
               "Domestic Partners",
             ],
-            icon: '',
+            icon: 'relationship_status.png',
           ),
           AppInput(
             prefix: "",
@@ -58,8 +58,6 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
             hint: "How long have you been together?",
             keyboardType: TextInputType.number,
             controller: durationOfRelationController,
-            description:
-                "How long have you been together? (Number Input - Years)",
           ),
           AppExpansionTile(
             title: "Do you live together?",
@@ -72,11 +70,11 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
               "No",
               "Occasionally",
             ],
-            icon: '',
+            icon: 'living_together.png',
           ),
           AppExpansionTile(
             title:
-                "Choose your partner's primary love language for relationship tips.",
+                "Your partner's primary love language",
             label: "Love Language",
             onChange: (value) {
               loveLanguage = value;
@@ -88,7 +86,7 @@ class _MyPartnerSectionState extends State<MyPartnerSection> {
               "Quality Time",
               "Physical Touch",
             ],
-            icon: '',
+            icon: 'love_language2.png',
           ),
           AppButton(
             text: "Next",

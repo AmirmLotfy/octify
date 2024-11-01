@@ -61,49 +61,36 @@ class _ResultsViewState extends State<ResultsView> {
 
     late String text;
     switch (widget.personaType) {
-      case PersonaType.general:
-        text =
-            "As a behavioral specialist, suggest strategies for dealing with this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Provide actionable steps to improve interactions and build a more positive relationship.";
+      // case PersonaType.general:
+      //   text =
+      //       "As a behavioral specialist, suggest strategies for dealing with this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Provide actionable steps to improve interactions and build a more positive relationship.";
       case PersonaType.child:
         text =
-            "As a child psychologist, provide expert advice on how to manage this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}, including step-by-step actions to improve their behavior and support their emotional development.";
-      case PersonaType.partner:
-        text =
-            "As a relationship counselor, offer advice on how to improve my relationship with my partner, especially in dealing with this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Provide a step-by-step plan to deepen our emotional connection and resolve conflicts.";
+            "Acting as a child psychologist, analyze the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}). Provide ${widget.personaModelData.name} with actionable guidance to support the child's needs effectively.";
       case PersonaType.parent:
-        text =
-            "As a family therapist, offer guidance on improving the relationship with my parent, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include a step-by-step action plan to foster mutual understanding and respect";
+        text ="As a family counselor, take into account the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) provided by ${widget.personaModelData.name}. Offer strategies to enhance family dynamics and resolve any issues.";
+      case PersonaType.partner:
+        text ="As a relationship therapist, use the details from ${widget.personaModelData.toMap()} and the described challenges (${widget.challengesList}) to assist ${widget.personaModelData.name} in developing a stronger and more understanding partnership.";
       case PersonaType.pet:
-        text =
-            "As a pet behaviorist, provide advice on managing this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include a step-by-step plan to improve my pet’s behavior and strengthen our bond.";
+        text ="Acting as an animal behavior specialist, provide ${widget.personaModelData.name} with a behavior improvement plan that addresses the specific challenges (${widget.challengesList}), using the detailed persona characteristics (${widget.personaModelData.toMap()}).";
       case PersonaType.friend:
-        text =
-            "As a life coach, suggest ways to strengthen my friendship with ${widget.personaModelData.name}, particularly in dealing with this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Provide actionable steps to enhance our connection and support each other better.";
+        text ="As a life coach, integrate the persona characteristics (${widget.personaModelData.toMap()}) with the challenges (${widget.challengesList}) to guide ${widget.personaModelData.name} in nurturing and strengthening their friendship.";
       case PersonaType.myself:
-        text =
-            "As a personal development coach, guide me on how to address this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Offer a detailed action plan to help me improve and achieve my personal goals.";
+        text ="Using the input from ${widget.personaModelData.toMap()} and the challenges (${widget.challengesList}), function as a personal development coach to craft a targeted growth and improvement strategy for ${widget.personaModelData.name}.";
       case PersonaType.colleague:
-        text =
-            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
-      // todo: change these to real
+        text ="In your role as a workplace coach, utilize the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to help ${widget.personaModelData.name} improve professional interactions and address conflicts.";
       case PersonaType.sibling:
-        text =
-            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+        text ="Utilize your expertise as a family dynamics specialist to analyze ${widget.personaModelData.toMap()} and ${widget.challengesList}. Provide ${widget.personaModelData.name} with a strategic approach to foster a positive sibling relationship.";
       case PersonaType.teenager:
-        text =
-            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+        text ="Act as a youth counselor, taking into account the teenager’s characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}). Offer ${widget.personaModelData.name} strategies to effectively support and connect with the teenager.";
       case PersonaType.baby:
-        text =
-            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+        text ="As a pediatric development specialist, use the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to guide ${widget.personaModelData.name} in providing appropriate developmental care for the baby.";
       case PersonaType.neighbor:
-        text =
-            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+        text ="Function as a community relations advisor, using the neighbor's persona characteristics (${widget.personaModelData.toMap()}) and the specific challenges (${widget.challengesList}) to help ${widget.personaModelData.name} maintain harmonious relations.";
       case PersonaType.customer:
-        text =
-            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+        text ="Acting as a customer service expert, apply the customer persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to aid ${widget.personaModelData.name} in enhancing customer interaction and satisfaction.";
       case PersonaType.teacher:
-        text =
-            "As a workplace coach, provide advice on how to improve my professional relationship with ${widget.personaModelData.name}, focusing on this persona details this persona not me the persona is someone i face challenges with ${widget.personaModelData.toMap()}. Include practical steps to enhance teamwork and resolve conflicts.";
+        text ="As an educational advisor, utilize the teacher’s characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to provide ${widget.personaModelData.name} with effective strategies for engaging and collaborating in an educational setting.";
     }
 
     // String text =
@@ -242,9 +229,9 @@ class _ResultsViewState extends State<ResultsView> {
                       // save persona model
                       HistoryModel selectedModel;
                       switch (widget.personaType) {
-                        case PersonaType.general:
-                          selectedModel = list[6];
-                          selectedModel.title = widget.personaModelData.name;
+                        // case PersonaType.general:
+                        //   selectedModel = list[6];
+                        //   selectedModel.title = widget.personaModelData.name;
                         case PersonaType.child:
                           selectedModel = list[0];
                         case PersonaType.partner:

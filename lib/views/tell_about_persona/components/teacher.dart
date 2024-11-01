@@ -39,7 +39,7 @@ class _TeacherSectionState extends State<TeacherSection> {
             hint: "Enter the teacher's full name.",
           ),
           AppExpansionTile(
-            title: "Select the subject the teacher specializes in",
+            title: "Subject that teacher specializes in",
             label: "Subject Taught",
             onChange: (value) {
               subjectTaught = value;
@@ -54,10 +54,10 @@ class _TeacherSectionState extends State<TeacherSection> {
               "Music",
               "Other"
             ],
-            icon: '',
+            icon: 'teacher.svg',
           ),
           AppExpansionTile(
-            title: "Describe the teacher's preferred teaching style.",
+            title: "Describe Teacher's teaching style",
             label: "Teaching Style",
             onChange: (value) {
               teachingStyle = value;
@@ -69,16 +69,16 @@ class _TeacherSectionState extends State<TeacherSection> {
               "Project-Based",
               "Other"
             ],
-            icon: '',
+            icon: 'teaching_style.svg',
           ),
           AppExpansionTile(
-            title: "Specify the age group the tea primarily works with.",
+            title: "Age group that teacher works with.",
             label: "Student Age Group",
             onChange: (value) {
               studentAgeGroup = value;
             },
             list: ["Elementary", "Middle School", "High School", "College"],
-            icon: '',
+            icon: 'teaching_style.svg',
           ),
           AppButton(
             text: "Next",

@@ -44,7 +44,7 @@ class _MyParentSectionState extends State<MyParentSection> {
             prefix: "age.svg",
             label: "Age",
             controller: ageController,
-            hint: "Enter the age of your parent",
+            hint: "Specify the age of your parent",
             keyboardType: TextInputType.number,
           ),
           // todo: new ---> need relationship icon
@@ -60,37 +60,32 @@ class _MyParentSectionState extends State<MyParentSection> {
               "Stepfather",
               "Stepmother",
             ],
-            icon: '',
+            icon: 'relationship.png',
           ),
-          // todo: new ---> need Living Situation icon
           AppExpansionTile(
-            title: "Indicate your living situation with your parent",
+            title: "Indicate your living situation",
             label: "Living Situation",
             onChange: (value) {
               liveSituation = value;
             },
             list: [
-              "Lives with you",
+              "Your Parent lives with you",
               "Lives separately",
               "Deceased",
             ],
-            icon: '',
+            icon: 'living_together.png',
           ),
           AppInput(
-            prefix: "health.png",
             label: "Health Concerns",
+            maxLines: 2,
             controller: healthController,
-            hint: "Enter Concerns",
-            description: "Note any health concerns to receive tailored advice.",
+            hint: "Note any health concerns to receive tailored advice.",
           ),
-          // todo: new ---> need Occupation icon
           AppInput(
-            prefix: "",
             label: "Occupation",
+            maxLines: 2,
             controller: occupationController,
-            hint: "Enter the parent's occupation",
-            description:
-                "Enter the parent's occupation contextualize their daily life.",
+            hint: "Enter the parent's occupation to contextualize their daily life.",
           ),
           AppButton(
             text: "Next",

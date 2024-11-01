@@ -9,7 +9,6 @@ import '../core/design/app_button.dart';
 import '../core/design/second_app_bar.dart';
 
 enum PersonaType {
-  general,
   child,
   partner,
   parent,
@@ -48,7 +47,7 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
         text: "Partner",
         personaType: PersonaType.partner,
         image: "partner.svg",
-        color: const Color(0xff8FD1CD)),
+        color: const Color(0xffF3AEAF)),
     _Model(
         text: "Myself",
         personaType: PersonaType.myself,
@@ -58,51 +57,51 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
         text: "Colleague",
         personaType: PersonaType.colleague,
         image: "colleague.svg",
-        color: const Color(0xff96D9B0)),
+        color: const Color(0xffBADED8)),
     _Model(
         text: "Friend",
         personaType: PersonaType.friend,
         image: "friend.svg",
-        color: const Color(0xffFEDEA5)),
+        color: const Color(0xffA4DFF1)),
     _Model(
       text: "My Pet",
       personaType: PersonaType.pet,
       image: "my_pet.svg",
-      color: const Color(0xffFFCFB9),
+      color: const Color(0xffC2D6FE),
     ),
     _Model(
         personaType: PersonaType.sibling,
-        image: "",
+        image: "sibling.svg",
         text: "Sibling",
-        color: const Color(0xff96D9B0)),
+        color: const Color(0xffFFB381)),
     _Model(
         personaType: PersonaType.teenager,
-        image: "",
+        image: "teenager.png",
         text: "Teenager",
-        color: const Color(0xff96D9B0)),
+        color: const Color(0xffFFC2B8)),
     _Model(
         personaType: PersonaType.baby,
-        image: "",
+        image: "baby.png",
         text: "Baby",
-        color: const Color(0xff96D9B0)),
+        color: const Color(0xffFBB0FF)),
     _Model(
         personaType: PersonaType.neighbor,
-        image: "",
+        image: "neighbor.png",
         text: "Neighbor",
-        color: const Color(0xff96D9B0)),
+        color: const Color(0xffABDDAF)),
     _Model(
         personaType: PersonaType.customer,
-        image: "",
+        image: "customer.png",
         text: "Customer",
-        color: const Color(0xff96D9B0)),
+        color: const Color(0xffE7C6A7)),
     _Model(
         personaType: PersonaType.teacher,
-        image: "",
+        image: "teacher.svg",
         text: "Teacher",
-        color: const Color(0xff96D9B0)),
+        color: const Color(0xffFFCCA7)),
   ];
-  final otherPersonaController = TextEditingController();
-  bool isGeneralPersona = false;
+  // final otherPersonaController = TextEditingController();
+  // bool isGeneralPersona = false;
 
   @override
   Widget build(BuildContext context) {
@@ -139,29 +138,29 @@ class _SelectPersonaViewState extends State<SelectPersonaView> {
                 itemCount: list.length,
               ),
             ),
-            SizedBox(height: 24.h),
-            AppInput(
-              controller: otherPersonaController,
-              label: "Other Persona",
-              hint: "Enter other persona",
-              onChanged: (value) {
-                if (value.isNotEmpty) {
-                  isGeneralPersona = true;
-                } else {
-                  isGeneralPersona = false;
-                }
-                setState(() {});
-              },
-            ),
-            if(isGeneralPersona)
-            AppButton(
-              onPress: () {
-                navigateTo(TellAboutPersonaView(
-                  personaType: PersonaType.general,
-                ));
-              },
-              text: "Next",
-            )
+            // SizedBox(height: 24.h),
+            // AppInput(
+            //   controller: otherPersonaController,
+            //   label: "Other Persona",
+            //   hint: "Enter other persona",
+            //   onChanged: (value) {
+            //     if (value.isNotEmpty) {
+            //       isGeneralPersona = true;
+            //     } else {
+            //       isGeneralPersona = false;
+            //     }
+            //     setState(() {});
+            //   },
+            // ),
+            // if(isGeneralPersona)
+            // AppButton(
+            //   onPress: () {
+            //     navigateTo(TellAboutPersonaView(
+            //       personaType: PersonaType.general,
+            //     ));
+            //   },
+            //   text: "Next",
+            // )
           ],
         ),
       ),
@@ -214,6 +213,7 @@ class _Item extends StatelessWidget {
               model.image,
               height: 48.h,
               width: 48.h,
+              color: Colors.black,
             )
           ],
         ),

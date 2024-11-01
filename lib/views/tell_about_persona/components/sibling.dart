@@ -67,9 +67,8 @@ class _SiblingSectionState extends State<SiblingSection> {
             list: [
               "Yes",
               "No",
-              "Occasionally",
             ],
-            icon: '',
+            icon: 'living_together.png',
           ),
           AppButton(
             text: "Next",

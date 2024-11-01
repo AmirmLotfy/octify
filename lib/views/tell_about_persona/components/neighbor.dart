@@ -53,10 +53,10 @@ class _NeighborSectionState extends State<NeighborSection> {
             icon: 'gender.svg',
           ),
           AppInput(
-            prefix: "",
             label: "Shared Community Interests",
+            maxLines: 2,
             controller: sharedCommunityInterestsController,
-            description: "List common community interests for local event suggestions",
+            hint: "List common community interests for local event suggestions",
           ),
 
           AppExpansionTile(
@@ -71,7 +71,7 @@ class _NeighborSectionState extends State<NeighborSection> {
               "Email",
               "Text",
             ],
-            icon: '',
+            icon: 'preferred_communication_method.svg',
           ),
 
           AppButton(

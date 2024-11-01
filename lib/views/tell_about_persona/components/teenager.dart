@@ -48,7 +48,7 @@ class _TeenagerSectionState extends State<TeenagerSection> {
             keyboardType: TextInputType.number,
           ),
           AppExpansionTile(
-            title: "What is your relationship to this teenager?",
+            title: " Type of relationship you have with.",
             label: "Relationship to You",
             onChange: (value) {
               relationship = value;
@@ -59,11 +59,11 @@ class _TeenagerSectionState extends State<TeenagerSection> {
               "Friend",
               "Other",
             ],
-            icon: '',
+            icon: 'relationship.png',
           ),
           AppExpansionTile(
             title:
-                "Specify their school year for educational and social advice",
+                "Their school year for educational",
             label: "Current School Year",
             onChange: (value) {
               currentSchoolYear = value;
@@ -75,13 +75,13 @@ class _TeenagerSectionState extends State<TeenagerSection> {
               "Senior",
               "Middle School",
             ],
-            icon: '',
+            icon: 'teacher.svg',
           ),
           AppInput(
-            prefix: "",
             controller: friendGroupController,
+            maxLines: 2,
             label: "Friend Group",
-            hint: "Describe their friend group to understand social dynamics.",
+            hint: "Note any health coSpecify their school year for educational and social advice.ncerns to receive tailored advice.",
             keyboardType: TextInputType.number,
           ),
           AppButton(

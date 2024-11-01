@@ -37,8 +37,8 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
 
   Widget get form {
     switch (widget.personaType) {
-      case PersonaType.general:
-        return GeneralSection(type: widget.personaType);
+      // case PersonaType.general:
+      //   return GeneralSection(type: widget.personaType);
       case PersonaType.child:
         return MyChildSection(type: widget.personaType);
       case PersonaType.partner:
@@ -86,9 +86,9 @@ class _TellAboutPersonaViewState extends State<TellAboutPersonaView> {
                 children: [
                   const TextSpan(
                       text:
-                          "Please provide the following details about the Persona to help us "),
+                          "Please provide the following\ndetails to help us "),
                   TextSpan(
-                    text: "understand your needs better.",
+                    text: "understand\nyour needs better.",
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
@@ -138,6 +138,7 @@ class PersonaModelData {
       studentAgeGroup,
       birthOrder,
       friendGroup,
+      currentFocus,
       teachingStyle,
       developmentalMilestones,
       position,
@@ -168,6 +169,7 @@ class PersonaModelData {
     educationLevel = json['educationLevel'] ?? "";
     lifeStage = json['lifeStage'] ?? "";
     loveLanguage = json['loveLanguage'] ?? "";
+    currentFocus = json['currentFocus'] ?? "";
     liveSituation = json['liveSituation'] ?? "";
     liveTogether = json['liveTogether'] ?? "";
     favoriteTreats = json['favoriteTreats'] ?? "";
@@ -191,6 +193,7 @@ class PersonaModelData {
     sharedCommunityInterests = json['sharedCommunityInterests'] ?? "";
     frequencyOfInteraction = json['frequencyOfInteraction'] ?? "";
     friendshipDuration = json['friendshipDuration'] ?? "";
+    currentFocus = json['currentFocus'] ?? "";
     purchaseHistory = json['purchaseHistory'] ?? "";
     String myType = json["personaType"] ?? "";
     type = PersonaType.values
@@ -204,6 +207,7 @@ class PersonaModelData {
   PersonaModelData({
     required this.name,
     this.gender,
+    this.currentFocus,
     this.species,
     this.subjectTaught,
     this.studentAgeGroup,
@@ -276,6 +280,7 @@ class PersonaModelData {
       "frequencyOfInteraction": frequencyOfInteraction,
       "developmentalMilestones": developmentalMilestones,
       "preferredCommunicationMethod": preferredCommunicationMethod,
+      "currentFocus": currentFocus,
       "subjectTaught": subjectTaught,
       "favoriteTreats": favoriteTreats,
       "teachingStyle": teachingStyle,

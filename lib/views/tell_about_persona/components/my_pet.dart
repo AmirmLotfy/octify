@@ -34,7 +34,7 @@ class _MyPetSectionState extends State<MyPetSection> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppInput(
-            prefix: "user_name.svg",
+            prefix: "pet_name.svg",
             label: " Name",
             controller: nameController,
             validator: InputValidator.personaNameValidator,
@@ -54,29 +54,26 @@ class _MyPetSectionState extends State<MyPetSection> {
               "Reptile",
               "Other",
             ],
-            icon: '',
+            icon: 'species.png',
           ),
           AppInput(
             prefix: "age.svg",
             label: "Age",
             controller: ageController,
-            hint: "Specify your pet's age",
+            hint: "Specify the age of your pet.",
             keyboardType: TextInputType.number,
           ),
           AppInput(
-            prefix: "breed.png",
             label: "Breed",
+            maxLines: 2,
             hint: "Enter the breed of your pet, if applicable.",
             controller: breedController,
-            description: "Enter the breed of your pet, if applicable.",
           ),
           AppInput(
-            prefix: "",
             label: "Favorite Treats",
-            hint: "List your pet's favorite treats f reward suggestions.",
+            maxLines: 2,
+            hint: "List your pet's favorite treats for reward suggestions.",
             controller: favoriteTreatsController,
-            description:
-                "List your pet's favorite treats f reward suggestions.",
             keyboardType: TextInputType.number,
           ),
           AppButton(

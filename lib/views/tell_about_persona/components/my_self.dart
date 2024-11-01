@@ -23,10 +23,7 @@ class MySelfSection extends StatefulWidget {
 class _MySelfSectionState extends State<MySelfSection> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
-  final interestsController = TextEditingController();
-  final personalityTypeController = TextEditingController();
-  final healthController = TextEditingController();
-  final goalsController = TextEditingController();
+  final currentFocusController = TextEditingController();
   String? gender;
   final formKey = GlobalKey<FormState>();
 
@@ -61,48 +58,18 @@ class _MySelfSectionState extends State<MySelfSection> {
             list: [
               "Male",
               "Female",
-              "Other",
+              "Non-Binary",
               "Prefer not to say",
             ],
             icon: 'gender.svg',
           ),
+
           AppInput(
-            prefix: "interests.png",
-            label: "Interests/Hobbies",
-            controller: interestsController,
-            hint: "Enter Interests/Hobbies",
-            validator: InputValidator.personaInterestsHobbiesValidator,
-            description: "Add your personal interests or hobbies",
-          ),
-          // AppInput(
-          //   prefix: "challenges.png",
-          //   controller: challengesController,
-          //   label: "Challenges",
-          //   hint: "Enter Challenges",
-          //   description: "List any personal challenges you're facing",
-          // ),
-          AppInput(
-            prefix: "personality_type.png",
-            label: "Personality Type",
-            controller: personalityTypeController,
-            hint: "Enter Personality Type",
-            description: "Choose your personality type for self-insight",
-          ),
-          AppInput(
-            prefix: "health.png",
-            label: "Health Conditions",
-            hint: "Enter Health Conditions",
-            validator: InputValidator.personaHealthConditionsValidator,
-            controller: healthController,
-            description: "Include any health conditions for self-care guidance",
-          ),
-          AppInput(
-            prefix: "goals.png",
-            label: "Goals",
-            hint: "Enter Goals",
-            controller: goalsController,
+            label: "Current Focus",
+            maxLines: 2,
+            hint: "What is your current personal focus or goal?",
+            controller: currentFocusController,
             validator: InputValidator.personaGoalsValidator,
-            description: "Specify personal goals you want to achieve",
           ),
           AppButton(
             text: "Next",
@@ -118,11 +85,9 @@ class _MySelfSectionState extends State<MySelfSection> {
                     personaModelData: PersonaModelData(
                       name: nameController.text,
                       age: ageController.text,
-                      goals: goalsController.text,
+                      currentFocus: currentFocusController.text,
                       type: PersonaType.myself,
-                      personalityType: personalityTypeController.text,
-                      // challenges: challengesController.text,
-                      interestsHobbies: interestsController.text,
+
                     ),
                   ));
                 }

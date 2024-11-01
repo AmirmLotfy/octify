@@ -39,20 +39,20 @@ class _MyColleagueSectionState extends State<MyColleagueSection> {
             controller: nameController,
           ),
           AppInput(
-            prefix: "",
+            prefix: "position.svg",
             label: "Position",
             hint: "Enter your colleague’s position",
             // validator: InputValidator.personaNameValidator,
             controller: positionController,
           ),
           AppInput(
-            prefix: "",
+            prefix: "department.svg",
             label: "Department",
             hint: "Which department do they work in?",
             controller: departmentController,
           ),
           AppExpansionTile(
-            title: "What is your working relationship with this colleague?",
+            title: "working relationship with colleague?",
             label: "Working Relationship",
             onChange: (value) {
               workRelationship = value;
@@ -62,7 +62,7 @@ class _MyColleagueSectionState extends State<MyColleagueSection> {
               "Supervisor",
               "Subordinate",
             ],
-            icon: '',
+            icon: 'working_relationship.svg',
           ),
           AppButton(
             text: "Next",

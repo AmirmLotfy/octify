@@ -40,24 +40,24 @@ class _CustomerSectionState extends State<CustomerSection> {
             hint: "Enter the customer's name to personalize the experience.",
           ),
           AppExpansionTile(
-            title: "Select the customer's preferred contact method.",
+            title: "Customer's preferred contact method",
             label: "Preferred Communication Method",
             onChange: (value) {
               preferredCommunicationMethod = value;
             },
             list: [
-              "Email",
-              "Phone",
-              "Text",
               "Social Media",
+              "Phone",
+              "Email",
+              "Text",
             ],
-            icon: '',
+            icon: 'preferred_communication_method.svg',
           ),
           AppInput(
-            prefix: "",
             label: "Purchase History",
             controller: purchaseHistoryController,
-            description: "Track previous purchases to tailor recommendations.",
+            maxLines: 2,
+            hint: "Track previous purchases to tailor recommendations.",
           ),
           AppButton(
             text: "Next",

@@ -34,18 +34,17 @@ class _MyFriendSectionState extends State<MyFriendSection> {
           AppInput(
             prefix: "user_name.svg",
             controller: nameController,
-            label: " Name",
+            label: "Name",
             hint: "Enter your friend's name",
             validator: InputValidator.personaNameValidator,
           ),
           AppInput(
-            prefix: "",
+            prefix: "friend.svg",
+            prefixColor:  Color(0xff8C8C8C),
             label: "Friendship Duration",
             hint: "How long have you been friends?",
             keyboardType: TextInputType.number,
             controller: friendshipDurationController,
-            description:
-                "How long have you been friends? How long have you been friends?",
           ),
           AppExpansionTile(
             title: "Select the type of friendship.",
@@ -60,7 +59,7 @@ class _MyFriendSectionState extends State<MyFriendSection> {
               "Online",
               "Other",
             ],
-            icon: '',
+            icon: 'sibling.svg',
           ),
           AppExpansionTile(
             title: "How often do you interact?",
@@ -74,7 +73,7 @@ class _MyFriendSectionState extends State<MyFriendSection> {
               "Monthly",
               "Rarely",
             ],
-            icon: '',
+            icon: 'relationship.png',
           ),
           AppButton(
             text: "Next",

@@ -46,11 +46,11 @@ class _BabySectionState extends State<BabySection> {
             controller: ageController,
             label: "Age",
             validator: InputValidator.personaAgeValidator,
-            hint: "Provide the baby's age to track developmental milestones.",
+            hint: "Specify the age of your baby.",
             keyboardType: TextInputType.number,
           ),
           AppExpansionTile(
-            title: "Select the baby's gender.",
+            title: "Select your child’s gender.",
             label: "Gender",
             onChange: (value) {
               gender = value;
@@ -63,17 +63,16 @@ class _BabySectionState extends State<BabySection> {
             icon: 'gender.svg',
           ),
           AppInput(
-            prefix: "",
-            label: "Sleep Schedule",
-            controller: sleepScheduleController,
-            description: "Track sleep patterns for better routine management.",
-            hint: "Track sleep patterns for better routine management.",
+            label: "Developmental Milestones",
+            maxLines: 2,
+            controller: developmentalMilestonesController,
+            hint: "Record milestones to monitor progress and celebrate achievements",
           ),
           AppInput(
-            prefix: "",
-            label: "Name",
-            controller: developmentalMilestonesController,
-            hint: "Enter the name of your child",
+            label: "Sleep Schedule",
+            maxLines: 2,
+            controller: sleepScheduleController,
+            hint: "Track sleep patterns for better routine management.",
           ),
           AppButton(
             text: "Next",
@@ -90,7 +89,8 @@ class _BabySectionState extends State<BabySection> {
                       name: nameController.text,
                       age: ageController.text,
                       sleepSchedule: sleepScheduleController.text,
-                      developmentalMilestones: developmentalMilestonesController.text,
+                      developmentalMilestones:
+                          developmentalMilestonesController.text,
                       gender: gender,
                       type: PersonaType.baby,
                     ),

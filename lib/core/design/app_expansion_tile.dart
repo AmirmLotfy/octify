@@ -50,6 +50,7 @@ class _AppExpansionTileState extends State<AppExpansionTile> {
               widget.icon,
               height: 24.h,
               width: 24.h,
+              color: Color(0xff8C8C8C),
             ),
             title: Text(
               selectedValue ?? widget.title,
