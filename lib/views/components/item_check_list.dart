@@ -88,11 +88,39 @@ class BoldableText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<TextSpan> children = [];
+    final List<InlineSpan> children = [];
     final List<String> split = text.split('**');
     for (int i = 0; i < split.length; i++) {
       if (i % 2 == 0) {
         children.add(TextSpan(text: split[i], style: style));
+        // final List<String> items = split[i].trim().split('* ');
+        // print(items);
+        // print(items.length);
+        // for (int i = 0; i < items.length; i++) {
+        //   children.add(WidgetSpan(
+        //       child: Row(
+        //     crossAxisAlignment: CrossAxisAlignment.start,
+        //     children: [
+        //       if (i != 0)
+        //         Padding(
+        //           padding: EdgeInsets.only(top: 4.h),
+        //           child: AppImage(
+        //             "achievement.svg",
+        //             height: 12.h,
+        //             width: 12.h,
+        //           ),
+        //         ),
+        //       SizedBox(width: 3.w),
+        //       Expanded(
+        //           child: Text(items[i]+(i==items.length-1?"\n":""),
+        //               style: TextStyle(
+        //                 fontSize: 14.sp,
+        //                 fontWeight: FontWeight.w400,
+        //                 color: const Color(0xff8C8C8C),
+        //               ))),
+        //     ],
+        //   )));
+        // }
       } else {
         children.add(TextSpan(
             text: split[i],

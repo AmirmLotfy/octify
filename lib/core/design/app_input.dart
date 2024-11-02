@@ -59,12 +59,25 @@ class _AppInputState extends State<AppInput> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.label != null)
-            Padding(
-              padding: EdgeInsets.only(bottom: 12.h),
-              child: Text(
-                widget.label!,
-                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
-              ),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 12.h),
+                  child: Text(
+                    widget.label!,
+                    style:
+                        TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
+                  ),
+                ),
+                // if (widget.validator != null)
+                //   Padding(
+                //     padding: EdgeInsets.only(bottom: 4.h),
+                //     child: Text(
+                //       " *",
+                //       style: TextStyle(color: Colors.red),
+                //     ),
+                //   )
+              ],
             ),
           TextFormField(
             style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),

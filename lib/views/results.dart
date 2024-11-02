@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:octify/core/design/app_button.dart';
@@ -14,6 +15,7 @@ import 'package:octify/views/components/item_check_list.dart';
 import 'package:octify/views/home/view.dart';
 import 'package:octify/views/select_persona.dart';
 
+import '../core/design/app_image.dart';
 import '../core/design/second_app_bar.dart';
 import 'chat/view.dart';
 import 'home/pages/home.dart';
@@ -68,29 +70,41 @@ class _ResultsViewState extends State<ResultsView> {
         text =
             "Acting as a child psychologist, analyze the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}). Provide ${widget.personaModelData.name} with actionable guidance to support the child's needs effectively.";
       case PersonaType.parent:
-        text ="As a family counselor, take into account the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) provided by ${widget.personaModelData.name}. Offer strategies to enhance family dynamics and resolve any issues.";
+        text =
+            "As a family counselor, take into account the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) provided by ${widget.personaModelData.name}. Offer strategies to enhance family dynamics and resolve any issues.";
       case PersonaType.partner:
-        text ="As a relationship therapist, use the details from ${widget.personaModelData.toMap()} and the described challenges (${widget.challengesList}) to assist ${widget.personaModelData.name} in developing a stronger and more understanding partnership.";
+        text =
+            "As a relationship therapist, use the details from ${widget.personaModelData.toMap()} and the described challenges (${widget.challengesList}) to assist ${widget.personaModelData.name} in developing a stronger and more understanding partnership.";
       case PersonaType.pet:
-        text ="Acting as an animal behavior specialist, provide ${widget.personaModelData.name} with a behavior improvement plan that addresses the specific challenges (${widget.challengesList}), using the detailed persona characteristics (${widget.personaModelData.toMap()}).";
+        text =
+            "Acting as an animal behavior specialist, provide ${widget.personaModelData.name} with a behavior improvement plan that addresses the specific challenges (${widget.challengesList}), using the detailed persona characteristics (${widget.personaModelData.toMap()}).";
       case PersonaType.friend:
-        text ="As a life coach, integrate the persona characteristics (${widget.personaModelData.toMap()}) with the challenges (${widget.challengesList}) to guide ${widget.personaModelData.name} in nurturing and strengthening their friendship.";
+        text =
+            "As a life coach, integrate the persona characteristics (${widget.personaModelData.toMap()}) with the challenges (${widget.challengesList}) to guide ${widget.personaModelData.name} in nurturing and strengthening their friendship.";
       case PersonaType.myself:
-        text ="Using the input from ${widget.personaModelData.toMap()} and the challenges (${widget.challengesList}), function as a personal development coach to craft a targeted growth and improvement strategy for ${widget.personaModelData.name}.";
+        text =
+            "Using the input from ${widget.personaModelData.toMap()} and the challenges (${widget.challengesList}), function as a personal development coach to craft a targeted growth and improvement strategy for ${widget.personaModelData.name}.";
       case PersonaType.colleague:
-        text ="In your role as a workplace coach, utilize the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to help ${widget.personaModelData.name} improve professional interactions and address conflicts.";
+        text =
+            "In your role as a workplace coach, utilize the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to help ${widget.personaModelData.name} improve professional interactions and address conflicts.";
       case PersonaType.sibling:
-        text ="Utilize your expertise as a family dynamics specialist to analyze ${widget.personaModelData.toMap()} and ${widget.challengesList}. Provide ${widget.personaModelData.name} with a strategic approach to foster a positive sibling relationship.";
+        text =
+            "Utilize your expertise as a family dynamics specialist to analyze ${widget.personaModelData.toMap()} and ${widget.challengesList}. Provide ${widget.personaModelData.name} with a strategic approach to foster a positive sibling relationship.";
       case PersonaType.teenager:
-        text ="Act as a youth counselor, taking into account the teenager’s characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}). Offer ${widget.personaModelData.name} strategies to effectively support and connect with the teenager.";
+        text =
+            "Act as a youth counselor, taking into account the teenager’s characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}). Offer ${widget.personaModelData.name} strategies to effectively support and connect with the teenager.";
       case PersonaType.baby:
-        text ="As a pediatric development specialist, use the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to guide ${widget.personaModelData.name} in providing appropriate developmental care for the baby.";
+        text =
+            "As a pediatric development specialist, use the persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to guide ${widget.personaModelData.name} in providing appropriate developmental care for the baby.";
       case PersonaType.neighbor:
-        text ="Function as a community relations advisor, using the neighbor's persona characteristics (${widget.personaModelData.toMap()}) and the specific challenges (${widget.challengesList}) to help ${widget.personaModelData.name} maintain harmonious relations.";
+        text =
+            "Function as a community relations advisor, using the neighbor's persona characteristics (${widget.personaModelData.toMap()}) and the specific challenges (${widget.challengesList}) to help ${widget.personaModelData.name} maintain harmonious relations.";
       case PersonaType.customer:
-        text ="Acting as a customer service expert, apply the customer persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to aid ${widget.personaModelData.name} in enhancing customer interaction and satisfaction.";
+        text =
+            "Acting as a customer service expert, apply the customer persona characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to aid ${widget.personaModelData.name} in enhancing customer interaction and satisfaction.";
       case PersonaType.teacher:
-        text ="As an educational advisor, utilize the teacher’s characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to provide ${widget.personaModelData.name} with effective strategies for engaging and collaborating in an educational setting.";
+        text =
+            "As an educational advisor, utilize the teacher’s characteristics (${widget.personaModelData.toMap()}) and the challenges (${widget.challengesList}) to provide ${widget.personaModelData.name} with effective strategies for engaging and collaborating in an educational setting.";
     }
 
     // String text =
@@ -299,6 +313,7 @@ class _ResultsViewState extends State<ResultsView> {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(24.r),
+        // physics: NeverScrollableScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -335,7 +350,36 @@ class _ResultsViewState extends State<ResultsView> {
                       // ),
                       //
                       // SizedBox(height: 14.h),
-                      if (result != null) ItemCheckList(title: result!),
+                      if (result != null)
+                        MarkdownBody(
+                          data: result!,
+                          onTapLink: (text, href, title) {
+                            showMessage(text);
+                            if (href != null) {
+                              openUrl(href);
+                            }
+                          },
+                          bulletBuilder: (parameters) => AppImage(
+                            "achievement.svg",
+                            height: 12.h,
+                            width: 12.h,
+                          ),
+                          // bulletBuilder: (parameters) =>
+                          //     Builder(builder: (context) {
+                          //   bool isChecked = false;
+                          //   return StatefulBuilder(
+                          //       builder: (context, setState) {
+                          //     return Checkbox(
+                          //       value: isChecked,
+                          //       onChanged: (value) {
+                          //         isChecked = !isChecked;
+                          //         setState(() {});
+                          //       },
+                          //     );
+                          //   });
+                          // }),
+                        ),
+                      // if (result != null) ItemCheckList(title: result!),
                       if (result == null)
                         Text(
                           "No Results Found",
@@ -389,11 +433,4 @@ class _ResultsViewState extends State<ResultsView> {
             ),
     );
   }
-}
-
-class _Model {
-  final String title;
-  final List<String> list;
-
-  _Model({required this.title, required this.list});
 }

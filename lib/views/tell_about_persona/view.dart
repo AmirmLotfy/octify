@@ -193,7 +193,6 @@ class PersonaModelData {
     sharedCommunityInterests = json['sharedCommunityInterests'] ?? "";
     frequencyOfInteraction = json['frequencyOfInteraction'] ?? "";
     friendshipDuration = json['friendshipDuration'] ?? "";
-    currentFocus = json['currentFocus'] ?? "";
     purchaseHistory = json['purchaseHistory'] ?? "";
     String myType = json["personaType"] ?? "";
     type = PersonaType.values

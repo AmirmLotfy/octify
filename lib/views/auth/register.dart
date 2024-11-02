@@ -183,7 +183,7 @@ class _RegisterViewState extends State<RegisterView> {
                   text: "Sign Up",
                 ),
                 const LoginOrRegister(
-                  isLogin: false,
+                  isLogin: false
                 )
               ],
             ),

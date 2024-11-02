@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:octify/core/design/app_image.dart';
@@ -53,7 +54,7 @@ class LoginOrRegister extends StatelessWidget {
           //     SizedBox(width: 12.w),
           //     _ItemSocial(
           //       image: "facebook.png",
-          //       onPress: () {},
+          //       onPress: signInWithFacebook,
           //     ),
           //     SizedBox(width: 12.w),
           //     _ItemSocial(
@@ -81,11 +82,13 @@ class LoginOrRegister extends StatelessWidget {
                     Navigator.pop(context);
                   }
                 },
-                child: Text(isLogin ? "Sign Up" : "Sign In",style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).primaryColor
-                ),),
+                child: Text(
+                  isLogin ? "Sign Up" : "Sign In",
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).primaryColor),
+                ),
               ),
               // TextButton(
               //   style: TextButton.styleFrom(
@@ -101,6 +104,18 @@ class LoginOrRegister extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<UserCredential> signInWithFacebook() async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
 
   Future signInWithGoogle() async {
@@ -145,7 +160,9 @@ class LoginOrRegister extends StatelessWidget {
     navigateTo(const HomeView(), keepHistory: false);
 
     // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    return await FirebaseAuth.instance.signInWithCredential(credential).catchError((onError){
+      print(onError);
+    });
   }
 }
 
