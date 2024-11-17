@@ -54,6 +54,7 @@ class DefaultFirebaseOptions {
     appId: '1:761011857743:android:60745be007517bc4f1fd3a',
     messagingSenderId: '761011857743',
     projectId: 'octifyai',
+    databaseURL: 'https://octifyai-default-rtdb.firebaseio.com',
     storageBucket: 'octifyai.appspot.com',
   );
 
@@ -62,7 +63,11 @@ class DefaultFirebaseOptions {
     appId: '1:761011857743:ios:f6627dda3e2cf978f1fd3a',
     messagingSenderId: '761011857743',
     projectId: 'octifyai',
+    databaseURL: 'https://octifyai-default-rtdb.firebaseio.com',
     storageBucket: 'octifyai.appspot.com',
+    androidClientId: '761011857743-ovp0ptr5aus8853v7coe6i66n3ocge40.apps.googleusercontent.com',
+    iosClientId: '761011857743-doot3akc0ehmp3vvb6a48b3ofpfjcve3.apps.googleusercontent.com',
     iosBundleId: 'com.araby.octify',
   );
+
 }

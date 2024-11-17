@@ -5,6 +5,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:octify/core/design/app_image.dart';
+import 'package:octify/views/auth/social/google/button.dart';
 import 'package:octify/views/home/view.dart';
 
 import '../../../core/logic/helper_methods.dart';
@@ -64,6 +65,9 @@ class LoginOrRegister extends StatelessWidget {
           //   ],
           // ),
           SizedBox(height: 16.h),
+          SignInButtons(),
+          SizedBox(height: 16.h),
+
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
